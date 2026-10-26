@@ -13,6 +13,21 @@ const { URL } = require('url');
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT) || 3000;
 
+/* Carga .env.local / .env sin dependencias externas. */
+['.env.local', '.env'].forEach((name) => {
+  const p = path.join(ROOT, name);
+  if (!fs.existsSync(p)) return;
+  fs.readFileSync(p, 'utf8')
+    .split(/\r?\n/)
+    .forEach((line) => {
+      const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/);
+      if (!m) return;
+      let v = m[2].trim();
+      if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
+      if (process.env[m[1]] === undefined) process.env[m[1]] = v;
+    });
+});
+
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',

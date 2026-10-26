@@ -5,3 +5,10 @@ node_modules/
 .env.local
 *.log
 .DS_Store
+
+.vercel
+.env*
+
+# generado por la integracion de Upstash
+.agents/
+.claude/

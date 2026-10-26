@@ -4,10 +4,13 @@
   "private": true,
   "description": "Juego de reclutamiento de bomberos voluntarios de Camana, con contador de visitas, registro de postulantes y panel de administracion.",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.2"
   }
 }

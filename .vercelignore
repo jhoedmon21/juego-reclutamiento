@@ -1,0 +1,8 @@
+.data
+.vercel
+.env.local
+.env
+node_modules
+*.log
+.agents
+.claude

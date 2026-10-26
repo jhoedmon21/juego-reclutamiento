@@ -5,6 +5,9 @@ Incluye **contador de visitas**, **registro de postulantes** y un **panel de adm
 
 > «Servir también es amar a tu tierra.»
 
+- 🎮 **Juego:** https://juego-reclutamiento.vercel.app
+- 🔐 **Panel:** https://juego-reclutamiento.vercel.app/admin
+
 ---
 
 ## Contenido
@@ -12,27 +15,32 @@ Incluye **contador de visitas**, **registro de postulantes** y un **panel de adm
 | Archivo | Qué es |
 |---|---|
 | `index.html` | El juego completo (escenarios, misiones, medalla y formulario de inscripción). |
-| `admin.html` | Panel de administración: visitas, postulantes, estados, CSV. |
+| `admin.html` | Panel de administración: visitas, postulantes, estados y exportación CSV. |
 | `api/track.js` | Contador de visitas (total y por día). |
 | `api/register.js` | Recibe y valida los registros del juego. |
-| `api/admin/*` | Login, listado, cambio de estado y borrado de registros. |
-| `lib/store.js` | Almacenamiento (Redis en producción / archivo JSON en local). |
-| `lib/auth.js` | Firma y verificación del token de administrador. |
-| `server.js` | Servidor local de desarrollo, sin dependencias. |
+| `api/admin/login.js` | Entrega el token de sesión del panel. |
+| `api/admin/registros.js` | Listar, cambiar estado y eliminar postulantes. |
+| `api/admin/stats.js` | Métricas del panel (visitas, postulantes, series por día). |
+| `lib/store.js` | Almacenamiento: Redis → Vercel Blob → archivo local. |
+| `lib/auth.js` | Firma y verificación del token de administrador (HMAC, 12 h). |
+| `dev-server.js` | Servidor local de desarrollo, sin dependencias. |
 
 ---
 
 ## Probar en local
 
 ```bash
-node server.js
+npm install
+npm run dev
 ```
 
 - Juego → http://localhost:3000
 - Panel → http://localhost:3000/admin
 - Clave por defecto → `camanabomberos2026`
 
-En local los datos se guardan en `.data/store.json` (no se sube a Git).
+En local, si no hay variables de entorno, los datos se guardan en
+`.data/store.json` (ignorado por Git). Si defines `KV_REST_API_*` o
+`BLOB_READ_WRITE_TOKEN`, usa ese almacén también en local.
 
 ---
 
@@ -40,23 +48,24 @@ En local los datos se guardan en `.data/store.json` (no se sube a Git).
 
 | Variable | Para qué | Obligatoria |
 |---|---|---|
-| `ADMIN_PASSWORD` | Clave del panel de administración. | Sí (en producción) |
-| `ADMIN_SECRET` | Clave para firmar los tokens. Si falta se usa `ADMIN_PASSWORD`. | Recomendada |
-| `KV_REST_API_URL` | URL REST de Upstash Redis. | Sí |
-| `KV_REST_API_TOKEN` | Token REST de Upstash Redis. | Sí |
+| `ADMIN_PASSWORD` | Clave del panel de administración. | Sí en producción |
+| `ADMIN_SECRET` | Clave para firmar los tokens de sesión. Si falta se usa `ADMIN_PASSWORD`. | Recomendada |
+| `KV_REST_API_URL` | URL REST de Upstash Redis. | Sí (o Blob) |
+| `KV_REST_API_TOKEN` | Token REST de Upstash Redis. | Sí (o Blob) |
+| `BLOB_READ_WRITE_TOKEN` | Alternativa de almacenamiento si no hay Redis. | No |
 
 > También se aceptan `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN`.
 
-### Cómo conectar la base de datos en Vercel (2 minutos)
+### Almacenamiento
 
-1. En el proyecto de Vercel → pestaña **Storage** → **Create Database**.
-2. Elige **Upstash Redis** → plan **Free** → región `us-east-1` (la más cercana a Perú).
-3. Pulsa **Connect Project** y selecciona este proyecto (todos los entornos).
-4. Vercel inyecta `KV_REST_API_URL` y `KV_REST_API_TOKEN` automáticamente.
-5. Vuelve a desplegar: **Deployments → ⋯ → Redeploy**.
+`lib/store.js` elige el primer backend disponible:
 
-Sin este paso el juego funciona igual, pero el contador y los registros
-quedan desactivados y el panel muestra un aviso de configuración.
+1. **Upstash Redis** (`KV_REST_API_*`) — recomendado. Contador atómico y escrituras seguras.
+2. **Vercel Blob** (`BLOB_READ_WRITE_TOKEN`) — alternativa sin Redis; el contador usa
+   escrituras condicionales por ETag para no perder visitas.
+3. **Archivo local** — solo para desarrollo.
+
+Ambos almacenes ya están conectados al proyecto en Vercel.
 
 ### Cambiar la clave del panel
 
@@ -71,15 +80,28 @@ vercel --prod
 ## Despliegue
 
 ```bash
+npm install -g vercel   # si aún no lo tienes
 vercel --prod
 ```
 
-El sitio queda en `https://<proyecto>.vercel.app` y el panel en `/admin`.
+Para que cada `git push` despliegue solo, conecta el repositorio en
+**Vercel → Settings → Git** (`vercel git connect`).
 
 ---
 
-## Notas de privacidad
+## Cómo funciona el panel
 
-El formulario pide nombre, DNI, edad, WhatsApp y distrito. Esos datos solo se usan
-para contactar al postulante y se muestran únicamente en el panel privado.
-El token de sesión del panel caduca a las 12 horas.
+- **Visitas totales / hoy** — cada visita se cuenta una vez por sesión del navegador.
+- **Postulantes** — nombre, DNI, edad, WhatsApp, distrito, tipo de ingreso, avance en el juego.
+- **Estado** — `nuevo → contactado → voluntario / descartado`.
+- **WhatsApp** — cada número abre un chat directo con el postulante.
+- **CSV** — exporta lo que esté filtrado, listo para Excel.
+- Un mismo DNI no se duplica: se actualiza y se registra cuántas veces volvió.
+
+---
+
+## Privacidad
+
+El formulario pide nombre, DNI, edad, WhatsApp y distrito. Esos datos se usan solo
+para contactar al postulante y se muestran únicamente en el panel privado
+(protegido con clave, token firmado de 12 h y límite de intentos por IP).

@@ -67,6 +67,7 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 /* contador de visitas */
 #hud .vw{margin-top:9px;padding-top:8px;border-top:1px solid rgba(128,128,128,.28);font-size:.71rem;color:var(--mut);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;line-height:1.35}
 #hud .vw span{white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+#hud .vw i,.ov .vw2 i{font-style:normal}
 #hud .vw b{font-size:.79rem;color:var(--red);font-variant-numeric:tabular-nums;letter-spacing:.2px}
 #hud .vw b.v0{color:var(--mut)}
 .ov .vw2{font-size:.82rem;opacity:.8;margin:10px auto 0;letter-spacing:.3px}
@@ -77,7 +78,7 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 <canvas id="c"></canvas>
 <div id="hud"><b class="f">🚒 CAMANÁ TE NECESITA</b>
 <div class="m" id="m0"></div><div class="m" id="m1"></div><div class="m" id="m2"></div><div class="m" id="m3"></div><div class="m" id="m4"></div><div class="m" id="m5"></div><div class="m" id="m6"></div>
-<div id="bar"><i></i></div><div class="vw" id="vw"><span>👁 <b id="vcn" class="v0">—</b> visitas</span><span>📝 <b id="rcn" class="v0">—</b> postulantes</span></div><button class="bt" id="bm">📖 Manual del bombero (M)</button></div>
+<div id="bar"><i></i></div><div class="vw" id="vw"><span>👁 <b id="vcn" class="v0">—</b> <i id="vcu">visitas</i></span><span>📝 <b id="rcn" class="v0">—</b> <i id="rcu">postulantes</i></span></div><button class="bt" id="bm">📖 Manual del bombero (M)</button></div>
 <canvas id="mm" width="224" height="224"></canvas>
 <div id="hint">WASD / flechas: conducir · <b>E</b>: agua · <b>R</b>: hidráulica · <b>Espacio</b>: sirena · <b>M</b>: manual</div>
 <div id="pg"><span id="pgt"></span><i></i></div><div id="gd"><b id="ga">▲</b><span id="gt"></span></div><div id="pg2"><span id="pg2t"></span><i></i></div><div id="pn"></div><div id="toast"></div>
@@ -85,7 +86,7 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 <div class="pad"><button data-k="KeyR" class="b2">🔧</button><button data-k="Space" class="b2">📢</button><button data-k="KeyM" class="b2">📖</button><button data-k="KeyE" class="big">💧</button></div>
 <div id="rg"><div class="bx"></div></div>
 <div id="mn"><div class="bx"></div></div>
-<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="vw2">👁 <b id="vco">—</b> visitas · 📝 <b id="rco">—</b> postulantes registrados</p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button></div></div>
+<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="vw2">👁 <b id="vco">—</b> <i id="vou">visitas</i> · 📝 <b id="rco">—</b> <i id="rou">postulantes registrados</i></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button></div></div>
 <div class="ov" id="fin"><div><h1>¡Bombero<br><em>honorario!</em></h1><p>Completaste todas las misiones. Registra tus datos y recibe tu medalla de Bombero Honorario.</p><button class="lk" id="cb">Obtener mi medalla 🏅</button><br><br><button class="lk" id="kp" style="background:#444">Seguir explorando</button></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -94,7 +95,9 @@ var T=THREE,$=function(s){return document.querySelector(s)},PI=Math.PI,rnd=Math.
 // ── Contador de visitas y postulantes ──────────────────────────────────────
 function nf(n){try{return Number(n).toLocaleString("es-PE")}catch(e){return String(n)}}
 function pintarStats(v,r){var a=$("#vcn"),b=$("#rcn"),c=$("#vco"),d=$("#rco");
-if(a&&v!=null){a.textContent=nf(v);a.className=""}if(b&&r!=null){b.textContent=nf(r);b.className=""}
+function set(id,txt){var e=$(id);if(e)e.textContent=txt}
+if(a&&v!=null){a.textContent=nf(v);a.className="";set("#vcu",v==1?"visita":"visitas");set("#vou",v==1?"visita":"visitas")}
+if(b&&r!=null){b.textContent=nf(r);b.className="";set("#rcu",r==1?"postulante":"postulantes");set("#rou",r==1?"postulante registrado":"postulantes registrados")}
 if(c&&v!=null)c.textContent=nf(v);if(d&&r!=null)d.textContent=nf(r)}
 function apiStats(metodo){
 var o={method:metodo||"GET",headers:{"Content-Type":"application/json"}};
