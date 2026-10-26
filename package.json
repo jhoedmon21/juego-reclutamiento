@@ -1,0 +1,13 @@
+{
+  "name": "juego-reclutamiento",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Juego de reclutamiento de bomberos voluntarios de Camana, con contador de visitas, registro de postulantes y panel de administracion.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
