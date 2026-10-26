@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacto y registro · Compañía de Bomberos de Camaná</title>
+<meta name="description" content="Formulario oficial de contacto y registro de la Compañía de Bomberos Voluntarios de Camaná. Consultas, inscripciones, voluntariado y capacitaciones.">
+<meta name="theme-color" content="#3d0a0d">
+<link rel="stylesheet" href="/assets/institucional.css">
+</head>
+<body>
+
+<a class="skip" href="#formulario">Ir al formulario</a>
+
+<!-- Barra de emergencia -->
+<div class="topbar">
+  <div class="wrap">
+    <span class="em">🚨 Emergencias <b>116</b></span>
+    <span class="meta">
+      <span>Camaná · Arequipa · Perú</span>
+      <span>Atención de lunes a domingo, 24 horas</span>
+    </span>
+  </div>
+</div>
+
+<!-- Cabecera -->
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="crest" viewBox="0 0 64 74" aria-hidden="true">
+        <path d="M32 2 61 12v27c0 19-13 28-29 33C16 67 3 58 3 39V12z" fill="#8c1015" stroke="#c19a2e" stroke-width="2.4"/>
+        <path d="M32 8 55 16v23c0 15-10 22-23 26C19 61 9 54 9 39V16z" fill="none" stroke="#c19a2e" stroke-width="1" opacity=".5"/>
+        <path d="M32 21c5.4 6.6 9.4 9.8 9.4 15.6a9.4 9.4 0 0 1-18.8 0c0-4.2 2-6.6 4.3-9.4.7 2.8 1.7 4.2 3 5.2.6-4.2 1-7.4 2.1-11.4z" fill="#e6c765"/>
+        <path d="M32 34c2.5 3 4.2 4.6 4.2 7.3a4.2 4.2 0 0 1-8.4 0c0-2.1 1-3.4 2.1-4.6.4 1.4.9 2.1 1.4 2.5.3-1.8.4-3.3.7-5.2z" fill="#8c1015"/>
+      </svg>
+      <span>
+        <span class="nm">Compañía de Bomberos de Camaná</span>
+        <span class="sb">Bomberos Voluntarios del Perú</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="/">Inicio</a>
+      <a href="/contacto" aria-current="page">Contacto</a>
+      <a href="/encuesta">Encuesta ciudadana</a>
+      <a class="cta" href="/admin">Panel interno</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Portada -->
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">Atención a la ciudadanía</span>
+    <h1>Contacto y registro institucional</h1>
+    <p>
+      Este es el canal oficial para comunicarse con la Compañía de Bomberos Voluntarios de Camaná.
+      Registre su consulta, solicite información sobre el voluntariado o coordine una capacitación.
+      Toda comunicación es recibida y atendida por la Comandancia.
+    </p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<main class="main" id="formulario">
+  <div class="wrap cols">
+
+    <!-- ─── Formulario ─── -->
+    <div>
+      <div class="card" id="carta-form">
+        <div class="card-head">
+          <div>
+            <span class="eyebrow">Formulario oficial</span>
+            <h2>Registro de contacto</h2>
+          </div>
+          <span class="req-note">Los campos con <span class="req">*</span> son obligatorios</span>
+        </div>
+        <p class="lead">
+          Complete sus datos y el motivo de su comunicación. Recibirá respuesta en un plazo
+          máximo de tres días hábiles, al correo o al número que indique.
+        </p>
+
+        <div class="aviso aviso-emergencia" role="note">
+          <span class="ic" aria-hidden="true">⚠</span>
+          <div>
+            <b>Este formulario no atiende emergencias.</b>
+            Si hay un incendio, un accidente o una persona en peligro, llame de inmediato al
+            <b>116</b> o acuda a la unidad más cercana. El formulario se revisa solo en horario administrativo.
+          </div>
+        </div>
+
+        <form id="f" novalidate autocomplete="on">
+          <div class="field">
+            <label for="nombre">Nombres y apellidos <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej. María Fernanda Quispe Huamán"
+                   autocomplete="name" required aria-describedby="e-nombre">
+            <span class="err" id="e-nombre" role="alert"></span>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="dni">DNI <span class="hint" style="display:inline;font-weight:400">(opcional)</span></label>
+              <input type="text" id="dni" name="dni" inputmode="numeric" maxlength="8"
+                     placeholder="8 dígitos" autocomplete="off" aria-describedby="e-dni">
+              <span class="err" id="e-dni" role="alert"></span>
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+              <input type="tel" id="telefono" name="telefono" inputmode="tel"
+                     placeholder="Ej. 987 654 321" autocomplete="tel" required aria-describedby="e-telefono">
+              <span class="err" id="e-telefono" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="correo" name="correo" placeholder="nombre@correo.com"
+                   autocomplete="email" required aria-describedby="e-correo">
+            <span class="err" id="e-correo" role="alert"></span>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label for="distrito">Distrito <span class="req" aria-hidden="true">*</span></label>
+              <select id="distrito" name="distrito" required aria-describedby="e-distrito">
+                <option value="">Seleccione un distrito</option>
+                <option>Camaná</option>
+                <option>Samuel Pastor</option>
+                <option>Nicolás de Piérola</option>
+                <option>Mariscal Cáceres</option>
+                <option>José María Quimper</option>
+                <option>Ocoña</option>
+                <option>Otro distrito</option>
+              </select>
+              <span class="err" id="e-distrito" role="alert"></span>
+            </div>
+            <div class="field">
+              <label for="motivo">Motivo de contacto <span class="req" aria-hidden="true">*</span></label>
+              <select id="motivo" name="motivo" required aria-describedby="e-motivo">
+                <option value="">Seleccione un motivo</option>
+                <option>Quiero ser bombero voluntario</option>
+                <option>Información sobre el voluntariado</option>
+                <option>Capacitación y prevención</option>
+                <option>Donaciones y apoyo</option>
+                <option>Prensa y comunicación</option>
+                <option>Constancia o trámite</option>
+                <option>Otro</option>
+              </select>
+              <span class="err" id="e-motivo" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="mensaje">Mensaje <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="mensaje" name="mensaje" required minlength="20" maxlength="1500"
+                      placeholder="Describa su consulta o solicitud con el mayor detalle posible…"
+                      aria-describedby="e-mensaje h-mensaje"></textarea>
+            <span class="hint" id="h-mensaje">Mínimo 20 caracteres. <span id="cuenta">0</span>/1500</span>
+            <span class="err" id="e-mensaje" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="consent" name="consent" required aria-describedby="e-consent">
+              <span>
+                Autorizo a la Compañía de Bomberos de Camaná a utilizar mis datos personales
+                únicamente para responder esta comunicación, conforme a la Ley N.º 29733 de
+                Protección de Datos Personales. <span class="req" aria-hidden="true">*</span>
+              </span>
+            </label>
+            <span class="err" id="e-consent" role="alert"></span>
+          </div>
+
+          <div class="hp" aria-hidden="true">
+            <label for="empresa">No completar</label>
+            <input type="text" id="empresa" name="empresa" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primario" type="submit" id="enviar">Enviar comunicación</button>
+            <a class="btn-ghost" href="/encuesta">Prefiero responder la encuesta →</a>
+          </div>
+          <p class="hint" style="margin-top:14px">
+            Sus datos no se comparten con terceros y se conservan solo mientras sean necesarios
+            para atender su solicitud.
+          </p>
+        </form>
+      </div>
+
+      <!-- Éxito -->
+      <div class="card exito" id="carta-ok" hidden>
+        <div class="sello" aria-hidden="true">✓</div>
+        <h2>Comunicación registrada</h2>
+        <p>
+          Gracias por escribirnos. Su mensaje fue recibido por la Comandancia y será atendido
+          en un plazo máximo de tres días hábiles.
+        </p>
+        <p style="margin-bottom:0"><span class="folio" id="folio">—</span></p>
+        <div class="actions" style="justify-content:center;border-top:0;padding-top:8px">
+          <a class="btn btn-sec" href="/encuesta">Responder la encuesta ciudadana</a>
+          <a class="btn-ghost" href="/">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Panel lateral ─── -->
+    <aside class="side">
+      <div class="card destacado">
+        <h3>Emergencias</h3>
+        <div class="num116">116</div>
+        <p>
+          Línea gratuita nacional, disponible las 24 horas. También puede acudir al
+          cuartel de la Compañía en Camaná.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Datos institucionales</h3>
+        <ul class="info-list">
+          <li>
+            <span class="k" aria-hidden="true">📍</span>
+            <span><b>Cuartel general</b><small>Camaná, provincia de Camaná, Arequipa</small></span>
+          </li>
+          <li>
+            <span class="k" aria-hidden="true">🕘</span>
+            <span><b>Atención administrativa</b><small>Lunes a viernes, 08:00 a 16:00</small></span>
+          </li>
+          <li>
+            <span class="k" aria-hidden="true">✉️</span>
+            <span><b>Correo institucional</b><small>comunicaciones@bomberoscamana.pe</small></span>
+          </li>
+          <li>
+            <span class="k" aria-hidden="true">🚒</span>
+            <span><b>Guardia permanente</b><small>Personal de turno los 365 días del año</small></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>¿Desea ser bombero voluntario?</h3>
+        <p>
+          Puede postular desde los 15 años. El proceso incluye una entrevista, evaluación
+          médica y el curso básico de formación. Seleccione
+          <b>«Quiero ser bombero voluntario»</b> en el formulario y lo contactaremos.
+        </p>
+        <p style="margin-bottom:0">
+          <a href="/">Conocer el proceso jugando →</a>
+        </p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- Pie -->
+<footer class="pie">
+  <div class="wrap">
+    <div class="cols3">
+      <div>
+        <h4>Compañía de Bomberos de Camaná</h4>
+        <p>
+          Institución de servicio voluntario dedicada a la protección de la vida, el patrimonio
+          y el ambiente en la provincia de Camaná, Arequipa.
+        </p>
+      </div>
+      <div>
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/contacto">Contacto y registro</a></li>
+          <li><a href="/encuesta">Encuesta ciudadana</a></li>
+          <li><a href="/admin">Panel interno</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Emergencias</h4>
+        <ul>
+          <li><a href="tel:116"><b style="color:#fff">116</b> · Línea nacional</a></li>
+          <li>Central 105 · Policía Nacional</li>
+          <li>Central 106 · SAMU</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© <span id="anio">2026</span> Compañía de Bomberos de Camaná. Todos los derechos reservados.</span>
+      <span>Servir también es amar a tu tierra.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var form = $('#f');
+  var enviando = false;
+
+  $('#anio').textContent = new Date().getFullYear();
+
+  /* Contador de caracteres */
+  var msg = $('#mensaje'), cuenta = $('#cuenta');
+  msg.addEventListener('input', function () {
+    cuenta.textContent = msg.value.length;
+  });
+
+  /* ── Validación ─────────────────────────────────────────────────────── */
+  function setErr(id, texto) {
+    var e = $('#e-' + id), campo = $('#' + id);
+    if (texto) {
+      e.textContent = texto;
+      e.classList.add('on');
+      if (campo) campo.setAttribute('aria-invalid', 'true');
+      return false;
+    }
+    e.textContent = '';
+    e.classList.remove('on');
+    if (campo) campo.removeAttribute('aria-invalid');
+    return true;
+  }
+
+  var reglas = {
+    nombre: function (v) {
+      if (v.length < 5) return 'Escriba sus nombres y apellidos completos.';
+      if (v.split(/\s+/).length < 2) return 'Ingrese al menos un nombre y un apellido.';
+      if (!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$/.test(v)) return 'Use solo letras y espacios.';
+      return '';
+    },
+    dni: function (v) {
+      if (!v) return '';
+      if (!/^\d{8}$/.test(v)) return 'El DNI debe tener exactamente 8 dígitos.';
+      return '';
+    },
+    telefono: function (v) {
+      var d = v.replace(/\D/g, '');
+      if (d.length < 9) return 'Ingrese un número de 9 dígitos.';
+      if (d.length > 12) return 'El número es demasiado largo.';
+      return '';
+    },
+    correo: function (v) {
+      if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(v)) return 'Ingrese un correo electrónico válido.';
+      return '';
+    },
+    distrito: function (v) { return v ? '' : 'Seleccione su distrito.'; },
+    motivo: function (v) { return v ? '' : 'Seleccione el motivo de su contacto.'; },
+    mensaje: function (v) {
+      if (v.length < 20) return 'Escriba al menos 20 caracteres para que podamos ayudarle.';
+      return '';
+    },
+    consent: function (_, campo) {
+      return campo.checked ? '' : 'Debe autorizar el uso de sus datos para continuar.';
+    },
+  };
+
+  function validarCampo(id) {
+    var campo = $('#' + id);
+    var v = campo.type === 'checkbox' ? '' : campo.value.trim();
+    var err = reglas[id] ? reglas[id](v, campo) : '';
+    return setErr(id, err);
+  }
+
+  Object.keys(reglas).forEach(function (id) {
+    var campo = $('#' + id);
+    campo.addEventListener('blur', function () { validarCampo(id); });
+    campo.addEventListener('change', function () { validarCampo(id); });
+    campo.addEventListener('input', function () {
+      if (campo.getAttribute('aria-invalid') === 'true') validarCampo(id);
+    });
+  });
+
+  /* ── Envío ──────────────────────────────────────────────────────────── */
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (enviando) return;
+
+    var ok = true, primero = null;
+    Object.keys(reglas).forEach(function (id) {
+      if (!validarCampo(id)) {
+        ok = false;
+        if (!primero) primero = $('#' + id);
+      }
+    });
+
+    if (!ok) {
+      if (primero) primero.focus();
+      return;
+    }
+
+    var btn = $('#enviar');
+    enviando = true;
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    var datos = {
+      nombre: $('#nombre').value.trim(),
+      dni: $('#dni').value.replace(/\D/g, ''),
+      correo: $('#correo').value.trim(),
+      telefono: $('#telefono').value.trim(),
+      distrito: $('#distrito').value,
+      motivo: $('#motivo').value,
+      mensaje: $('#mensaje').value.trim(),
+      consent: $('#consent').checked,
+      empresa: $('#empresa').value,
+    };
+
+    fetch('/api/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.ok) {
+          $('#folio').textContent = 'Folio ' + j.folio;
+          $('#carta-form').hidden = true;
+          $('#carta-ok').hidden = false;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          $('#carta-ok').focus && $('#carta-ok').focus();
+        } else {
+          mostrarError((j && j.error) || 'No se pudo enviar su comunicación.');
+        }
+      })
+      .catch(function () {
+        mostrarError('No se pudo conectar con el servidor. Revise su conexión e intente nuevamente.');
+      })
+      .then(function () {
+        enviando = false;
+        btn.disabled = false;
+        btn.textContent = 'Enviar comunicación';
+      });
+  });
+
+  function mostrarError(texto) {
+    var prev = $('#aviso-error');
+    if (prev) prev.remove();
+    var div = document.createElement('div');
+    div.id = 'aviso-error';
+    div.className = 'aviso aviso-emergencia';
+    div.setAttribute('role', 'alert');
+    div.innerHTML = '<span class="ic" aria-hidden="true">⚠</span><div></div>';
+    div.lastChild.textContent = texto;
+    form.parentNode.insertBefore(div, form);
+    div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+})();
+</script>
+</body>
+</html>

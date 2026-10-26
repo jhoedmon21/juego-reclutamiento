@@ -72,6 +72,10 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 #hud .vw b.v0{color:var(--mut)}
 .ov .vw2{font-size:.82rem;opacity:.8;margin:10px auto 0;letter-spacing:.3px}
 .ov .vw2 b{color:var(--amb)}
+.ov .ovnav{margin:16px auto 0;font-size:.76rem;opacity:.72;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.ov .ovnav a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.ov .ovnav a:hover{opacity:1;color:var(--red);border-color:var(--red)}
+.ov .ovnav span{opacity:.4}
 </style>
 </head>
 <body>
@@ -86,7 +90,7 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 <div class="pad"><button data-k="KeyR" class="b2">🔧</button><button data-k="Space" class="b2">📢</button><button data-k="KeyM" class="b2">📖</button><button data-k="KeyE" class="big">💧</button></div>
 <div id="rg"><div class="bx"></div></div>
 <div id="mn"><div class="bx"></div></div>
-<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="vw2">👁 <b id="vco">—</b> <i id="vou">visitas</i> · 📝 <b id="rco">—</b> <i id="rou">postulantes registrados</i></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button></div></div>
+<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="vw2">👁 <b id="vco">—</b> <i id="vou">visitas</i> · 📝 <b id="rco">—</b> <i id="rou">postulantes registrados</i></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button><p class="ovnav"><a href="/contacto">Contacto y registro</a><span>·</span><a href="/encuesta">Encuesta ciudadana</a><span>·</span><a href="/admin">Panel interno</a></p></div></div>
 <div class="ov" id="fin"><div><h1>¡Bombero<br><em>honorario!</em></h1><p>Completaste todas las misiones. Registra tus datos y recibe tu medalla de Bombero Honorario.</p><button class="lk" id="cb">Obtener mi medalla 🏅</button><br><br><button class="lk" id="kp" style="background:#444">Seguir explorando</button></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>

@@ -7,3 +7,6 @@ node_modules
 .agents
 .claude
 .workbuddy-ai
+_*.html
+_*.png
+WhatsApp Image*.jpeg

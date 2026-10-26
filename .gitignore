@@ -15,3 +15,8 @@ node_modules/
 
 # memoria local del asistente (no publicar)
 .workbuddy-ai/
+
+# archivos de referencia y pruebas locales
+_*.html
+_*.png
+WhatsApp Image*.jpeg

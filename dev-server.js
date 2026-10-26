@@ -61,13 +61,11 @@ function serveStatic(req, res, pathname) {
   if (!file.startsWith(ROOT)) return sendText(res, 403, 'Prohibido');
 
   fs.stat(file, (err, st) => {
-    if (err || !st.isFile()) {
-      // rutas limpias: /algo -> /algo.html
-      const alt = file + '.html';
-      if (!err && fs.existsSync(alt)) return stream(alt);
-      return sendText(res, 404, 'No encontrado: ' + rel);
-    }
-    stream(file);
+    if (!err && st.isFile()) return stream(file);
+    // rutas limpias: /contacto -> /contacto.html
+    const alt = file + '.html';
+    if (fs.existsSync(alt)) return stream(alt);
+    return sendText(res, 404, 'No encontrado: ' + rel);
   });
 
   function stream(f) {

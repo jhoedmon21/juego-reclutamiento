@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encuesta ciudadana · Compañía de Bomberos de Camaná</title>
+<meta name="description" content="Encuesta de opinión ciudadana de la Compañía de Bomberos Voluntarios de Camaná. Su respuesta ayuda a mejorar el servicio a la comunidad.">
+<meta name="theme-color" content="#3d0a0d">
+<link rel="stylesheet" href="/assets/institucional.css">
+</head>
+<body>
+
+<a class="skip" href="#encuesta">Ir a la encuesta</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="em">🚨 Emergencias <b>116</b></span>
+    <span class="meta">
+      <span>Camaná · Arequipa · Perú</span>
+      <span>Encuesta anónima · 3 minutos</span>
+    </span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="crest" viewBox="0 0 64 74" aria-hidden="true">
+        <path d="M32 2 61 12v27c0 19-13 28-29 33C16 67 3 58 3 39V12z" fill="#8c1015" stroke="#c19a2e" stroke-width="2.4"/>
+        <path d="M32 8 55 16v23c0 15-10 22-23 26C19 61 9 54 9 39V16z" fill="none" stroke="#c19a2e" stroke-width="1" opacity=".5"/>
+        <path d="M32 21c5.4 6.6 9.4 9.8 9.4 15.6a9.4 9.4 0 0 1-18.8 0c0-4.2 2-6.6 4.3-9.4.7 2.8 1.7 4.2 3 5.2.6-4.2 1-7.4 2.1-11.4z" fill="#e6c765"/>
+        <path d="M32 34c2.5 3 4.2 4.6 4.2 7.3a4.2 4.2 0 0 1-8.4 0c0-2.1 1-3.4 2.1-4.6.4 1.4.9 2.1 1.4 2.5.3-1.8.4-3.3.7-5.2z" fill="#8c1015"/>
+      </svg>
+      <span>
+        <span class="nm">Compañía de Bomberos de Camaná</span>
+        <span class="sb">Bomberos Voluntarios del Perú</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="/">Inicio</a>
+      <a href="/contacto">Contacto</a>
+      <a href="/encuesta" aria-current="page">Encuesta ciudadana</a>
+      <a class="cta" href="/admin">Panel interno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">Consulta pública</span>
+    <h1>Encuesta de opinión ciudadana</h1>
+    <p>
+      Su valoración nos permite mejorar la calidad del servicio que brindamos a la provincia
+      de Camaná. La encuesta es anónima, toma alrededor de tres minutos y sus respuestas se
+      procesan de forma agregada.
+    </p>
+    <div class="rule"></div>
+  </div>
+</section>
+
+<!-- Progreso -->
+<div class="progreso" id="prog" role="group" aria-label="Avance de la encuesta">
+  <div class="wrap">
+    <span class="txt" id="ptxt">0 de 10 respondidas</span>
+    <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar">
+      <i></i>
+    </div>
+    <span class="txt" id="ppct">0%</span>
+  </div>
+</div>
+
+<main class="main" id="encuesta" style="padding-top:26px">
+  <div class="wrap cols">
+
+    <div>
+      <div class="card" id="carta-enc">
+        <div class="card-head">
+          <div>
+            <span class="eyebrow">Formulario institucional</span>
+            <h2>Cuestionario</h2>
+          </div>
+          <span class="req-note">Los campos con <span class="req">*</span> son obligatorios</span>
+        </div>
+        <p class="lead">
+          Responda con sinceridad. No hay respuestas correctas ni incorrectas: su percepción
+          es el dato que necesitamos. La pregunta 7 es opcional.
+        </p>
+
+        <div class="aviso aviso-info" role="note">
+          <span class="ic" aria-hidden="true">🔒</span>
+          <div>
+            <b>Encuesta anónima.</b> No solicitamos nombre, DNI ni correo. Solo se guardan sus
+            respuestas, la fecha y el distrito que usted decida indicar.
+          </div>
+        </div>
+
+        <form id="f" novalidate>
+          <div id="preguntas"></div>
+
+          <!-- Datos generales -->
+          <div class="seccion-tit"><span>Datos generales</span></div>
+          <p class="hint" style="margin:-6px 0 16px">
+            Opcionales. Nos ayudan a entender si la percepción cambia según el distrito o la edad.
+          </p>
+          <div class="grid2">
+            <div class="field">
+              <label for="distrito">Distrito de residencia</label>
+              <select id="distrito" name="distrito">
+                <option value="">Prefiero no indicarlo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="edad">Rango de edad</label>
+              <select id="edad" name="edad">
+                <option value="">Prefiero no indicarlo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primario" type="submit" id="enviar">Enviar mis respuestas</button>
+            <span class="hint" style="margin:0">Podrá revisar el resumen al finalizar.</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Éxito -->
+      <div class="card exito" id="carta-ok" hidden>
+        <div class="sello" aria-hidden="true">✓</div>
+        <h2>Gracias por su participación</h2>
+        <p>
+          Sus respuestas fueron registradas correctamente. La información se procesa de forma
+          agregada y se utiliza para mejorar el servicio de la Compañía.
+        </p>
+        <p style="margin-bottom:0"><span class="folio" id="folio">—</span></p>
+
+        <div class="resumen" id="resumen" hidden></div>
+
+        <div class="actions" style="justify-content:center;border-top:0;padding-top:8px">
+          <a class="btn btn-sec" href="/contacto">Contactar a la Compañía</a>
+          <a class="btn-ghost" href="/">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="card destacado">
+        <h3>Su opinión tiene valor</h3>
+        <p>
+          Cada respuesta se revisa en la Comandancia y se toma en cuenta para las decisiones
+          de capacitación, equipamiento y acercamiento a la comunidad.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Cómo se usa la información</h3>
+        <ul class="info-list">
+          <li><span class="k" aria-hidden="true">📊</span><span><b>Resultados agregados</b><small>Se analizan en conjunto, nunca de forma individual.</small></span></li>
+          <li><span class="k" aria-hidden="true">🤝</span><span><b>Plan de mejora</b><small>Las sugerencias abiertas se revisan una por una.</small></span></li>
+          <li><span class="k" aria-hidden="true">⏱️</span><span><b>Duración</b><small>Entre 2 y 3 minutos.</small></span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>¿Necesita ayuda?</h3>
+        <p style="margin-bottom:0">
+          Si tiene dificultades para completar la encuesta, escríbanos desde el
+          <a href="/contacto">formulario de contacto</a>.
+        </p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <div class="cols3">
+      <div>
+        <h4>Compañía de Bomberos de Camaná</h4>
+        <p>
+          Institución de servicio voluntario dedicada a la protección de la vida, el patrimonio
+          y el ambiente en la provincia de Camaná, Arequipa.
+        </p>
+      </div>
+      <div>
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/contacto">Contacto y registro</a></li>
+          <li><a href="/encuesta">Encuesta ciudadana</a></li>
+          <li><a href="/admin">Panel interno</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Emergencias</h4>
+        <ul>
+          <li><a href="tel:116"><b style="color:#fff">116</b> · Línea nacional</a></li>
+          <li>Central 105 · Policía Nacional</li>
+          <li>Central 106 · SAMU</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© <span id="anio">2026</span> Compañía de Bomberos de Camaná. Todos los derechos reservados.</span>
+      <span>Servir también es amar a tu tierra.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/encuesta.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.ENCUESTA;
+  var $ = function (s) { return document.querySelector(s); };
+  var form = $('#f');
+  var REQUERIDAS = E.preguntas.filter(function (p) { return p.requerido !== false; });
+  var enviando = false;
+
+  $('#anio').textContent = new Date().getFullYear();
+
+  /* ── Pintar preguntas ──────────────────────────────────────────────── */
+  function htmlEsc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function pintarEscala(p) {
+    var h = '<div class="escala" role="radiogroup" aria-labelledby="q-' + p.id + '">';
+    for (var i = p.min; i <= p.max; i++) {
+      h += '<input type="radio" name="' + p.id + '" id="' + p.id + '-' + i + '" value="' + i + '">' +
+           '<label for="' + p.id + '-' + i + '">' + i + '</label>';
+    }
+    h += '</div><div class="escala-ext"><span>' + p.etiquetas[0] + '</span><span>' + p.etiquetas[1] + '</span></div>';
+    return h;
+  }
+
+  function pintarOpciones(p) {
+    var tipo = p.multiple ? 'checkbox' : 'radio';
+    var cls = p.opciones.length > 3 ? 'opts dos' : 'opts';
+    var h = '<div class="' + cls + '" role="' + (p.multiple ? 'group' : 'radiogroup') + '" aria-labelledby="q-' + p.id + '">';
+    p.opciones.forEach(function (o, i) {
+      var id = p.id + '-' + o.v;
+      h += '<label class="opt" for="' + id + '">' +
+             '<input type="' + tipo + '" name="' + p.id + '" id="' + id + '" value="' + htmlEsc(o.v) + '">' +
+             '<span>' + htmlEsc(o.t) + '</span>' +
+           '</label>';
+    });
+    return h + '</div>';
+  }
+
+  function pintarAbierta(p) {
+    return '<textarea name="' + p.id + '" id="' + p.id + '" maxlength="' + (p.max || 600) + '" ' +
+           'placeholder="' + htmlEsc(p.placeholder || '') + '"></textarea>' +
+           '<span class="hint"><span id="cnt-' + p.id + '">0</span>/' + (p.max || 600) + ' caracteres</span>';
+  }
+
+  var cont = $('#preguntas');
+  E.secciones.forEach(function (sec) {
+    var s = document.createElement('div');
+    s.innerHTML = '<div class="seccion-tit"><span>' + htmlEsc(sec.titulo) + '</span></div>';
+    cont.appendChild(s);
+
+    sec.preguntas.forEach(function (p) {
+      var w = document.createElement('div');
+      w.className = 'preg';
+      w.dataset.pid = p.id;
+      var opc = p.requerido === false ? '<span class="opc">opcional</span>' : '';
+      var cuerpo =
+        p.tipo === 'escala' ? pintarEscala(p) :
+        p.tipo === 'abierta' ? pintarAbierta(p) :
+        pintarOpciones(p);
+
+      w.innerHTML =
+        '<div class="q">' +
+          '<span class="num" aria-hidden="true">' + p.n + '</span>' +
+          '<span class="txt" id="q-' + p.id + '">' + htmlEsc(p.titulo) + opc + '</span>' +
+        '</div>' +
+        (p.ayuda ? '<p class="hint" style="margin:0 0 10px 36px">' + htmlEsc(p.ayuda) + '</p>' : '') +
+        '<div class="body">' + cuerpo + '</div>' +
+        '<span class="err" id="e-' + p.id + '" role="alert"></span>';
+
+      cont.appendChild(w);
+
+      if (p.tipo === 'abierta') {
+        var ta = w.querySelector('textarea');
+        ta.addEventListener('input', function () {
+          var c = $('#cnt-' + p.id);
+          if (c) c.textContent = ta.value.length;
+        });
+      }
+    });
+  });
+
+  /* Distritos y edades */
+  E.distritos.forEach(function (d) {
+    var o = document.createElement('option'); o.textContent = d; $('#distrito').appendChild(o);
+  });
+  E.edades.forEach(function (d) {
+    var o = document.createElement('option'); o.textContent = d; $('#edad').appendChild(o);
+  });
+
+  /* ── Progreso ──────────────────────────────────────────────────────── */
+  function respondida(p) {
+    if (p.tipo === 'abierta') return true;
+    var sel = form.querySelectorAll('[name="' + p.id + '"]:checked');
+    return sel.length > 0;
+  }
+
+  function actualizarProgreso() {
+    var n = REQUERIDAS.filter(respondida).length;
+    var pct = Math.round((n / REQUERIDAS.length) * 100);
+    $('#ptxt').textContent = n + ' de ' + REQUERIDAS.length + ' respondidas';
+    $('#ppct').textContent = pct + '%';
+    $('#pbar').querySelector('i').style.width = pct + '%';
+    $('#pbar').setAttribute('aria-valuenow', pct);
+  }
+
+  form.addEventListener('change', function (ev) {
+    actualizarProgreso();
+    var pid = ev.target.name;
+    if (pid) {
+      var e = $('#e-' + pid);
+      if (e && e.classList.contains('on')) {
+        e.classList.remove('on');
+        var w = form.querySelector('[data-pid="' + pid + '"]');
+        if (w) w.classList.remove('invalid');
+      }
+    }
+  });
+  actualizarProgreso();
+
+  /* ── Envío ─────────────────────────────────────────────────────────── */
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (enviando) return;
+
+    var faltan = [];
+    REQUERIDAS.forEach(function (p) {
+      if (!respondida(p)) faltan.push(p);
+    });
+
+    if (faltan.length) {
+      faltan.forEach(function (p) {
+        var e = $('#e-' + p.id);
+        e.textContent = 'Esta pregunta es obligatoria.';
+        e.classList.add('on');
+        var w = form.querySelector('[data-pid="' + p.id + '"]');
+        if (w) w.classList.add('invalid');
+      });
+      var primero = form.querySelector('[data-pid="' + faltan[0].id + '"]');
+      if (primero) {
+        primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var foco = primero.querySelector('input, textarea');
+        if (foco) foco.focus({ preventScroll: true });
+      }
+      return;
+    }
+
+    var respuestas = {};
+    E.preguntas.forEach(function (p) {
+      if (p.tipo === 'abierta') {
+        var ta = form.querySelector('[name="' + p.id + '"]');
+        respuestas[p.id] = ta ? ta.value.trim() : '';
+      } else if (p.multiple) {
+        var arr = [];
+        form.querySelectorAll('[name="' + p.id + '"]:checked').forEach(function (c) {
+          arr.push(c.value);
+        });
+        respuestas[p.id] = arr;
+      } else {
+        var sel = form.querySelector('[name="' + p.id + '"]:checked');
+        respuestas[p.id] = sel ? (p.tipo === 'escala' ? Number(sel.value) : sel.value) : null;
+      }
+    });
+
+    var btn = $('#enviar');
+    enviando = true;
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    fetch('/api/encuesta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        respuestas: respuestas,
+        distrito: $('#distrito').value,
+        edad: $('#edad').value,
+      }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.ok) {
+          $('#folio').textContent = 'Folio ' + j.folio;
+          $('#carta-enc').hidden = true;
+          $('#prog').hidden = true;
+          $('#carta-ok').hidden = false;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          cargarResumen();
+        } else {
+          alert((j && j.error) || 'No se pudo enviar la encuesta.');
+        }
+      })
+      .catch(function () {
+        alert('No se pudo conectar con el servidor. Revise su conexión e intente nuevamente.');
+      })
+      .then(function () {
+        enviando = false;
+        btn.disabled = false;
+        btn.textContent = 'Enviar mis respuestas';
+      });
+  });
+
+  function cargarResumen() {
+    fetch('/api/encuesta?resumen=1')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok || !j.total) return;
+        var caja = $('#resumen');
+        caja.innerHTML =
+          '<div><div class="v">' + j.total + '</div><div class="l">Respuestas registradas</div></div>' +
+          '<div><div class="v">' + (j.promedioLabor || '—') + '</div><div class="l">Calificación promedio de la labor</div></div>' +
+          '<div><div class="v">' + (j.promedioNota || '—') + '</div><div class="l">Nota promedio a los Bomberos</div></div>' +
+          '<div><div class="v">' + (j.recomiendaPct != null ? j.recomiendaPct + '%' : '—') + '</div><div class="l">Recomendaría ser bombero</div></div>';
+        caja.hidden = false;
+      })
+      .catch(function () {});
+  }
+})();
+</script>
+</body>
+</html>
