@@ -36,7 +36,7 @@ npm run dev
 
 - Juego → http://localhost:3000
 - Panel → http://localhost:3000/admin
-- Clave por defecto → `camanabomberos2026`
+- Clave por defecto → `bomberoscamana`
 
 En local, si no hay variables de entorno, los datos se guardan en
 `.data/store.json` (ignorado por Git). Si defines `KV_REST_API_*` o

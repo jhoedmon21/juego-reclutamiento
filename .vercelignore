@@ -6,3 +6,4 @@ node_modules
 *.log
 .agents
 .claude
+.workbuddy-ai

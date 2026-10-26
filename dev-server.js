@@ -123,7 +123,7 @@ server.listen(PORT, () => {
   console.log('  Camana te necesita - servidor local');
   console.log('  Juego  : http://localhost:' + PORT + '/');
   console.log('  Admin  : http://localhost:' + PORT + '/admin');
-  console.log('  Clave  : ' + (process.env.ADMIN_PASSWORD || 'camanabomberos2026'));
+  console.log('  Clave  : ' + (process.env.ADMIN_PASSWORD || 'bomberoscamana'));
   console.log('  Datos  : ' + (process.env.KV_REST_API_URL ? 'Redis (KV)' : path.join(ROOT, '.data', 'store.json')));
   console.log('');
 });

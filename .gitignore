@@ -12,3 +12,6 @@ node_modules/
 # generado por la integracion de Upstash
 .agents/
 .claude/
+
+# memoria local del asistente (no publicar)
+.workbuddy-ai/
