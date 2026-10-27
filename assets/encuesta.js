@@ -1,5 +1,10 @@
 /* Definición única de la encuesta ciudadana.
-   La usan encuesta.html (para pintar el formulario) y admin.html (para los gráficos). */
+   La usan encuesta.html (para pintar el formulario), resultados.html (tablero)
+   y admin.html (gráficos y exportación).
+
+   Son las 7 preguntas del cuaderno de la compañía: calificación de la labor,
+   contacto con una emergencia, actividad que quiere conocer, vínculo con un
+   bombero, nota final, recomendación y pedido abierto. */
 (function (w) {
   'use strict';
 
@@ -18,145 +23,119 @@
   var PREGUNTAS = [
     {
       id: 'p1',
-      seccion: 'Su experiencia con la Compañía',
+      seccion: 'Su experiencia',
       n: 1,
+      icono: '⭐',
       tipo: 'escala',
       min: 1,
       max: 10,
       etiquetas: ['Muy deficiente', 'Excelente'],
-      titulo: '¿Cómo califica la labor que realiza la Compañía de Bomberos Voluntarios de Camaná?',
-      ayuda: 'Marque un valor del 1 al 10, donde 1 es muy deficiente y 10 es excelente.',
+      corto: 'Calificación de la labor',
+      titulo: '¿Cómo calificas la labor de los Bomberos de Camaná?',
+      ayuda: 'Marca un valor del 1 al 10. No hay respuesta correcta: nos sirve tu impresión real.',
     },
     {
       id: 'p2',
-      seccion: 'Su experiencia con la Compañía',
+      seccion: 'Su experiencia',
       n: 2,
+      icono: '👀',
       tipo: 'opciones',
-      titulo: '¿Ha presenciado alguna vez la intervención de los Bomberos de Camaná durante una emergencia?',
+      corto: '¿Ha visto trabajar a los bomberos?',
+      titulo: '¿Alguna vez has visto trabajar a los bomberos en una emergencia?',
       opciones: [
-        { v: 'si', t: 'Sí, en más de una ocasión' },
-        { v: 'una', t: 'Sí, una sola vez' },
-        { v: 'no', t: 'No, nunca' },
-        { v: 'ns', t: 'No lo recuerdo' },
+        { v: 'si', t: 'Sí, más de una vez', icono: '🔁' },
+        { v: 'una', t: 'Sí, una sola vez', icono: '1️⃣' },
+        { v: 'no', t: 'No, nunca', icono: '🚫' },
+        { v: 'ns', t: 'No lo recuerdo', icono: '🤔' },
       ],
     },
     {
       id: 'p3',
-      seccion: 'Su experiencia con la Compañía',
+      seccion: 'Su experiencia',
       n: 3,
+      icono: '🚒',
       tipo: 'opciones',
-      titulo: '¿Qué tipo de intervención le gustaría conocer más de cerca?',
-      ayuda: 'Puede elegir más de una opción.',
+      corto: 'Actividad que quiere conocer',
+      titulo: '¿Qué trabajo te gustaría presenciar de las actividades de los bomberos?',
+      ayuda: 'Puedes marcar más de una opción.',
       multiple: true,
       opciones: [
-        { v: 'incendios', t: 'Incendios y rescate estructural' },
-        { v: 'rescate', t: 'Rescate de personas' },
-        { v: 'vehicular', t: 'Accidentes vehiculares' },
-        { v: 'matpel', t: 'Materiales peligrosos' },
-        { v: 'prevencion', t: 'Prevención y primeros auxilios' },
-        { v: 'otro', t: 'Otro' },
+        { v: 'incendios', t: 'Incendios', icono: '🔥' },
+        { v: 'rescate', t: 'Rescate de personas', icono: '🆘' },
+        { v: 'vehicular', t: 'Accidentes vehiculares', icono: '🚗' },
+        { v: 'matpel', t: 'Materiales peligrosos', icono: '☣️' },
+        { v: 'prevencion', t: 'Prevención y primeros auxilios', icono: '🩺' },
+        { v: 'otro', t: 'Otro', icono: '✳️' },
       ],
     },
     {
       id: 'p4',
-      seccion: 'Su vínculo con la institución',
+      seccion: 'Su vínculo',
       n: 4,
+      icono: '🤝',
       tipo: 'opciones',
-      titulo: '¿Tiene usted algún familiar o amigo que sea bombero voluntario?',
+      corto: '¿Tiene un bombero cerca?',
+      titulo: '¿Tienes algún amigo o familiar que sea bombero?',
       opciones: [
-        { v: 'familiar', t: 'Sí, un familiar' },
-        { v: 'amigo', t: 'Sí, un amigo' },
-        { v: 'ambos', t: 'Sí, familiar y amigo' },
-        { v: 'no', t: 'No' },
+        { v: 'amigo', t: 'Sí, un amigo', icono: '🧑‍🤝‍🧑' },
+        { v: 'familiar', t: 'Sí, un familiar', icono: '👨‍👩‍👧' },
+        { v: 'ambos', t: 'Sí, ambos', icono: '👥' },
+        { v: 'no', t: 'No', icono: '🚫' },
       ],
     },
     {
       id: 'p5',
-      seccion: 'Su vínculo con la institución',
+      seccion: 'Su vínculo',
       n: 5,
+      icono: '🎖️',
       tipo: 'escala',
       min: 1,
       max: 10,
       etiquetas: ['Muy baja', 'Muy alta'],
-      titulo: '¿Qué nota final le pondría usted a los Bomberos de Camaná?',
-      ayuda: 'Una sola calificación global, del 1 al 10.',
+      corto: 'Nota a los Bomberos de Camaná',
+      titulo: '¿Qué nota le pondrías a los Bomberos de Camaná?',
+      ayuda: 'Una sola nota global, del 1 al 10.',
     },
     {
       id: 'p6',
-      seccion: 'Su vínculo con la institución',
+      seccion: 'Su vínculo',
       n: 6,
+      icono: '🙌',
       tipo: 'opciones',
-      titulo: '¿Recomendaría a otra persona integrarse como bombero voluntario?',
+      corto: '¿Recomendaría ser bombero?',
+      titulo: '¿Recomendarías a alguien ser bombero voluntario?',
       opciones: [
-        { v: 'si', t: 'Sí, sin dudarlo' },
-        { v: 'talvez', t: 'Tal vez' },
-        { v: 'no', t: 'No' },
+        { v: 'si', t: 'Sí, sin dudarlo', icono: '✅' },
+        { v: 'talvez', t: 'Tal vez', icono: '🤷' },
+        { v: 'no', t: 'No', icono: '❌' },
       ],
     },
     {
       id: 'p7',
-      seccion: 'Sus sugerencias',
+      seccion: 'Su pedido',
       n: 7,
+      icono: '✍️',
       tipo: 'abierta',
-      titulo: '¿Qué aspecto considera usted que debería mejorar la Compañía de Bomberos de Camaná?',
-      ayuda: 'Su respuesta es opcional y se usa únicamente para mejorar el servicio.',
-      placeholder: 'Escriba aquí su sugerencia…',
+      corto: '¿Qué le pediría a la compañía?',
+      titulo: '¿Qué le pedirías a los Bomberos de Camaná?',
+      ayuda: 'Opcional. Una idea, una queja o un pedido concreto: todo se lee en la Comandancia.',
+      placeholder: 'Ej. Que visiten los colegios para enseñar primeros auxilios…',
       max: 600,
       requerido: false,
     },
-    {
-      id: 'p8',
-      seccion: 'Información y participación',
-      n: 8,
-      tipo: 'opciones',
-      titulo: '¿Conoce el número de emergencia de los Bomberos?',
-      ayuda: 'El número de emergencia a nivel nacional es el 116.',
-      opciones: [
-        { v: 'si', t: 'Sí, lo conozco' },
-        { v: 'duda', t: 'Lo he escuchado, pero no lo recuerdo' },
-        { v: 'no', t: 'No lo conocía' },
-      ],
-    },
-    {
-      id: 'p9',
-      seccion: 'Información y participación',
-      n: 9,
-      tipo: 'opciones',
-      titulo: '¿Qué tan informado se siente sobre las labores de prevención que realiza la Compañía?',
-      opciones: [
-        { v: 'mucho', t: 'Muy informado' },
-        { v: 'algo', t: 'Algo informado' },
-        { v: 'poco', t: 'Poco informado' },
-        { v: 'nada', t: 'Nada informado' },
-      ],
-    },
-    {
-      id: 'p10',
-      seccion: 'Información y participación',
-      n: 10,
-      tipo: 'opciones',
-      titulo: '¿Por qué medio prefiere recibir información institucional?',
-      opciones: [
-        { v: 'whatsapp', t: 'WhatsApp' },
-        { v: 'facebook', t: 'Redes sociales' },
-        { v: 'radio', t: 'Radio local' },
-        { v: 'presencial', t: 'Talleres presenciales' },
-        { v: 'otro', t: 'Otro medio' },
-      ],
-    },
-    {
-      id: 'p11',
-      seccion: 'Información y participación',
-      n: 11,
-      tipo: 'opciones',
-      titulo: '¿Estaría dispuesto(a) a participar en actividades de prevención y capacitación organizadas por la Compañía?',
-      opciones: [
-        { v: 'si', t: 'Sí, me gustaría participar' },
-        { v: 'talvez', t: 'Tal vez' },
-        { v: 'no', t: 'No' },
-      ],
-    },
   ];
+
+  /* Etiquetas legibles de cada respuesta cerrada (las usan el tablero y el panel). */
+  var ETIQUETAS = {};
+  PREGUNTAS.forEach(function (p) {
+    if (p.tipo === 'opciones') {
+      var m = {};
+      p.opciones.forEach(function (o) {
+        m[o.v] = o.t;
+      });
+      ETIQUETAS[p.id] = m;
+    }
+  });
 
   var SECCIONES = [];
   PREGUNTAS.forEach(function (p) {
@@ -170,12 +149,23 @@
     s.preguntas.push(p);
   });
 
+  function porId(id) {
+    return PREGUNTAS.filter(function (p) {
+      return p.id === id;
+    })[0] || null;
+  }
+
   w.ENCUESTA = {
     preguntas: PREGUNTAS,
     secciones: SECCIONES,
     distritos: DISTRITOS,
     edades: EDADES,
+    etiquetas: ETIQUETAS,
     total: PREGUNTAS.length,
+    obligatorias: PREGUNTAS.filter(function (p) {
+      return p.requerido !== false;
+    }).length,
+    porId: porId,
     /** Devuelve el texto legible de una respuesta. */
     texto: function (p, v) {
       if (v === undefined || v === null || v === '') return '—';

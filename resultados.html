@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultados de la encuesta · Compañía de Bomberos de Camaná</title>
+<meta name="description" content="Tablero público y permanente con el análisis de la encuesta ciudadana de la Compañía de Bomberos Voluntarios de Camaná B-35: cuántas personas respondieron, calificaciones y temas que pide la comunidad.">
+<meta name="theme-color" content="#3d0a0d">
+<link rel="stylesheet" href="/assets/institucional.css">
+<link rel="stylesheet" href="/assets/rediseno.css">
+<link rel="icon" href="/assets/escudo.png" type="image/png">
+</head>
+<body class="xp">
+
+<a class="skip" href="#tablero">Ir al tablero</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="em">🚨 Emergencias <b>116</b></span>
+    <span class="meta">
+      <span>Camaná · Arequipa · Perú</span>
+      <span>Tablero permanente · datos agregados</span>
+    </span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img class="crest-img" src="/assets/escudo.png" alt="Escudo de la Compañía de Bomberos Camaná B-35" width="314" height="340">
+      <span>
+        <span class="nm">Compañía de Bomberos de Camaná</span>
+        <span class="sb">Bomberos Voluntarios del Perú · B-35</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="/">Inicio</a>
+      <a href="/contacto">Inscripción</a>
+      <a href="/encuesta">Encuesta</a>
+      <a href="/resultados" aria-current="page">Resultados</a>
+      <a class="cta" href="/admin">Panel interno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="xp-hero">
+  <div class="wrap">
+    <span class="kick">Rendición de cuentas · en vivo</span>
+    <h1>Cuántos respondieron y qué <em>dice Camaná</em></h1>
+    <p class="sub">
+      Este tablero no se reinicia: acumula todas las respuestas de la campaña y se
+      recalcula cada minuto. No contiene datos personales, solo cifras agregadas.
+    </p>
+    <div class="chips">
+      <span class="xp-chip"><span class="dot"></span>Actualizado: <b id="fresco">conectando…</b></span>
+      <span class="xp-chip">👥 <b id="chip-total">—</b> participantes</span>
+      <span class="xp-chip">⭐ Nota media <b id="chip-nota">—</b>/10</span>
+    </div>
+  </div>
+</section>
+
+<main class="main" id="tablero" style="padding-top:26px">
+  <div class="wrap">
+
+    <!-- Participación -->
+    <div class="xp-card">
+      <div class="xp-board-head">
+        <div>
+          <span class="eyebrow">Participación</span>
+          <h2 id="t-meta">Cargando…</h2>
+        </div>
+        <span class="xp-live"><i></i> Análisis permanente</span>
+      </div>
+      <p class="lead" id="t-lead" style="margin-bottom:16px">
+        Cada respuesta cuenta. La meta de la campaña es reunir 500 voces de la provincia.
+      </p>
+      <div class="xp-goal">
+        <div class="top">
+          <span>Avance hacia la meta</span>
+          <span><b id="t-pct">0%</b></span>
+        </div>
+        <div class="track"><i id="t-barra"></i></div>
+      </div>
+      <div class="xp-stats xp-mt" id="t-kpis"></div>
+    </div>
+
+    <!-- Lectura automática -->
+    <div class="xp-card">
+      <div class="xp-board-head">
+        <div>
+          <span class="eyebrow">Análisis</span>
+          <h2>Qué significan estos números</h2>
+        </div>
+        <span class="xp-badge">Se recalcula solo</span>
+      </div>
+      <p class="lead">Lectura automática de la encuesta: lo que la compañía debería mirar primero.</p>
+      <div class="xp-insights" id="t-analisis">
+        <div class="xp-empty">Cargando el análisis…</div>
+      </div>
+    </div>
+
+    <!-- Serie 30 días -->
+    <div class="xp-card">
+      <div class="xp-board-head">
+        <div>
+          <span class="eyebrow">Últimos 30 días</span>
+          <h2>Respuestas por día</h2>
+        </div>
+        <span class="xp-badge" id="t-ritmo">—</span>
+      </div>
+      <div class="xp-serie" id="t-serie" aria-hidden="true"></div>
+      <div class="xp-serie-eje"><span>Hace 30 días</span><span>Hace 15 días</span><span>Hoy</span></div>
+      <p class="hint" style="margin:14px 0 0" id="t-serie-pie">—</p>
+    </div>
+
+    <!-- Distribuciones -->
+    <div class="xp-grid c2 xp-mt">
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Pregunta 1</span><h2>Calificación de la labor</h2></div></div>
+        <p class="lead">Cuántas personas eligieron cada nota, de 1 (muy deficiente) a 10 (excelente).</p>
+        <div class="xp-bars" id="t-dist"></div>
+      </div>
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Pregunta 5</span><h2>Nota global a los bomberos</h2></div></div>
+        <p class="lead">La nota final que pone la comunidad a la compañía.</p>
+        <div class="xp-bars" id="t-dist5"></div>
+      </div>
+    </div>
+
+    <div class="xp-grid c2 xp-mt">
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Pregunta 3</span><h2>Qué quieren ver de cerca</h2></div></div>
+        <p class="lead">Actividades que la comunidad quisiera presenciar. Base ideal para el próximo taller.</p>
+        <div class="xp-bars" id="t-act"></div>
+      </div>
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Pregunta 2</span><h2>¿Han visto trabajar a los bomberos?</h2></div></div>
+        <p class="lead">Contacto real con una emergencia. Mide cuánto conoce la ciudadanía la labor.</p>
+        <div class="xp-bars" id="t-visto"></div>
+      </div>
+    </div>
+
+    <div class="xp-grid c2 xp-mt">
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Pregunta 4</span><h2>¿Tienen un bombero cerca?</h2></div></div>
+        <p class="lead">Amigos y familiares bomberos: la red natural de reclutamiento.</p>
+        <div class="xp-bars" id="t-vinculo"></div>
+      </div>
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Pregunta 6</span><h2>¿Recomendarían ser bombero?</h2></div></div>
+        <p class="lead">Disposición a recomendar el voluntariado a otra persona.</p>
+        <div class="xp-bars" id="t-rec"></div>
+      </div>
+    </div>
+
+    <div class="xp-grid c2 xp-mt">
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Territorio</span><h2>Participación por distrito</h2></div></div>
+        <p class="lead">Dato opcional que indica a qué distritos llegar con más fuerza.</p>
+        <div class="xp-bars" id="t-distritos"></div>
+      </div>
+      <div class="xp-card">
+        <div class="xp-board-head"><div><span class="eyebrow">Población</span><h2>Participación por edad</h2></div></div>
+        <p class="lead">Dato opcional que ayuda a diseñar convocatorias por generación.</p>
+        <div class="xp-bars" id="t-edades"></div>
+      </div>
+    </div>
+
+    <!-- Origen -->
+    <div class="xp-card xp-mt">
+      <div class="xp-board-head">
+        <div><span class="eyebrow">Trazabilidad</span><h2>De dónde llegan las respuestas</h2></div>
+      </div>
+      <p class="lead">El juego «Camaná te necesita» invita a responder la encuesta al terminar las misiones.</p>
+      <div class="xp-bars" id="t-origen"></div>
+    </div>
+
+    <!-- Metodología + CTA -->
+    <div class="xp-card xp-mt">
+      <h2 style="font-size:1.14rem;margin-bottom:12px">Nota metodológica</h2>
+      <ul class="info-list">
+        <li><span class="k" aria-hidden="true">🔒</span><span><b>Anónima</b><small>No se registran nombres, DNI ni correos. Cada respuesta recibe un folio interno sin vínculo con la persona.</small></span></li>
+        <li><span class="k" aria-hidden="true">📊</span><span><b>Agregada</b><small>Los porcentajes se calculan sobre el total de respuestas válidas; los datos opcionales pueden sumar menos.</small></span></li>
+        <li><span class="k" aria-hidden="true">🕒</span><span><b>Permanente</b><small>El tablero se actualiza automáticamente cada minuto y acumula todas las campañas.</small></span></li>
+        <li><span class="k" aria-hidden="true">🧮</span><span><b>Siete preguntas</b><small>Calificación de la labor, contacto con emergencias, actividad de interés, vínculo, nota, recomendación y pedido abierto.</small></span></li>
+      </ul>
+
+      <div class="cta-cinta">
+        <div>
+          <h3>¿Ya respondiste?</h3>
+          <p>Si todavía no lo hiciste, tu opinión es el dato que falta. Siete preguntas, dos minutos, anónima.</p>
+        </div>
+        <a class="xp-btn pri" href="/encuesta?src=resultados">Responder la encuesta</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <div class="cols3">
+      <div>
+        <h4>Compañía de Bomberos de Camaná</h4>
+        <p>
+          Institución de servicio voluntario dedicada a la protección de la vida, el patrimonio
+          y el ambiente en la provincia de Camaná, Arequipa.
+        </p>
+      </div>
+      <div>
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/contacto">Inscripción y contacto</a></li>
+          <li><a href="/encuesta">Encuesta ciudadana</a></li>
+          <li><a href="/resultados">Resultados</a></li>
+          <li><a href="/admin">Panel interno</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Emergencias</h4>
+        <ul>
+          <li><a href="tel:116"><b style="color:#fff">116</b> · Línea nacional</a></li>
+          <li>Central 105 · Policía Nacional</li>
+          <li>Central 106 · SAMU</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© <span id="anio">2026</span> Compañía de Bomberos de Camaná. Todos los derechos reservados.</span>
+      <span>Servir también es amar a tu tierra.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var META = 500;
+  var REFRESCO = 60000;
+  var ultimaCarga = null;
+  var nf = function (n) { try { return Number(n).toLocaleString('es-PE'); } catch (e) { return String(n); } };
+  var pct = function (n, total) { return total ? Math.round((n / total) * 100) : 0; };
+
+  var ETQ = {
+    act: { incendios: 'Incendios', rescate: 'Rescate de personas', vehicular: 'Accidentes vehiculares', matpel: 'Materiales peligrosos', prevencion: 'Prevención y primeros auxilios', otro: 'Otro' },
+    visto: { si: 'Sí, más de una vez', una: 'Sí, una sola vez', no: 'No, nunca', ns: 'No lo recuerda' },
+    vinculo: { amigo: 'Sí, un amigo', familiar: 'Sí, un familiar', ambos: 'Sí, ambos', no: 'No' },
+    rec: { si: 'Sí, sin dudarlo', talvez: 'Tal vez', no: 'No' },
+    origen: { juego: 'Juego «Camaná te necesita»', web: 'Sitio web', contacto: 'Formulario de inscripción', resultados: 'Este tablero', qr: 'Código QR', admin: 'Carga interna' }
+  };
+
+  $('#anio').textContent = new Date().getFullYear();
+
+  /* ── Barras ────────────────────────────────────────────────────────── */
+  function barras(destino, datos, etiquetas, total, orden) {
+    var caja = $(destino);
+    if (!caja) return;
+    var claves = orden || Object.keys(datos || {});
+    var max = 0;
+    claves.forEach(function (k) { max = Math.max(max, Number(datos[k]) || 0); });
+
+    if (!max) {
+      caja.innerHTML = '<div class="xp-empty">Todavía no hay respuestas en esta pregunta.</div>';
+      return;
+    }
+
+    caja.innerHTML = claves.map(function (k) {
+      var n = Number(datos[k]) || 0;
+      var w = max ? (n / max) * 100 : 0;
+      var et = (etiquetas && etiquetas[k]) || k;
+      return '<div class="xp-bar-row">' +
+               '<span class="et">' + et + '</span>' +
+               '<span class="tr"><i style="width:' + w + '%"></i></span>' +
+               '<span class="n">' + n + '<small>' + pct(n, total) + '%</small></span>' +
+             '</div>';
+    }).join('');
+  }
+
+  function barrasEscala(destino, dist, total) {
+    var caja = $(destino);
+    if (!caja) return;
+    var claves = [];
+    for (var i = 10; i >= 1; i--) claves.push(String(i));
+    var max = 0;
+    claves.forEach(function (k) { max = Math.max(max, Number(dist[k]) || 0); });
+    if (!max) {
+      caja.innerHTML = '<div class="xp-empty">Todavía no hay calificaciones registradas.</div>';
+      return;
+    }
+    caja.innerHTML = claves.map(function (k) {
+      var n = Number(dist[k]) || 0;
+      var w = (n / max) * 100;
+      var col = k >= '9' ? 'linear-gradient(90deg,#3fae76,#1f7a4d)' : k <= '5' ? 'linear-gradient(90deg,#d8434a,#8c1015)' : 'linear-gradient(90deg,#e0b84f,#c19a2e)';
+      return '<div class="xp-bar-row">' +
+               '<span class="et">Nota ' + k + '</span>' +
+               '<span class="tr"><i style="width:' + w + '%;background:' + col + '"></i></span>' +
+               '<span class="n">' + n + '<small>' + pct(n, total) + '%</small></span>' +
+             '</div>';
+    }).join('');
+  }
+
+  function stat(v, l, gold, sm) {
+    return '<div class="xp-stat' + (gold ? ' gold' : '') + (sm ? ' sm' : '') + '">' +
+             '<div class="v">' + v + '</div>' +
+             '<div class="l">' + l + '</div>' +
+           '</div>';
+  }
+
+  /* ── Render ────────────────────────────────────────────────────────── */
+  function render(j) {
+    var total = Number(j.total) || 0;
+    var p = Math.min(100, Math.round((total / META) * 100));
+
+    $('#t-meta').textContent = total
+      ? nf(total) + (total === 1 ? ' respuesta recibida' : ' respuestas recibidas')
+      : 'Aún sin respuestas';
+    $('#t-barra').style.width = p + '%';
+    $('#t-pct').textContent = p + '%';
+    $('#chip-total').textContent = nf(total);
+    $('#chip-nota').textContent = j.promedioNota != null ? j.promedioNota : '—';
+
+    $('#t-lead').innerHTML = total >= META
+      ? 'Meta cumplida: la comunidad superó las <b>' + nf(META) + '</b> respuestas. La compañía sigue escuchando.'
+      : 'Cada respuesta cuenta. La meta de la campaña es llegar a <b>' + nf(META) + '</b> voces de la provincia' +
+        (total ? '; faltan <b>' + nf(META - total) + '</b>.' : '.');
+
+    var primera = j.primera ? new Date(j.primera).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—';
+
+    $('#t-kpis').innerHTML =
+      stat(nf(total), 'Participantes acumulados', true) +
+      stat(nf(j.hoy || 0), 'Respuestas hoy') +
+      stat(nf(j.ultimos7 || 0), 'Últimos 7 días') +
+      stat((j.promedioDiario || 0).toString().replace('.', ','), 'Promedio por día') +
+      stat((j.promedioLabor != null ? j.promedioLabor : '—') + '<small>/10</small>', 'Labor (pregunta 1)', true) +
+      stat((j.promedioNota != null ? j.promedioNota : '—') + '<small>/10</small>', 'Nota global (pregunta 5)') +
+      stat((j.recomiendaPct != null ? j.recomiendaPct + '%' : '—'), 'Recomendaría ser bombero') +
+      stat(nf(j.comentarios || 0), 'Pedidos escritos') +
+      stat(primera, 'Primera respuesta', false, true) +
+      stat(nf(j.diasActivos || 0), 'Días con actividad');
+
+    /* Análisis automático */
+    var ins = j.analisis || [];
+    $('#t-analisis').innerHTML = ins.length
+      ? ins.map(function (x) {
+          return '<div class="xp-insight ' + (x.k || 'info') + '"><h4>' + x.t + '</h4><p>' + x.d + '</p></div>';
+        }).join('')
+      : '<div class="xp-empty">Aún no hay datos suficientes para el análisis.</div>';
+
+    /* Serie */
+    var serie = j.serie30 || [];
+    var maxSerie = 0;
+    serie.forEach(function (d) { if (d.n > maxSerie) maxSerie = d.n; });
+    $('#t-serie').innerHTML = serie.map(function (d) {
+      var h = maxSerie ? Math.max(3, Math.round((d.n / maxSerie) * 100)) : 3;
+      return '<div class="col' + (d.n ? '' : ' vacio') + '" title="' + d.d + ': ' + d.n + ' respuestas">' +
+               '<i style="height:' + h + '%"></i></div>';
+    }).join('');
+
+    var ult7 = serie.slice(-7).reduce(function (a, d) { return a + d.n; }, 0);
+    $('#t-ritmo').textContent = ult7 + (ult7 === 1 ? ' respuesta en 7 días' : ' respuestas en 7 días');
+    $('#t-serie-pie').textContent = maxSerie
+      ? 'El día más activo de los últimos 30 días tuvo ' + maxSerie + (maxSerie === 1 ? ' respuesta.' : ' respuestas.')
+      : 'Todavía no hay actividad registrada en los últimos 30 días.';
+
+    /* Distribuciones */
+    barrasEscala('#t-dist', j.distribucion || {}, total);
+    barrasEscala('#t-dist5', j.distribucion5 || j.distribucion || {}, total);
+    barras('#t-act', j.actividades, ETQ.act, total);
+    barras('#t-visto', j.visto, ETQ.visto, total, ['si', 'una', 'no', 'ns']);
+    barras('#t-vinculo', j.vinculo, ETQ.vinculo, total, ['amigo', 'familiar', 'ambos', 'no']);
+    barras('#t-rec', j.recomendacion, ETQ.rec, total, ['si', 'talvez', 'no']);
+    barras('#t-distritos', j.distritos, null, total);
+    barras('#t-edades', j.edades, null, total);
+    barras('#t-origen', j.origenes, ETQ.origen, total);
+
+    ultimaCarga = Date.now();
+    marcarFresco();
+  }
+
+  function marcarFresco() {
+    if (!ultimaCarga) return;
+    var s = Math.round((Date.now() - ultimaCarga) / 1000);
+    var txt = s < 10 ? 'ahora mismo' : s < 60 ? 'hace ' + s + ' s' : 'hace ' + Math.round(s / 60) + ' min';
+    $('#fresco').textContent = txt;
+  }
+
+  function cargar() {
+    fetch('/api/encuesta?resumen=1', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.ok) {
+          META = Number(j.meta) || META;
+          render(j);
+        } else {
+          throw new Error('sin datos');
+        }
+      })
+      .catch(function () {
+        $('#fresco').textContent = 'sin conexión · reintentando';
+      });
+  }
+
+  cargar();
+  setInterval(cargar, REFRESCO);
+  setInterval(marcarFresco, 5000);
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) cargar();
+  });
+})();
+</script>
+</body>
+</html>

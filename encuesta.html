@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Encuesta ciudadana · Compañía de Bomberos de Camaná</title>
-<meta name="description" content="Encuesta de opinión ciudadana de la Compañía de Bomberos Voluntarios de Camaná. Su respuesta ayuda a mejorar el servicio a la comunidad.">
+<meta name="description" content="Encuesta de opinión ciudadana de la Compañía de Bomberos Voluntarios de Camaná B-35. Siete preguntas, dos minutos, totalmente anónima. Los resultados se publican en vivo.">
 <meta name="theme-color" content="#3d0a0d">
 <link rel="stylesheet" href="/assets/institucional.css">
+<link rel="stylesheet" href="/assets/rediseno.css">
+<link rel="icon" href="/assets/escudo.png" type="image/png">
 </head>
-<body>
+<body class="xp">
 
 <a class="skip" href="#encuesta">Ir a la encuesta</a>
 
@@ -17,7 +19,7 @@
     <span class="em">🚨 Emergencias <b>116</b></span>
     <span class="meta">
       <span>Camaná · Arequipa · Perú</span>
-      <span>Encuesta anónima · 3 minutos</span>
+      <span>7 preguntas · 2 minutos · anónima</span>
     </span>
   </div>
 </div>
@@ -25,47 +27,46 @@
 <header class="masthead">
   <div class="wrap">
     <a class="brand" href="/">
-      <svg class="crest" viewBox="0 0 64 74" aria-hidden="true">
-        <path d="M32 2 61 12v27c0 19-13 28-29 33C16 67 3 58 3 39V12z" fill="#8c1015" stroke="#c19a2e" stroke-width="2.4"/>
-        <path d="M32 8 55 16v23c0 15-10 22-23 26C19 61 9 54 9 39V16z" fill="none" stroke="#c19a2e" stroke-width="1" opacity=".5"/>
-        <path d="M32 21c5.4 6.6 9.4 9.8 9.4 15.6a9.4 9.4 0 0 1-18.8 0c0-4.2 2-6.6 4.3-9.4.7 2.8 1.7 4.2 3 5.2.6-4.2 1-7.4 2.1-11.4z" fill="#e6c765"/>
-        <path d="M32 34c2.5 3 4.2 4.6 4.2 7.3a4.2 4.2 0 0 1-8.4 0c0-2.1 1-3.4 2.1-4.6.4 1.4.9 2.1 1.4 2.5.3-1.8.4-3.3.7-5.2z" fill="#8c1015"/>
-      </svg>
+      <img class="crest-img" src="/assets/escudo.png" alt="Escudo de la Compañía de Bomberos Camaná B-35" width="314" height="340">
       <span>
         <span class="nm">Compañía de Bomberos de Camaná</span>
-        <span class="sb">Bomberos Voluntarios del Perú</span>
+        <span class="sb">Bomberos Voluntarios del Perú · B-35</span>
       </span>
     </a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="/">Inicio</a>
-      <a href="/contacto">Contacto</a>
-      <a href="/encuesta" aria-current="page">Encuesta ciudadana</a>
+      <a href="/contacto">Inscripción</a>
+      <a href="/encuesta" aria-current="page">Encuesta</a>
+      <a href="/resultados">Resultados</a>
       <a class="cta" href="/admin">Panel interno</a>
     </nav>
   </div>
 </header>
 
-<section class="hero">
+<section class="xp-hero">
   <div class="wrap">
-    <span class="kicker">Consulta pública</span>
-    <h1>Encuesta de opinión ciudadana</h1>
-    <p>
-      Su valoración nos permite mejorar la calidad del servicio que brindamos a la provincia
-      de Camaná. La encuesta es anónima, toma alrededor de tres minutos y sus respuestas se
-      procesan de forma agregada.
+    <span class="kick">Consulta pública · Camaná 2026</span>
+    <h1>Siete preguntas para que la compañía <em>te escuche</em></h1>
+    <p class="sub">
+      No pedimos nombre ni documento. Solo queremos saber cómo ves a tus bomberos y qué
+      te gustaría que hagamos en Camaná. Al terminar ves los resultados en vivo.
     </p>
-    <div class="rule"></div>
+    <div class="chips">
+      <span class="xp-chip"><span class="dot"></span><b id="h-total">—</b> vecinos ya respondieron</span>
+      <span class="xp-chip">📅 Hoy: <b id="h-hoy">—</b></span>
+      <span class="xp-chip">⭐ Promedio: <b id="h-prom">—</b>/10</span>
+      <span class="xp-chip">🎯 Meta: <b>500</b> voces</span>
+    </div>
   </div>
 </section>
 
-<!-- Progreso -->
-<div class="progreso" id="prog" role="group" aria-label="Avance de la encuesta">
+<div class="xp-prog" id="prog">
   <div class="wrap">
-    <span class="txt" id="ptxt">0 de 10 respondidas</span>
-    <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar">
-      <i></i>
+    <div class="in">
+      <span id="ptxt">0 de 6 respondidas</span>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar"><i></i></div>
+      <span class="pc" id="ppct">0%</span>
     </div>
-    <span class="txt" id="ppct">0%</span>
   </div>
 </div>
 
@@ -73,97 +74,144 @@
   <div class="wrap cols">
 
     <div>
-      <div class="card" id="carta-enc">
-        <div class="card-head">
+      <div class="xp-card" id="carta-enc">
+        <div class="xp-head">
           <div>
             <span class="eyebrow">Formulario institucional</span>
-            <h2>Cuestionario</h2>
+            <h2>Encuesta ciudadana</h2>
           </div>
-          <span class="req-note">Los campos con <span class="req">*</span> son obligatorios</span>
+          <span class="xp-badge">🔒 Anónima</span>
         </div>
         <p class="lead">
-          Responda con sinceridad. No hay respuestas correctas ni incorrectas: su percepción
-          es el dato que necesitamos. La pregunta 7 es opcional.
+          Responde con sinceridad. No hay respuestas correctas ni incorrectas: tu percepción
+          es el dato que nos falta. La última pregunta es opcional.
         </p>
 
-        <div class="aviso aviso-info" role="note">
+        <div class="xp-note privacy" role="note" style="margin:14px 0 16px">
           <span class="ic" aria-hidden="true">🔒</span>
           <div>
-            <b>Encuesta anónima.</b> No solicitamos nombre, DNI ni correo. Solo se guardan sus
-            respuestas, la fecha y el distrito que usted decida indicar.
+            <b>No pedimos nombre, DNI ni correo.</b> Solo se guardan tus respuestas, la fecha
+            y —si decides indicarlos— tu distrito y tu rango de edad.
           </div>
         </div>
 
-        <form id="f" novalidate>
-          <div id="preguntas"></div>
+        <div class="xp-note" id="aviso-juego" hidden role="note" style="margin:0 0 16px">
+          <span class="ic" aria-hidden="true">🚒</span>
+          <div>
+            <b>Llegaste desde el juego «Camaná te necesita».</b> Estas respuestas se convierten
+            en decisiones de capacitación y equipamiento. Al enviarlas, vuelve al juego y
+            reclama tu insignia de ciudadano comprometido.
+          </div>
+        </div>
 
-          <!-- Datos generales -->
-          <div class="seccion-tit"><span>Datos generales</span></div>
-          <p class="hint" style="margin:-6px 0 16px">
-            Opcionales. Nos ayudan a entender si la percepción cambia según el distrito o la edad.
-          </p>
-          <div class="grid2">
-            <div class="field">
-              <label for="distrito">Distrito de residencia</label>
-              <select id="distrito" name="distrito">
-                <option value="">Prefiero no indicarlo</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="edad">Rango de edad</label>
-              <select id="edad" name="edad">
-                <option value="">Prefiero no indicarlo</option>
-              </select>
+        <div class="xp-goal" id="goal" style="margin:0 0 20px">
+          <div class="top">
+            <span><b id="ob-total">—</b> <span id="ob-lbl">vecinos ya respondieron</span></span>
+            <span id="ob-pie">Cargando el avance de la campaña…</span>
+          </div>
+          <div class="track"><i id="ob-barra"></i></div>
+        </div>
+
+        <ol class="xp-steps" id="pasos"></ol>
+
+        <form id="f" novalidate>
+          <div id="paneles"></div>
+
+          <div id="datos-generales" hidden>
+            <div class="xp-optional">
+              <h4>Datos opcionales</h4>
+              <div class="xp-grid2">
+                <div class="field">
+                  <label for="distrito">Distrito de residencia</label>
+                  <select id="distrito" name="distrito">
+                    <option value="">Prefiero no indicarlo</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="edad">Rango de edad</label>
+                  <select id="edad" name="edad">
+                    <option value="">Prefiero no indicarlo</option>
+                  </select>
+                </div>
+              </div>
+              <p class="hint" style="margin:2px 0 8px">Nos ayudan a saber a qué distritos y generaciones llegar mejor.</p>
             </div>
           </div>
 
-          <div class="actions">
-            <button class="btn btn-primario" type="submit" id="enviar">Enviar mis respuestas</button>
-            <span class="hint" style="margin:0">Podrá revisar el resumen al finalizar.</span>
+          <div class="xp-nav">
+            <button class="xp-btn sec" type="button" id="atras" hidden>← Anterior</button>
+            <span class="grow"></span>
+            <button class="xp-btn pri" type="button" id="siguiente">Continuar →</button>
+            <button class="xp-btn pri" type="submit" id="enviar" hidden>Enviar mis respuestas ✓</button>
           </div>
         </form>
       </div>
 
       <!-- Éxito -->
-      <div class="card exito" id="carta-ok" hidden>
-        <div class="sello" aria-hidden="true">✓</div>
-        <h2>Gracias por su participación</h2>
-        <p>
-          Sus respuestas fueron registradas correctamente. La información se procesa de forma
-          agregada y se utiliza para mejorar el servicio de la Compañía.
+      <div class="xp-card xp-done" id="carta-ok" hidden>
+        <div class="ring" aria-hidden="true">✓</div>
+        <h2>¡Gracias por sumarte!</h2>
+        <p style="max-width:46ch;margin:0 auto 12px">
+          Tus respuestas quedaron registradas. Ya forman parte del análisis permanente que la
+          Comandancia revisa cada semana.
         </p>
-        <p style="margin-bottom:0"><span class="folio" id="folio">—</span></p>
+        <p style="margin-bottom:18px"><span class="folio" id="folio">—</span></p>
 
-        <div class="resumen" id="resumen" hidden></div>
-
-        <div class="actions" style="justify-content:center;border-top:0;padding-top:8px">
-          <a class="btn btn-sec" href="/contacto">Contactar a la Compañía</a>
-          <a class="btn-ghost" href="/">Volver al inicio</a>
+        <div class="xp-share">
+          <a class="wa" id="sh-wa" href="#" target="_blank" rel="noopener">💬 Compartir por WhatsApp</a>
+          <a class="xp-btn sec" href="/resultados">📊 Ver resultados en vivo</a>
+          <a class="xp-btn sec" id="sh-juego" href="/?enc=1">🚒 Volver al juego</a>
         </div>
+
+        <div class="xp-stats xp-mt" id="resumen" hidden></div>
+
+        <p class="hint" style="margin-top:18px">
+          ¿Te gustaría ser bombero? <a href="/contacto?desde=juego">Inscríbete en el formulario oficial →</a>
+        </p>
       </div>
     </div>
 
-    <aside class="side">
-      <div class="card destacado">
-        <h3>Su opinión tiene valor</h3>
-        <p>
-          Cada respuesta se revisa en la Comandancia y se toma en cuenta para las decisiones
-          de capacitación, equipamiento y acercamiento a la comunidad.
+    <aside class="side xp-side">
+      <div class="xp-card destacado">
+        <h3>Tu opinión tiene valor</h3>
+        <p style="margin-bottom:0">
+          Cada respuesta se revisa en la Comandancia y pesa en las decisiones de capacitación,
+          equipamiento y acercamiento al barrio.
         </p>
       </div>
-      <div class="card">
-        <h3>Cómo se usa la información</h3>
-        <ul class="info-list">
-          <li><span class="k" aria-hidden="true">📊</span><span><b>Resultados agregados</b><small>Se analizan en conjunto, nunca de forma individual.</small></span></li>
-          <li><span class="k" aria-hidden="true">🤝</span><span><b>Plan de mejora</b><small>Las sugerencias abiertas se revisan una por una.</small></span></li>
-          <li><span class="k" aria-hidden="true">⏱️</span><span><b>Duración</b><small>Entre 2 y 3 minutos.</small></span></li>
+
+      <div class="xp-card">
+        <h3>Resultados en vivo</h3>
+        <div class="xp-stats" style="grid-template-columns:1fr 1fr">
+          <div class="xp-stat"><div class="v" id="s-total">—</div><div class="l">Participantes</div></div>
+          <div class="xp-stat gold"><div class="v" id="s-prom">—</div><div class="l">Nota promedio</div></div>
+        </div>
+        <p style="margin:12px 0 0"><a href="/resultados">Ver el tablero completo →</a></p>
+      </div>
+
+      <div class="xp-card">
+        <h3>¿Por qué 7 preguntas?</h3>
+        <ul class="info-list" style="margin:0">
+          <li><span class="k" aria-hidden="true">⏱️</span><span><b>Dos minutos</b><small>Más corto que la versión anterior, para que nadie lo deje a medias.</small></span></li>
+          <li><span class="k" aria-hidden="true">📊</span><span><b>Análisis permanente</b><small>El tablero se actualiza solo y no se reinicia entre campañas.</small></span></li>
+          <li><span class="k" aria-hidden="true">🤝</span><span><b>Sin datos personales</b><small>No hay forma de vincular una respuesta con una persona.</small></span></li>
         </ul>
       </div>
-      <div class="card">
-        <h3>¿Necesita ayuda?</h3>
+
+      <div class="xp-card">
+        <h3>Comparte la encuesta</h3>
+        <p style="margin-bottom:12px">Mientras más vecinos respondan, mejor será el diagnóstico de la provincia.</p>
+        <div class="xp-share" style="justify-content:flex-start;margin-top:0">
+          <a class="wa" id="side-wa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <button type="button" id="side-copy">🔗 Copiar enlace</button>
+        </div>
+      </div>
+
+      <div class="xp-card">
+        <h3>¿Aún no conoces el juego?</h3>
         <p style="margin-bottom:0">
-          Si tiene dificultades para completar la encuesta, escríbanos desde el
-          <a href="/contacto">formulario de contacto</a>.
+          Recorre Camaná en el carro bomba, apaga incendios y descubre cómo se forma un
+          bombero voluntario. <a href="/">Entrar al juego →</a>
         </p>
       </div>
     </aside>
@@ -184,8 +232,9 @@
         <h4>Secciones</h4>
         <ul>
           <li><a href="/">Inicio</a></li>
-          <li><a href="/contacto">Contacto y registro</a></li>
+          <li><a href="/contacto">Inscripción y contacto</a></li>
           <li><a href="/encuesta">Encuesta ciudadana</a></li>
+          <li><a href="/resultados">Resultados</a></li>
           <li><a href="/admin">Panel interno</a></li>
         </ul>
       </div>
@@ -211,84 +260,162 @@
   'use strict';
   var E = window.ENCUESTA;
   var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
   var form = $('#f');
   var REQUERIDAS = E.preguntas.filter(function (p) { return p.requerido !== false; });
+  var META = 500;
   var enviando = false;
+  var paso = 1;
+  var primerPintado = true;
+
+  /* Cuatro pasos cortos: cada uno cabe en una pantalla de celular. */
+  var PASOS = [
+    { t: 'Tu experiencia', sub: 'Cómo has visto el trabajo de la compañía en tu distrito.', ids: ['p1', 'p2'] },
+    { t: 'Lo que quieres ver', sub: 'Elige las actividades que te gustaría conocer de cerca.', ids: ['p3'] },
+    { t: 'Tu vínculo', sub: 'Qué tan cerca sientes a la institución y qué nota le pones.', ids: ['p4', 'p5', 'p6'] },
+    { t: 'Tu pedido', sub: 'Una sugerencia para la compañía y dos datos opcionales.', ids: ['p7'] },
+  ];
 
   $('#anio').textContent = new Date().getFullYear();
 
-  /* ── Pintar preguntas ──────────────────────────────────────────────── */
+  /* ── Contexto ───────────────────────────────────────────────────────── */
+  var qs = new URLSearchParams(location.search);
+  var src = (qs.get('src') || qs.get('desde') || 'web').toLowerCase();
+  if (src === 'juego') $('#aviso-juego').hidden = false;
+
   function htmlEsc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  function nf(n) {
+    try { return Number(n).toLocaleString('es-PE'); } catch (e) { return String(n); }
+  }
 
+  /* ── Pintado de controles ───────────────────────────────────────────── */
   function pintarEscala(p) {
-    var h = '<div class="escala" role="radiogroup" aria-labelledby="q-' + p.id + '">';
+    var h = '<div class="xp-scale" role="radiogroup" aria-labelledby="q-' + p.id + '">';
     for (var i = p.min; i <= p.max; i++) {
       h += '<input type="radio" name="' + p.id + '" id="' + p.id + '-' + i + '" value="' + i + '">' +
            '<label for="' + p.id + '-' + i + '">' + i + '</label>';
     }
-    h += '</div><div class="escala-ext"><span>' + p.etiquetas[0] + '</span><span>' + p.etiquetas[1] + '</span></div>';
+    h += '</div><div class="xp-scale-foot"><span>' + htmlEsc(p.etiquetas[0]) +
+         '</span><span class="now" id="now-' + p.id + '"></span><span>' + htmlEsc(p.etiquetas[1]) + '</span></div>';
     return h;
   }
 
   function pintarOpciones(p) {
     var tipo = p.multiple ? 'checkbox' : 'radio';
-    var cls = p.opciones.length > 3 ? 'opts dos' : 'opts';
+    var cls = 'xp-opts' + (p.opciones.length > 3 ? ' two' : '');
     var h = '<div class="' + cls + '" role="' + (p.multiple ? 'group' : 'radiogroup') + '" aria-labelledby="q-' + p.id + '">';
-    p.opciones.forEach(function (o, i) {
+    p.opciones.forEach(function (o) {
       var id = p.id + '-' + o.v;
-      h += '<label class="opt" for="' + id + '">' +
+      h += '<label class="xp-opt" for="' + id + '">' +
              '<input type="' + tipo + '" name="' + p.id + '" id="' + id + '" value="' + htmlEsc(o.v) + '">' +
-             '<span>' + htmlEsc(o.t) + '</span>' +
+             '<span class="em" aria-hidden="true">' + (o.icono || '•') + '</span>' +
+             '<span class="tt">' + htmlEsc(o.t) + '</span>' +
+             '<span class="tick" aria-hidden="true">✓</span>' +
            '</label>';
     });
     return h + '</div>';
   }
 
   function pintarAbierta(p) {
-    return '<textarea name="' + p.id + '" id="' + p.id + '" maxlength="' + (p.max || 600) + '" ' +
+    return '<textarea class="xp-area" name="' + p.id + '" id="' + p.id + '" maxlength="' + (p.max || 600) + '" ' +
            'placeholder="' + htmlEsc(p.placeholder || '') + '"></textarea>' +
-           '<span class="hint"><span id="cnt-' + p.id + '">0</span>/' + (p.max || 600) + ' caracteres</span>';
+           '<span class="xp-count"><span id="cnt-' + p.id + '">0</span>/' + (p.max || 600) + '</span>';
   }
 
-  var cont = $('#preguntas');
-  E.secciones.forEach(function (sec) {
-    var s = document.createElement('div');
-    s.innerHTML = '<div class="seccion-tit"><span>' + htmlEsc(sec.titulo) + '</span></div>';
-    cont.appendChild(s);
+  function bloquePregunta(p) {
+    var w = document.createElement('div');
+    w.className = 'xp-q';
+    w.dataset.pid = p.id;
+    var opc = p.requerido === false ? '<span class="opt-tag">opcional</span>' : '';
+    var cuerpo =
+      p.tipo === 'escala' ? pintarEscala(p) :
+      p.tipo === 'abierta' ? pintarAbierta(p) :
+      pintarOpciones(p);
 
-    sec.preguntas.forEach(function (p) {
-      var w = document.createElement('div');
-      w.className = 'preg';
-      w.dataset.pid = p.id;
-      var opc = p.requerido === false ? '<span class="opc">opcional</span>' : '';
-      var cuerpo =
-        p.tipo === 'escala' ? pintarEscala(p) :
-        p.tipo === 'abierta' ? pintarAbierta(p) :
-        pintarOpciones(p);
-
-      w.innerHTML =
-        '<div class="q">' +
-          '<span class="num" aria-hidden="true">' + p.n + '</span>' +
-          '<span class="txt" id="q-' + p.id + '">' + htmlEsc(p.titulo) + opc + '</span>' +
+    w.innerHTML =
+      '<div class="top">' +
+        '<span class="ico" aria-hidden="true">' + (p.icono || '•') + '</span>' +
+        '<div>' +
+          '<div class="qtxt" id="q-' + p.id + '"><span class="num">' + p.n + '.</span>' +
+            htmlEsc(p.titulo) + opc + '</div>' +
+          (p.ayuda ? '<p class="qhelp">' + htmlEsc(p.ayuda) + '</p>' : '') +
         '</div>' +
-        (p.ayuda ? '<p class="hint" style="margin:0 0 10px 36px">' + htmlEsc(p.ayuda) + '</p>' : '') +
-        '<div class="body">' + cuerpo + '</div>' +
-        '<span class="err" id="e-' + p.id + '" role="alert"></span>';
+      '</div>' +
+      '<div class="body">' + cuerpo + '</div>' +
+      '<span class="xp-err" id="e-' + p.id + '" role="alert"></span>';
 
-      cont.appendChild(w);
+    if (p.tipo === 'abierta') {
+      var ta = w.querySelector('textarea');
+      ta.addEventListener('input', function () {
+        var c = $('#cnt-' + p.id);
+        if (c) c.textContent = ta.value.length;
+      });
+    }
 
-      if (p.tipo === 'abierta') {
-        var ta = w.querySelector('textarea');
-        ta.addEventListener('input', function () {
-          var c = $('#cnt-' + p.id);
-          if (c) c.textContent = ta.value.length;
+    if (p.tipo === 'escala') {
+      w.querySelectorAll('input').forEach(function (inp) {
+        inp.addEventListener('change', function () {
+          var now = $('#now-' + p.id);
+          if (now) {
+            now.textContent = 'Tu nota: ' + inp.value + '/10';
+            now.classList.add('on');
+          }
         });
-      }
+      });
+    }
+    return w;
+  }
+
+  /* ── Construir pasos ────────────────────────────────────────────────── */
+  var PORID = {};
+  E.preguntas.forEach(function (p) { PORID[p.id] = p; });
+
+  var olPasos = $('#pasos'), paneles = $('#paneles');
+
+  PASOS.forEach(function (def, i) {
+    var n = i + 1;
+
+    var li = document.createElement('li');
+    li.dataset.paso = n;
+    li.innerHTML = '<span class="n">' + n + '</span><span class="lbl">' + htmlEsc(def.t) + '</span>';
+    olPasos.appendChild(li);
+    if (i < PASOS.length - 1) {
+      var sep = document.createElement('li');
+      sep.className = 'ln';
+      sep.setAttribute('aria-hidden', 'true');
+      sep.style.cssText = 'padding:0;flex:1 1 12px;min-width:10px;height:2px;border-radius:2px;background:var(--linea)';
+      olPasos.appendChild(sep);
+    }
+
+    var panel = document.createElement('div');
+    panel.className = 'xp-panel' + (n === 1 ? ' on' : '');
+    panel.dataset.panel = n;
+
+    var h = document.createElement('h3');
+    h.className = 'xp-ptit';
+    h.textContent = def.t;
+    panel.appendChild(h);
+
+    var sub = document.createElement('p');
+    sub.className = 'xp-psub';
+    sub.textContent = def.sub;
+    panel.appendChild(sub);
+
+    def.ids.forEach(function (id) {
+      if (PORID[id]) panel.appendChild(bloquePregunta(PORID[id]));
     });
+
+    if (n === PASOS.length) {
+      var dg = $('#datos-generales');
+      dg.hidden = false;
+      panel.appendChild(dg);
+    }
+
+    paneles.appendChild(panel);
   });
 
   /* Distritos y edades */
@@ -299,11 +426,10 @@
     var o = document.createElement('option'); o.textContent = d; $('#edad').appendChild(o);
   });
 
-  /* ── Progreso ──────────────────────────────────────────────────────── */
+  /* ── Progreso ───────────────────────────────────────────────────────── */
   function respondida(p) {
     if (p.tipo === 'abierta') return true;
-    var sel = form.querySelectorAll('[name="' + p.id + '"]:checked');
-    return sel.length > 0;
+    return form.querySelectorAll('[name="' + p.id + '"]:checked').length > 0;
   }
 
   function actualizarProgreso() {
@@ -315,45 +441,91 @@
     $('#pbar').setAttribute('aria-valuenow', pct);
   }
 
+  function pintarPaso(n) {
+    paso = n;
+    $$('.xp-panel').forEach(function (p) {
+      p.classList.toggle('on', Number(p.dataset.panel) === n);
+    });
+    $$('#pasos li[data-paso]').forEach(function (li) {
+      var i = Number(li.dataset.paso);
+      li.classList.toggle('on', i === n);
+      li.classList.toggle('done', i < n);
+      var num = li.querySelector('.n');
+      if (num) num.textContent = i < n ? '✓' : String(i);
+    });
+    $('#atras').hidden = n === 1;
+    $('#siguiente').hidden = n === PASOS.length;
+    $('#enviar').hidden = n !== PASOS.length;
+    if (primerPintado) {
+      primerPintado = false;
+    } else {
+      var y = $('#carta-enc').getBoundingClientRect().top + window.pageYOffset - 74;
+      if (window.pageYOffset > y + 60 || window.pageYOffset < y - 500) {
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+      var foco = $('.xp-panel.on input, .xp-panel.on textarea');
+      if (foco && n > 1) foco.focus({ preventScroll: true });
+    }
+  }
+
   form.addEventListener('change', function (ev) {
     actualizarProgreso();
     var pid = ev.target.name;
     if (pid) {
       var e = $('#e-' + pid);
-      if (e && e.classList.contains('on')) {
-        e.classList.remove('on');
-        var w = form.querySelector('[data-pid="' + pid + '"]');
-        if (w) w.classList.remove('invalid');
-      }
+      if (e && e.classList.contains('on')) e.classList.remove('on');
+      var w = form.querySelector('[data-pid="' + pid + '"]');
+      if (w) w.classList.remove('bad');
     }
   });
   actualizarProgreso();
 
-  /* ── Envío ─────────────────────────────────────────────────────────── */
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    if (enviando) return;
-
-    var faltan = [];
-    REQUERIDAS.forEach(function (p) {
-      if (!respondida(p)) faltan.push(p);
+  /* ── Navegación ─────────────────────────────────────────────────────── */
+  function faltanEnPaso(n) {
+    var ids = PASOS[n - 1].ids;
+    return ids.map(function (id) { return PORID[id]; }).filter(function (p) {
+      return p && p.requerido !== false && !respondida(p);
     });
+  }
 
+  function marcarFaltan(faltan) {
+    faltan.forEach(function (p) {
+      var e = $('#e-' + p.id);
+      if (e) { e.textContent = 'Esta pregunta es obligatoria para enviar.'; e.classList.add('on'); }
+      var w = form.querySelector('[data-pid="' + p.id + '"]');
+      if (w) w.classList.add('bad');
+    });
     if (faltan.length) {
-      faltan.forEach(function (p) {
-        var e = $('#e-' + p.id);
-        e.textContent = 'Esta pregunta es obligatoria.';
-        e.classList.add('on');
-        var w = form.querySelector('[data-pid="' + p.id + '"]');
-        if (w) w.classList.add('invalid');
-      });
       var primero = form.querySelector('[data-pid="' + faltan[0].id + '"]');
       if (primero) {
         primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
         var foco = primero.querySelector('input, textarea');
         if (foco) foco.focus({ preventScroll: true });
       }
-      return;
+    }
+  }
+
+  $('#siguiente').addEventListener('click', function () {
+    var faltan = faltanEnPaso(paso);
+    if (faltan.length) return marcarFaltan(faltan);
+    if (paso < PASOS.length) pintarPaso(paso + 1);
+  });
+  $('#atras').addEventListener('click', function () {
+    if (paso > 1) pintarPaso(paso - 1);
+  });
+  pintarPaso(1);
+
+  /* ── Envío ──────────────────────────────────────────────────────────── */
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (enviando) return;
+
+    for (var i = 1; i <= PASOS.length; i++) {
+      var faltan = faltanEnPaso(i);
+      if (faltan.length) {
+        if (i !== paso) pintarPaso(i);
+        return marcarFaltan(faltan);
+      }
     }
 
     var respuestas = {};
@@ -385,46 +557,102 @@
         respuestas: respuestas,
         distrito: $('#distrito').value,
         edad: $('#edad').value,
+        origen: src,
       }),
     })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (j && j.ok) {
+          /* Marca local: el juego la lee para dar la insignia. */
+          try { localStorage.setItem('camana_enc', j.folio || '1'); } catch (e) {}
           $('#folio').textContent = 'Folio ' + j.folio;
           $('#carta-enc').hidden = true;
           $('#prog').hidden = true;
           $('#carta-ok').hidden = false;
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          cargarResumen();
+          var msg = 'Ya respondí la encuesta ciudadana de los Bomberos de Camaná 🚒 Son 2 minutos y es anónima: ' +
+                    location.origin + '/encuesta?src=qr';
+          $('#sh-wa').href = 'https://wa.me/?text=' + encodeURIComponent(msg);
+          cargarResumen(true);
         } else {
           alert((j && j.error) || 'No se pudo enviar la encuesta.');
         }
       })
       .catch(function () {
-        alert('No se pudo conectar con el servidor. Revise su conexión e intente nuevamente.');
+        alert('No se pudo conectar con el servidor. Revisa tu conexión e inténtalo otra vez.');
       })
       .then(function () {
         enviando = false;
         btn.disabled = false;
-        btn.textContent = 'Enviar mis respuestas';
+        btn.textContent = 'Enviar mis respuestas ✓';
       });
   });
 
-  function cargarResumen() {
-    fetch('/api/encuesta?resumen=1')
+  /* ── Meta, prueba social y resultados en vivo ───────────────────────── */
+  function pintarMeta(j) {
+    var t = Number(j.total) || 0;
+    var pct = Math.min(100, Math.round((t / META) * 100));
+    $('#ob-total').textContent = nf(t);
+    $('#ob-barra').style.width = pct + '%';
+    $('#h-total').textContent = nf(t);
+    $('#h-hoy').textContent = nf(j.hoy || 0);
+    $('#h-prom').textContent = j.promedioLabor != null ? j.promedioLabor : '—';
+    $('#s-total').textContent = nf(t);
+    $('#s-prom').textContent = j.promedioNota != null ? j.promedioNota + '/10' : '—';
+
+    if (t === 0) {
+      $('#ob-lbl').textContent = 'sé el primero en responder';
+      $('#ob-pie').textContent = 'Tu respuesta abre la conversación en la compañía.';
+    } else if (t >= META) {
+      $('#ob-lbl').textContent = t === 1 ? 'vecino ya respondió' : 'vecinos ya respondieron';
+      $('#ob-pie').textContent = 'Meta cumplida ✓ seguimos escuchando';
+    } else {
+      $('#ob-lbl').textContent = t === 1 ? 'vecino ya respondió' : 'vecinos ya respondieron';
+      $('#ob-pie').textContent = 'Faltan ' + nf(META - t) + ' para la meta (' + pct + '%)';
+    }
+  }
+
+  function cargarResumen(trasEnvio) {
+    fetch('/api/encuesta?resumen=1', { cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (j) {
-        if (!j || !j.ok || !j.total) return;
+        if (!j || !j.ok) return;
+        pintarMeta(j);
+        if (!trasEnvio) return;
         var caja = $('#resumen');
         caja.innerHTML =
-          '<div><div class="v">' + j.total + '</div><div class="l">Respuestas registradas</div></div>' +
-          '<div><div class="v">' + (j.promedioLabor || '—') + '</div><div class="l">Calificación promedio de la labor</div></div>' +
-          '<div><div class="v">' + (j.promedioNota || '—') + '</div><div class="l">Nota promedio a los Bomberos</div></div>' +
-          '<div><div class="v">' + (j.recomiendaPct != null ? j.recomiendaPct + '%' : '—') + '</div><div class="l">Recomendaría ser bombero</div></div>';
+          '<div class="xp-stat"><div class="v">' + nf(j.total) + '</div><div class="l">Respuestas totales</div></div>' +
+          '<div class="xp-stat gold"><div class="v">' + (j.promedioLabor || '—') + '<small>/10</small></div><div class="l">Labor promedio</div></div>' +
+          '<div class="xp-stat"><div class="v">' + (j.recomiendaPct != null ? j.recomiendaPct + '%' : '—') + '</div><div class="l">Recomendaría ser bombero</div></div>' +
+          '<div class="xp-stat"><div class="v">' + (j.hanVistoPct != null ? j.hanVistoPct + '%' : '—') + '</div><div class="l">Ha visto a los bomberos actuar</div></div>';
         caja.hidden = false;
       })
-      .catch(function () {});
+      .catch(function () { pintarMeta({ total: 0 }); });
   }
+
+  cargarResumen(false);
+
+  /* ── Compartir ──────────────────────────────────────────────────────── */
+  var enlace = location.origin + '/encuesta';
+  var texto = 'Ayúdame con 2 minutos: encuesta anónima a los Bomberos de Camaná 🚒 ' + enlace;
+  $('#side-wa').href = 'https://wa.me/?text=' + encodeURIComponent(texto);
+  $('#side-copy').addEventListener('click', function () {
+    var b = this;
+    var hecho = function () {
+      b.textContent = '✓ Enlace copiado';
+      setTimeout(function () { b.textContent = '🔗 Copiar enlace'; }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(enlace).then(hecho).catch(function () {});
+    } else {
+      var t = document.createElement('textarea');
+      t.value = enlace;
+      document.body.appendChild(t);
+      t.select();
+      try { document.execCommand('copy'); hecho(); } catch (e) {}
+      t.remove();
+    }
+  });
 })();
 </script>
 </body>

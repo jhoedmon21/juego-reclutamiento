@@ -9,9 +9,12 @@ module.exports = async function handler(req, res) {
   }
   try {
     const s = req.method === 'POST' ? await store.addVisit() : await store.getVisits();
-    const registros = await store.countRegs();
-    json(res, 200, { ok: true, visitas: s.visits, hoy: s.today, registros });
+    const [registros, encuestas] = await Promise.all([
+      store.countRegs().catch(() => 0),
+      store.countEncuestas().catch(() => 0),
+    ]);
+    json(res, 200, { ok: true, visitas: s.visits, hoy: s.today, registros, encuestas });
   } catch (e) {
-    json(res, 200, { ok: false, visitas: 0, hoy: 0, registros: 0, error: String(e.message || e) });
+    json(res, 200, { ok: false, visitas: 0, hoy: 0, registros: 0, encuestas: 0, error: String(e.message || e) });
   }
 };

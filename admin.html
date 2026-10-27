@@ -223,16 +223,13 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   </div>
 
   <header>
-    <svg class="crest" viewBox="0 0 64 74" aria-hidden="true">
-      <path d="M32 2 61 12v27c0 19-13 28-29 33C16 67 3 58 3 39V12z" fill="#8c1015" stroke="#c19a2e" stroke-width="2.4"/>
-      <path d="M32 21c5.4 6.6 9.4 9.8 9.4 15.6a9.4 9.4 0 0 1-18.8 0c0-4.2 2-6.6 4.3-9.4.7 2.8 1.7 4.2 3 5.2.6-4.2 1-7.4 2.1-11.4z" fill="#e6c765"/>
-      <path d="M32 34c2.5 3 4.2 4.6 4.2 7.3a4.2 4.2 0 0 1-8.4 0c0-2.1 1-3.4 2.1-4.6.4 1.4.9 2.1 1.4 2.5.3-1.8.4-3.3.7-5.2z" fill="#8c1015"/>
-    </svg>
+    <img class="crest" src="/assets/escudo.png" alt="" width="314" height="340" style="width:40px;height:auto">
     <div class="tt">
       <h1>Gestión institucional</h1>
       <span>Compañía de Bomberos de Camaná</span>
     </div>
     <div class="sp"></div>
+    <a class="btn" href="/resultados" target="_blank" rel="noopener">📊 Resultados</a>
     <a class="btn" href="/" target="_blank" rel="noopener">↗ Ver sitio</a>
     <button class="btn" id="ref">↻ Actualizar</button>
     <button class="btn" id="csv">⬇ Exportar</button>
@@ -255,6 +252,14 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
 
   <!-- ─── Postulantes ─── -->
   <section class="panel on" id="panel-post" role="tabpanel" aria-labelledby="tab-post">
+    <div class="card" style="margin-bottom:18px;border-left:4px solid var(--red)">
+      <h2 style="font-size:1rem">El juego ya no registra postulantes</h2>
+      <div class="hint" style="margin:0">
+        La única vía de inscripción es el <a href="/contacto" target="_blank" rel="noopener">formulario de la web</a>.
+        Los postulantes nuevos aparecen en <b>Mensajes de contacto</b> con el motivo «Quiero ser bombero voluntario».
+        Esta tabla conserva los registros históricos del juego anterior.
+      </div>
+    </div>
     <div class="kpis">
       <div class="kpi v"><div class="lb">👁 Visitas totales</div><div class="nb" id="k1">—</div><div class="sub" id="k1s">&nbsp;</div></div>
       <div class="kpi h"><div class="lb">📅 Visitas hoy</div><div class="nb" id="k2">—</div><div class="sub">&nbsp;</div></div>
@@ -337,6 +342,26 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
 
   <!-- ─── Encuestas ─── -->
   <section class="panel" id="panel-enc" role="tabpanel" aria-labelledby="tab-enc" hidden>
+    <div class="card" style="margin-bottom:20px">
+      <h2>Participación de la campaña</h2>
+      <div class="hint">Análisis permanente · se publica en <a href="/resultados" target="_blank" rel="noopener">/resultados</a></div>
+      <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-top:4px">
+        <span id="e-meta-n" style="font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums;line-height:1">—</span>
+        <span style="font-size:.8rem;color:var(--mut)" id="e-meta-t">de 500 respuestas de meta</span>
+      </div>
+      <div style="height:11px;background:#e9e4dd;border-radius:99px;overflow:hidden;margin:10px 0 10px">
+        <i id="e-meta-b" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),#d8434a);border-radius:99px;transition:width .8s"></i>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:.79rem;color:var(--mut)">
+        <span>Hoy: <b id="e-hoy" style="color:var(--tx)">0</b></span>
+        <span>Últimos 7 días: <b id="e-7" style="color:var(--tx)">0</b></span>
+        <span>Desde el juego: <b id="e-juego" style="color:var(--tx)">0</b></span>
+        <span>Con sugerencia escrita: <b id="e-com" style="color:var(--tx)">0</b></span>
+      </div>
+      <svg class="chart" id="ch4" viewBox="0 0 640 88" preserveAspectRatio="none" style="height:88px;margin-top:14px"></svg>
+      <div class="hint" style="margin:4px 0 0">Respuestas por día · últimos 30 días</div>
+    </div>
+
     <div class="kpis">
       <div class="kpi"><div class="lb">📊 Respuestas</div><div class="nb" id="e1">—</div><div class="sub" id="e1s">&nbsp;</div></div>
       <div class="kpi v"><div class="lb">⭐ Labor (prom.)</div><div class="nb" id="e2">—</div><div class="sub">Escala 1 a 10</div></div>
@@ -351,27 +376,46 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
         <svg class="chart" id="ch3" viewBox="0 0 320 132" preserveAspectRatio="none"></svg>
       </div>
       <div class="card">
-        <h2>Intervenciones de interés</h2>
+        <h2>Actividades de interés</h2>
         <div class="hint">Puede elegir varias (pregunta 3)</div>
         <ul class="hbar" id="hb-act"></ul>
       </div>
       <div class="card">
-        <h2>Canal preferido</h2>
-        <div class="hint">Para información institucional (pregunta 10)</div>
-        <ul class="hbar" id="hb-can"></ul>
+        <h2>¿Han visto trabajar a los bomberos?</h2>
+        <div class="hint">Pregunta 2 · contacto con una emergencia</div>
+        <ul class="hbar" id="hb-visto"></ul>
       </div>
     </div>
 
     <div class="charts">
       <div class="card">
-        <h2>Conocimiento de la línea 116</h2>
-        <div class="hint">Pregunta 8</div>
-        <ul class="hbar" id="hb-116"></ul>
+        <h2>Vínculo con un bombero</h2>
+        <div class="hint">Pregunta 4 · red natural de reclutamiento</div>
+        <ul class="hbar" id="hb-vinculo"></ul>
       </div>
+      <div class="card">
+        <h2>¿Recomendarían ser bombero?</h2>
+        <div class="hint">Pregunta 6 · disposición a recomendar</div>
+        <ul class="hbar" id="hb-rec"></ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <h2>Lectura automática</h2>
+      <div class="hint">Se recalcula con cada respuesta y se publica en <a href="/resultados" target="_blank" rel="noopener">/resultados</a></div>
+      <div id="enc-analisis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:12px"></div>
+    </div>
+
+    <div class="charts">
       <div class="card">
         <h2>Distribución por distrito</h2>
         <div class="hint">Dato opcional indicado al final</div>
         <ul class="hbar" id="hb-dis"></ul>
+      </div>
+      <div class="card">
+        <h2>Participación por edad</h2>
+        <div class="hint">Dato opcional indicado al final</div>
+        <ul class="hbar" id="hb-eda"></ul>
       </div>
     </div>
 
@@ -666,12 +710,16 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
         ? '<a class="wa" target="_blank" rel="noopener" href="https://wa.me/51' + esc(tel) + '">💬 WhatsApp</a>'
         : '';
       var est = m.estado || 'nuevo';
+      var org = m.origen && m.origen !== 'web' ? '<br><small style="color:var(--red);font-family:inherit">' + esc(m.origen) + '</small>' : '';
       return '<tr>' +
-        '<td class="mono" style="white-space:nowrap">' + esc(m.id) + '<br><small style="color:var(--mut);font-family:inherit">' + fecha(m.creado) + '</small></td>' +
-        '<td class="nm">' + esc(m.nombre) + (m.dni ? '<small>DNI ' + esc(m.dni) + '</small>' : '') + '</td>' +
+        '<td class="mono" style="white-space:nowrap">' + esc(m.id) + '<br><small style="color:var(--mut);font-family:inherit">' + fecha(m.creado) + '</small>' + org + '</td>' +
+        '<td class="nm">' + esc(m.nombre) +
+          (m.dni ? '<small>DNI ' + esc(m.dni) + '</small>' : '') +
+          (m.edad ? '<small>' + esc(m.edad) + ' años</small>' : '') + '</td>' +
         '<td><a class="mail" href="mailto:' + esc(m.correo) + '">' + esc(m.correo) + '</a><br>' + wa + '</td>' +
         '<td>' + esc(m.distrito) + '</td>' +
-        '<td style="max-width:170px">' + esc(m.motivo) + '</td>' +
+        '<td style="max-width:170px">' + esc(m.motivo) +
+          (m.disponibilidad ? '<br><small style="color:var(--mut)">' + esc(m.disponibilidad) + '</small>' : '') + '</td>' +
         '<td class="msg"><details><summary>Ver mensaje</summary><div class="full">' + esc(m.mensaje) + '</div></details></td>' +
         '<td style="white-space:nowrap"><select class="est st-' + est + '" data-msg="' + esc(m.id) + '">' +
           ['nuevo', 'atendido', 'archivado'].map(function (e) {
@@ -710,6 +758,40 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     $('#e3').textContent = R && R.promedioNota != null ? R.promedioNota : '—';
     $('#e4').textContent = R && R.recomiendaPct != null ? R.recomiendaPct + '%' : '—';
 
+    /* ── Participación de la campaña (análisis permanente) ── */
+    var totalE = (R && R.total) || lista.length;
+    var meta = (R && R.meta) || 500;
+    var pctM = meta ? Math.min(100, Math.round((totalE / meta) * 100)) : 0;
+    $('#e-meta-n').textContent = nf(totalE);
+    $('#e-meta-t').textContent = 'de ' + nf(meta) + ' respuestas de meta · ' + pctM + '%';
+    $('#e-meta-b').style.width = pctM + '%';
+    $('#e-hoy').textContent = nf((R && R.hoy) || 0);
+    var serie = (R && R.serie30) || [];
+    var u7 = serie.slice(-7).reduce(function (a, d) { return a + d.n; }, 0);
+    $('#e-7').textContent = nf(u7);
+    $('#e-juego').textContent = nf(((R && R.origenes) || {}).juego || 0);
+    $('#e-com').textContent = nf((R && R.comentarios) || 0);
+
+    var s4 = $('#ch4');
+    if (s4) {
+      if (!serie.length) {
+        s4.innerHTML = '';
+      } else {
+        var max4 = 1;
+        serie.forEach(function (d) { if (d.n > max4) max4 = d.n; });
+        var W4 = 640, H4 = 88, gap4 = W4 / serie.length, bw4 = gap4 * 0.66;
+        var o4 = '<line class="ax" x1="0" y1="' + (H4 - 1) + '" x2="' + W4 + '" y2="' + (H4 - 1) + '"/>';
+        serie.forEach(function (d, i) {
+          var bh = d.n ? Math.max(2, (d.n / max4) * (H4 - 12)) : 0;
+          var x = gap4 * i + (gap4 - bw4) / 2;
+          o4 += '<rect class="bar' + (i >= serie.length - 7 ? '' : ' g') + '" x="' + x.toFixed(1) +
+            '" y="' + (H4 - 1 - bh).toFixed(1) + '" width="' + bw4.toFixed(1) + '" height="' + bh.toFixed(1) +
+            '" rx="1"><title>' + d.d + ': ' + d.n + ' respuestas</title></rect>';
+        });
+        s4.innerHTML = o4;
+      }
+    }
+
     /* Distribución de la pregunta 1 (notas 1–10) */
     var svg = $('#ch3');
     if (svg) {
@@ -736,18 +818,35 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     }
 
     hbars('#hb-act', R && R.actividades, {
-      incendios: 'Incendios y rescate estructural', rescate: 'Rescate de personas',
+      incendios: 'Incendios', rescate: 'Rescate de personas',
       vehicular: 'Accidentes vehiculares', matpel: 'Materiales peligrosos',
       prevencion: 'Prevención y primeros auxilios', otro: 'Otro',
     });
-    hbars('#hb-can', R && R.canales, {
-      whatsapp: 'WhatsApp', facebook: 'Redes sociales', radio: 'Radio local',
-      presencial: 'Talleres presenciales', otro: 'Otro medio',
+    hbars('#hb-visto', R && R.visto, {
+      si: 'Sí, más de una vez', una: 'Sí, una sola vez', no: 'No, nunca', ns: 'No lo recuerda',
     });
-    hbars('#hb-116', R && R.conocimiento, {
-      si: 'Sí, lo conoce', duda: 'Lo escuchó, no lo recuerda', no: 'No lo conocía',
+    hbars('#hb-vinculo', R && R.vinculo, {
+      amigo: 'Sí, un amigo', familiar: 'Sí, un familiar', ambos: 'Sí, ambos', no: 'No',
+    });
+    hbars('#hb-rec', R && R.recomendacion, {
+      si: 'Sí, sin dudarlo', talvez: 'Tal vez', no: 'No',
     });
     hbars('#hb-dis', R && R.distritos, null);
+    hbars('#hb-eda', R && R.edades, null);
+
+    /* Lectura automática del análisis */
+    var cajaAna = $('#enc-analisis');
+    if (cajaAna) {
+      var ana = (R && R.analisis) || [];
+      cajaAna.innerHTML = ana.length
+        ? ana.map(function (x) {
+            var col = x.k === 'ok' ? '#1f7a4d' : x.k === 'warn' ? '#b01b22' : '#c19a2e';
+            return '<div style="border:1px solid var(--linea);border-left:4px solid ' + col + ';border-radius:8px;padding:11px 13px;background:#fff">' +
+              '<div style="font-size:.84rem;font-weight:800;margin-bottom:4px">' + esc(x.t) + '</div>' +
+              '<div style="font-size:.78rem;line-height:1.5;color:var(--tx2)">' + esc(x.d) + '</div></div>';
+          }).join('')
+        : '<div style="font-size:.8rem;color:var(--mut)">Sin datos suficientes todavía.</div>';
+    }
 
     /* Tabla */
     var q = FILTER.enc.q.toLowerCase().trim();
@@ -769,8 +868,9 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
 
     $('#tb-enc').innerHTML = rows.map(function (e) {
       var r = e.r || {};
+      var org = e.origen && e.origen !== 'web' ? '<br><small style="color:var(--red);font-family:inherit">' + esc(e.origen) + '</small>' : '';
       return '<tr>' +
-        '<td class="mono" style="white-space:nowrap">' + esc(e.id) + '<br><small style="color:var(--mut);font-family:inherit">' + fecha(e.creado) + '</small></td>' +
+        '<td class="mono" style="white-space:nowrap">' + esc(e.id) + '<br><small style="color:var(--mut);font-family:inherit">' + fecha(e.creado) + '</small>' + org + '</td>' +
         '<td>' + esc(e.distrito || '—') + '</td>' +
         '<td>' + esc(e.edad || '—') + '</td>' +
         '<td><b>' + esc(r.p1) + '</b><span style="color:var(--mut);font-size:.75rem">/10</span></td>' +
@@ -893,15 +993,19 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
       }), ['Nombre', 'DNI', 'Edad', 'WhatsApp', 'Distrito', 'Tipo de ingreso', 'Avance %', 'Fecha', 'Estado', 'Código', 'Minutos'], 'postulantes-camana');
     } else if (TAB === 'msg') {
       csv(DATA.msgs.map(function (m) {
-        return [m.id, fecha(m.creado), m.nombre, m.dni || '', m.correo, m.telefono, m.distrito, m.motivo, m.mensaje, m.estado];
-      }), ['Folio', 'Fecha', 'Nombre', 'DNI', 'Correo', 'Teléfono', 'Distrito', 'Motivo', 'Mensaje', 'Estado'], 'mensajes-camana');
+        return [m.id, fecha(m.creado), m.nombre, m.dni || '', m.edad || '', m.correo, m.telefono,
+          m.distrito, m.motivo, m.disponibilidad || '', m.origen || 'web', m.mensaje, m.estado];
+      }), ['Folio', 'Fecha', 'Nombre', 'DNI', 'Edad', 'Correo', 'Teléfono', 'Distrito', 'Motivo', 'Disponibilidad', 'Origen', 'Mensaje', 'Estado'], 'mensajes-camana');
     } else {
       csv(DATA.encs.respuestas.map(function (e) {
         var r = e.r || {};
-        return [e.id, fecha(e.creado), e.distrito || '', e.edad || '', r.p1, r.p5,
-          E ? E.texto(E.preguntas[5], r.p6) : r.p6, E ? E.texto(E.preguntas[2], r.p3) : r.p3,
-          E ? E.texto(E.preguntas[9], r.p10) : r.p10, r.p7 || ''];
-      }), ['Folio', 'Fecha', 'Distrito', 'Edad', 'P1 Labor', 'P5 Nota', 'P6 Recomienda', 'P3 Interés', 'P10 Canal', 'P7 Comentario'], 'encuestas-camana');
+        var txt = function (id, v) {
+          var p = E && E.porId ? E.porId(id) : null;
+          return p ? E.texto(p, v) : (v == null ? '' : v);
+        };
+        return [e.id, fecha(e.creado), e.distrito || '', e.edad || '', e.origen || 'web', r.p1, r.p5,
+          txt('p6', r.p6), txt('p3', r.p3), txt('p4', r.p4), txt('p2', r.p2), r.p7 || ''];
+      }), ['Folio', 'Fecha', 'Distrito', 'Edad', 'Origen', 'P1 Labor', 'P5 Nota', 'P6 Recomienda', 'P3 Interés', 'P4 Vínculo', 'P2 ¿Ha visto?', 'P7 Pedido'], 'encuestas-camana');
     }
   });
 

@@ -3,254 +3,331 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contacto y registro · Compañía de Bomberos de Camaná</title>
-<meta name="description" content="Formulario oficial de contacto y registro de la Compañía de Bomberos Voluntarios de Camaná. Consultas, inscripciones, voluntariado y capacitaciones.">
+<title>Inscripción y contacto · Compañía de Bomberos de Camaná</title>
+<meta name="description" content="Formulario oficial de inscripción y contacto de la Compañía de Bomberos Voluntarios de Camaná B-35. Postula como bombero voluntario, solicita información o coordina una capacitación.">
 <meta name="theme-color" content="#3d0a0d">
 <link rel="stylesheet" href="/assets/institucional.css">
+<link rel="stylesheet" href="/assets/rediseno.css">
+<link rel="icon" href="/assets/escudo.png" type="image/png">
 </head>
-<body>
+<body class="xp">
 
 <a class="skip" href="#formulario">Ir al formulario</a>
 
-<!-- Barra de emergencia -->
 <div class="topbar">
   <div class="wrap">
     <span class="em">🚨 Emergencias <b>116</b></span>
     <span class="meta">
       <span>Camaná · Arequipa · Perú</span>
-      <span>Atención de lunes a domingo, 24 horas</span>
+      <span>Respuesta en 3 días hábiles</span>
     </span>
   </div>
 </div>
 
-<!-- Cabecera -->
 <header class="masthead">
   <div class="wrap">
     <a class="brand" href="/">
-      <svg class="crest" viewBox="0 0 64 74" aria-hidden="true">
-        <path d="M32 2 61 12v27c0 19-13 28-29 33C16 67 3 58 3 39V12z" fill="#8c1015" stroke="#c19a2e" stroke-width="2.4"/>
-        <path d="M32 8 55 16v23c0 15-10 22-23 26C19 61 9 54 9 39V16z" fill="none" stroke="#c19a2e" stroke-width="1" opacity=".5"/>
-        <path d="M32 21c5.4 6.6 9.4 9.8 9.4 15.6a9.4 9.4 0 0 1-18.8 0c0-4.2 2-6.6 4.3-9.4.7 2.8 1.7 4.2 3 5.2.6-4.2 1-7.4 2.1-11.4z" fill="#e6c765"/>
-        <path d="M32 34c2.5 3 4.2 4.6 4.2 7.3a4.2 4.2 0 0 1-8.4 0c0-2.1 1-3.4 2.1-4.6.4 1.4.9 2.1 1.4 2.5.3-1.8.4-3.3.7-5.2z" fill="#8c1015"/>
-      </svg>
+      <img class="crest-img" src="/assets/escudo.png" alt="Escudo de la Compañía de Bomberos Camaná B-35" width="314" height="340">
       <span>
         <span class="nm">Compañía de Bomberos de Camaná</span>
-        <span class="sb">Bomberos Voluntarios del Perú</span>
+        <span class="sb">Bomberos Voluntarios del Perú · B-35</span>
       </span>
     </a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="/">Inicio</a>
-      <a href="/contacto" aria-current="page">Contacto</a>
-      <a href="/encuesta">Encuesta ciudadana</a>
+      <a href="/contacto" aria-current="page">Inscripción</a>
+      <a href="/encuesta">Encuesta</a>
+      <a href="/resultados">Resultados</a>
       <a class="cta" href="/admin">Panel interno</a>
     </nav>
   </div>
 </header>
 
-<!-- Portada -->
-<section class="hero">
+<section class="xp-hero">
   <div class="wrap">
-    <span class="kicker">Atención a la ciudadanía</span>
-    <h1>Contacto y registro institucional</h1>
-    <p>
-      Este es el canal oficial para comunicarse con la Compañía de Bomberos Voluntarios de Camaná.
-      Registre su consulta, solicite información sobre el voluntariado o coordine una capacitación.
-      Toda comunicación es recibida y atendida por la Comandancia.
+    <span class="kick">Canal oficial · Camaná B-35</span>
+    <h1>Este es el único formulario que <em>registra</em> postulantes</h1>
+    <p class="sub">
+      El juego sirve para conocer la labor; la inscripción real se hace aquí. Completa tus
+      datos, cuéntanos qué necesitas y recibe un folio para dar seguimiento.
     </p>
-    <div class="rule"></div>
+    <div class="chips">
+      <span class="xp-chip">🎂 Desde <b>15 años</b></span>
+      <span class="xp-chip">⏱️ <b>3 minutos</b></span>
+      <span class="xp-chip">📩 Respuesta en <b>3 días hábiles</b></span>
+      <span class="xp-chip">🔒 Datos <b>solo</b> para atenderte</span>
+    </div>
   </div>
 </section>
 
-<main class="main" id="formulario">
+<div class="xp-prog" id="prog">
+  <div class="wrap">
+    <div class="in">
+      <span id="ptxt">Paso 1 de 3 · Tus datos</span>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="33" id="pbar"><i style="width:33%"></i></div>
+      <span class="pc" id="ppct">33%</span>
+    </div>
+  </div>
+</div>
+
+<main class="main" id="formulario" style="padding-top:26px">
   <div class="wrap cols">
 
-    <!-- ─── Formulario ─── -->
     <div>
-      <div class="card" id="carta-form">
-        <div class="card-head">
+      <div class="xp-card" id="carta-form">
+        <div class="xp-head">
           <div>
             <span class="eyebrow">Formulario oficial</span>
-            <h2>Registro de contacto</h2>
+            <h2>Inscripción y contacto</h2>
           </div>
-          <span class="req-note">Los campos con <span class="req">*</span> son obligatorios</span>
+          <span class="xp-badge">Campos * obligatorios</span>
         </div>
         <p class="lead">
-          Complete sus datos y el motivo de su comunicación. Recibirá respuesta en un plazo
-          máximo de tres días hábiles, al correo o al número que indique.
+          Tres pasos breves. Al final recibirás un <b>folio de atención</b> para consultar
+          el estado de tu solicitud.
         </p>
 
-        <div class="aviso aviso-emergencia" role="note">
+        <div class="xp-note" role="note" style="margin:14px 0 16px">
           <span class="ic" aria-hidden="true">⚠</span>
           <div>
-            <b>Este formulario no atiende emergencias.</b>
-            Si hay un incendio, un accidente o una persona en peligro, llame de inmediato al
-            <b>116</b> o acuda a la unidad más cercana. El formulario se revisa solo en horario administrativo.
+            <b>Esto no atiende emergencias.</b> Si hay un incendio, un accidente o una persona
+            en peligro, llama de inmediato al <b>116</b>. El formulario se revisa en horario
+            administrativo.
           </div>
         </div>
 
+        <div class="xp-note privacy" id="aviso-juego" hidden role="note" style="margin:0 0 16px">
+          <span class="ic" aria-hidden="true">🚒</span>
+          <div>
+            <b>Llegaste desde el juego «Camaná te necesita».</b> Aquí sí queda registrada tu
+            inscripción: la compañía recibe tus datos y te responde. Puedes volver al juego
+            cuando termines.
+          </div>
+        </div>
+
+        <ol class="xp-steps" id="pasos">
+          <li class="on" data-paso="1"><span class="n">1</span><span class="lbl">Tus datos</span></li>
+          <li class="ln" aria-hidden="true" style="padding:0;flex:1 1 12px;min-width:10px;height:2px;border-radius:2px;background:var(--linea)"></li>
+          <li data-paso="2"><span class="n">2</span><span class="lbl">Tu interés</span></li>
+          <li class="ln" aria-hidden="true" style="padding:0;flex:1 1 12px;min-width:10px;height:2px;border-radius:2px;background:var(--linea)"></li>
+          <li data-paso="3"><span class="n">3</span><span class="lbl">Tu mensaje</span></li>
+        </ol>
+
         <form id="f" novalidate autocomplete="on">
-          <div class="field">
-            <label for="nombre">Nombres y apellidos <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej. María Fernanda Quispe Huamán"
-                   autocomplete="name" required aria-describedby="e-nombre">
-            <span class="err" id="e-nombre" role="alert"></span>
+          <!-- PASO 1 -->
+          <div class="xp-panel on" data-panel="1">
+            <h3 class="xp-ptit">Tus datos de contacto</h3>
+            <p class="xp-psub">Así podremos responderte. No compartimos tu información con terceros.</p>
+
+            <div class="field">
+              <label for="nombre">Nombres y apellidos <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej. María Fernanda Quispe Huamán"
+                     autocomplete="name" required aria-describedby="e-nombre">
+              <span class="err" id="e-nombre" role="alert"></span>
+            </div>
+
+            <div class="xp-grid2">
+              <div class="field">
+                <label for="dni">DNI <span class="hint" style="display:inline;font-weight:400">(opcional)</span></label>
+                <input type="text" id="dni" name="dni" inputmode="numeric" maxlength="8"
+                       placeholder="8 dígitos" autocomplete="off" aria-describedby="e-dni">
+                <span class="err" id="e-dni" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="edad">Edad <span class="hint" style="display:inline;font-weight:400">(opcional)</span></label>
+                <input type="number" id="edad" name="edad" inputmode="numeric" min="14" max="80"
+                       placeholder="Ej. 24" aria-describedby="e-edad h-edad">
+                <span class="hint" id="h-edad">Puedes postular desde los 15 años.</span>
+                <span class="err" id="e-edad" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="xp-grid2">
+              <div class="field">
+                <label for="telefono">Teléfono / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+                <input type="tel" id="telefono" name="telefono" inputmode="tel"
+                       placeholder="Ej. 987 654 321" autocomplete="tel" required aria-describedby="e-telefono">
+                <span class="err" id="e-telefono" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+                <input type="email" id="correo" name="correo" placeholder="nombre@correo.com"
+                       autocomplete="email" required aria-describedby="e-correo">
+                <span class="err" id="e-correo" role="alert"></span>
+              </div>
+            </div>
           </div>
 
-          <div class="grid2">
-            <div class="field">
-              <label for="dni">DNI <span class="hint" style="display:inline;font-weight:400">(opcional)</span></label>
-              <input type="text" id="dni" name="dni" inputmode="numeric" maxlength="8"
-                     placeholder="8 dígitos" autocomplete="off" aria-describedby="e-dni">
-              <span class="err" id="e-dni" role="alert"></span>
-            </div>
-            <div class="field">
-              <label for="telefono">Teléfono / WhatsApp <span class="req" aria-hidden="true">*</span></label>
-              <input type="tel" id="telefono" name="telefono" inputmode="tel"
-                     placeholder="Ej. 987 654 321" autocomplete="tel" required aria-describedby="e-telefono">
-              <span class="err" id="e-telefono" role="alert"></span>
-            </div>
-          </div>
+          <!-- PASO 2 -->
+          <div class="xp-panel" data-panel="2">
+            <h3 class="xp-ptit">¿Para qué nos escribes?</h3>
+            <p class="xp-psub">Elige la opción que mejor describa tu caso. Así lo derivamos al área correcta.</p>
 
-          <div class="field">
-            <label for="correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="correo" name="correo" placeholder="nombre@correo.com"
-                   autocomplete="email" required aria-describedby="e-correo">
-            <span class="err" id="e-correo" role="alert"></span>
-          </div>
-
-          <div class="grid2">
             <div class="field">
-              <label for="distrito">Distrito <span class="req" aria-hidden="true">*</span></label>
-              <select id="distrito" name="distrito" required aria-describedby="e-distrito">
-                <option value="">Seleccione un distrito</option>
-                <option>Camaná</option>
-                <option>Samuel Pastor</option>
-                <option>Nicolás de Piérola</option>
-                <option>Mariscal Cáceres</option>
-                <option>José María Quimper</option>
-                <option>Ocoña</option>
-                <option>Otro distrito</option>
-              </select>
-              <span class="err" id="e-distrito" role="alert"></span>
-            </div>
-            <div class="field">
-              <label for="motivo">Motivo de contacto <span class="req" aria-hidden="true">*</span></label>
-              <select id="motivo" name="motivo" required aria-describedby="e-motivo">
-                <option value="">Seleccione un motivo</option>
-                <option>Quiero ser bombero voluntario</option>
-                <option>Información sobre el voluntariado</option>
-                <option>Capacitación y prevención</option>
-                <option>Donaciones y apoyo</option>
-                <option>Prensa y comunicación</option>
-                <option>Constancia o trámite</option>
-                <option>Otro</option>
-              </select>
+              <span class="lbl" id="lbl-motivo">Motivo de contacto <span class="req" aria-hidden="true">*</span></span>
+              <div class="xp-opts two" role="radiogroup" aria-labelledby="lbl-motivo" id="motivo">
+                <label class="xp-opt"><input type="radio" name="motivo" value="Quiero ser bombero voluntario"><span class="em">🚒</span><span class="tt">Quiero ser bombero voluntario</span><span class="tick" aria-hidden="true">✓</span></label>
+                <label class="xp-opt"><input type="radio" name="motivo" value="Información sobre el voluntariado"><span class="em">ℹ️</span><span class="tt">Información sobre el voluntariado</span><span class="tick" aria-hidden="true">✓</span></label>
+                <label class="xp-opt"><input type="radio" name="motivo" value="Capacitación y prevención"><span class="em">🎓</span><span class="tt">Capacitación y prevención</span><span class="tick" aria-hidden="true">✓</span></label>
+                <label class="xp-opt"><input type="radio" name="motivo" value="Donaciones y apoyo"><span class="em">🤝</span><span class="tt">Donaciones y apoyo</span><span class="tick" aria-hidden="true">✓</span></label>
+                <label class="xp-opt"><input type="radio" name="motivo" value="Prensa y comunicación"><span class="em">📰</span><span class="tt">Prensa y comunicación</span><span class="tick" aria-hidden="true">✓</span></label>
+                <label class="xp-opt"><input type="radio" name="motivo" value="Constancia o trámite"><span class="em">📄</span><span class="tt">Constancia o trámite</span><span class="tick" aria-hidden="true">✓</span></label>
+                <label class="xp-opt"><input type="radio" name="motivo" value="Otro"><span class="em">✳️</span><span class="tt">Otro</span><span class="tick" aria-hidden="true">✓</span></label>
+              </div>
               <span class="err" id="e-motivo" role="alert"></span>
             </div>
+
+            <div class="xp-grid2">
+              <div class="field">
+                <label for="distrito">Distrito <span class="req" aria-hidden="true">*</span></label>
+                <select id="distrito" name="distrito" required aria-describedby="e-distrito">
+                  <option value="">Seleccione un distrito</option>
+                  <option>Camaná</option>
+                  <option>Samuel Pastor</option>
+                  <option>Nicolás de Piérola</option>
+                  <option>Mariscal Cáceres</option>
+                  <option>José María Quimper</option>
+                  <option>Ocoña</option>
+                  <option>Otro distrito</option>
+                </select>
+                <span class="err" id="e-distrito" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="disponibilidad">Disponibilidad <span class="hint" style="display:inline;font-weight:400">(opcional)</span></label>
+                <select id="disponibilidad" name="disponibilidad">
+                  <option value="">Prefiero no indicarlo</option>
+                  <option>Mañanas</option>
+                  <option>Tardes</option>
+                  <option>Noches</option>
+                  <option>Fines de semana</option>
+                  <option>Flexible / rotativo</option>
+                </select>
+                <span class="hint">Nos ayuda a programar entrevistas y guardias.</span>
+              </div>
+            </div>
+
+            <!-- Checklist informativo: aparece si quiere postular -->
+            <div class="xp-optional" id="bloque-req" hidden>
+              <h4>Lo que te pedirán en la entrevista</h4>
+              <ul class="xp-check-list">
+                <li><span class="k" aria-hidden="true">🪪</span><span><b>DNI</b> o partida de nacimiento (y autorización notarial si eres menor de edad).</span></li>
+                <li><span class="k" aria-hidden="true">📋</span><span><b>Ficha única de postulante</b> y declaración jurada de antecedentes.</span></li>
+                <li><span class="k" aria-hidden="true">🎓</span><span><b>Constancia de estudios</b> o trabajo (mínimo tercer grado de secundaria).</span></li>
+                <li><span class="k" aria-hidden="true">🏠</span><span><b>Certificado domiciliario</b> del distrito donde vives.</span></li>
+                <li><span class="k" aria-hidden="true">🩺</span><span><b>Aptitud</b> médica, psicológica y física para ingresar a la Escuela Básica.</span></li>
+              </ul>
+              <p class="hint" style="margin:10px 0 6px">
+                No necesitas subir nada ahora: primero conversamos contigo y te guiamos paso a paso.
+              </p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="mensaje">Mensaje <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="mensaje" name="mensaje" required minlength="20" maxlength="1500"
-                      placeholder="Describa su consulta o solicitud con el mayor detalle posible…"
-                      aria-describedby="e-mensaje h-mensaje"></textarea>
-            <span class="hint" id="h-mensaje">Mínimo 20 caracteres. <span id="cuenta">0</span>/1500</span>
-            <span class="err" id="e-mensaje" role="alert"></span>
+          <!-- PASO 3 -->
+          <div class="xp-panel" data-panel="3">
+            <h3 class="xp-ptit">Cuéntanos un poco más</h3>
+            <p class="xp-psub">Un par de líneas bastan. Si postulas, cuéntanos por qué quieres ser bombero.</p>
+
+            <div class="field">
+              <label for="mensaje">Mensaje <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="xp-area" id="mensaje" name="mensaje" required minlength="20" maxlength="1500"
+                        placeholder="Ej. Vivo en Camaná, tengo 22 años y quiero servir a mi distrito. Trabajo de día y puedo cubrir las noches y los fines de semana…"
+                        aria-describedby="e-mensaje h-mensaje"></textarea>
+              <span class="hint" id="h-mensaje">Mínimo 20 caracteres. <span id="cuenta">0</span>/1500</span>
+              <span class="err" id="e-mensaje" role="alert"></span>
+            </div>
+
+            <div class="field">
+              <label class="check">
+                <input type="checkbox" id="consent" name="consent" required aria-describedby="e-consent">
+                <span>
+                  Autorizo a la Compañía de Bomberos de Camaná a usar mis datos personales
+                  únicamente para atender esta comunicación, conforme a la Ley N.º 29733 de
+                  Protección de Datos Personales. <span class="req" aria-hidden="true">*</span>
+                </span>
+              </label>
+              <span class="err" id="e-consent" role="alert"></span>
+            </div>
+
+            <div class="hp" aria-hidden="true">
+              <label for="empresa">No completar</label>
+              <input type="text" id="empresa" name="empresa" tabindex="-1" autocomplete="off">
+            </div>
           </div>
 
-          <div class="field">
-            <label class="check">
-              <input type="checkbox" id="consent" name="consent" required aria-describedby="e-consent">
-              <span>
-                Autorizo a la Compañía de Bomberos de Camaná a utilizar mis datos personales
-                únicamente para responder esta comunicación, conforme a la Ley N.º 29733 de
-                Protección de Datos Personales. <span class="req" aria-hidden="true">*</span>
-              </span>
-            </label>
-            <span class="err" id="e-consent" role="alert"></span>
+          <div class="xp-nav">
+            <button class="xp-btn sec" type="button" id="atras" hidden>← Anterior</button>
+            <span class="grow"></span>
+            <button class="xp-btn pri" type="button" id="siguiente">Continuar →</button>
+            <button class="xp-btn pri" type="submit" id="enviar" hidden>Enviar mi inscripción ✓</button>
           </div>
-
-          <div class="hp" aria-hidden="true">
-            <label for="empresa">No completar</label>
-            <input type="text" id="empresa" name="empresa" tabindex="-1" autocomplete="off">
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-primario" type="submit" id="enviar">Enviar comunicación</button>
-            <a class="btn-ghost" href="/encuesta">Prefiero responder la encuesta →</a>
-          </div>
-          <p class="hint" style="margin-top:14px">
-            Sus datos no se comparten con terceros y se conservan solo mientras sean necesarios
-            para atender su solicitud.
-          </p>
         </form>
       </div>
 
       <!-- Éxito -->
-      <div class="card exito" id="carta-ok" hidden>
-        <div class="sello" aria-hidden="true">✓</div>
-        <h2>Comunicación registrada</h2>
-        <p>
-          Gracias por escribirnos. Su mensaje fue recibido por la Comandancia y será atendido
-          en un plazo máximo de tres días hábiles.
+      <div class="xp-card xp-done" id="carta-ok" hidden>
+        <div class="ring" aria-hidden="true">✓</div>
+        <h2>Inscripción registrada</h2>
+        <p style="max-width:48ch;margin:0 auto 12px">
+          Gracias por dar el paso. La Comandancia recibió tu solicitud y te escribirá al
+          WhatsApp o correo indicado en un plazo máximo de tres días hábiles.
         </p>
-        <p style="margin-bottom:0"><span class="folio" id="folio">—</span></p>
-        <div class="actions" style="justify-content:center;border-top:0;padding-top:8px">
-          <a class="btn btn-sec" href="/encuesta">Responder la encuesta ciudadana</a>
-          <a class="btn-ghost" href="/">Volver al inicio</a>
+        <p style="margin-bottom:18px"><span class="folio" id="folio">—</span></p>
+
+        <div class="xp-stats" style="text-align:left">
+          <div class="xp-stat"><div class="v">1️⃣</div><div class="l">Recepción y folio asignado</div></div>
+          <div class="xp-stat"><div class="v">2️⃣</div><div class="l">Contacto en 3 días hábiles</div></div>
+          <div class="xp-stat"><div class="v">3️⃣</div><div class="l">Entrevista y evaluación</div></div>
         </div>
+
+        <div class="xp-share" style="margin-top:20px">
+          <a class="xp-btn pri" href="/encuesta?src=contacto">📊 Responder la encuesta ciudadana</a>
+          <a class="xp-btn sec" href="/">🚒 Volver al juego</a>
+        </div>
+        <p class="hint" style="margin-top:16px">
+          Mientras esperas, la encuesta ciudadana nos ayuda a preparar mejor a la compañía.
+        </p>
       </div>
     </div>
 
-    <!-- ─── Panel lateral ─── -->
-    <aside class="side">
-      <div class="card destacado">
+    <aside class="side xp-side">
+      <div class="xp-card destacado">
         <h3>Emergencias</h3>
         <div class="num116">116</div>
-        <p>
-          Línea gratuita nacional, disponible las 24 horas. También puede acudir al
-          cuartel de la Compañía en Camaná.
+        <p style="margin-bottom:0">
+          Línea gratuita nacional, disponible las 24 horas. También puedes acudir al cuartel
+          de la Compañía en Camaná.
         </p>
       </div>
 
-      <div class="card">
-        <h3>Datos institucionales</h3>
-        <ul class="info-list">
-          <li>
-            <span class="k" aria-hidden="true">📍</span>
-            <span><b>Cuartel general</b><small>Camaná, provincia de Camaná, Arequipa</small></span>
-          </li>
-          <li>
-            <span class="k" aria-hidden="true">🕘</span>
-            <span><b>Atención administrativa</b><small>Lunes a viernes, 08:00 a 16:00</small></span>
-          </li>
-          <li>
-            <span class="k" aria-hidden="true">✉️</span>
-            <span><b>Correo institucional</b><small>comunicaciones@bomberoscamana.pe</small></span>
-          </li>
-          <li>
-            <span class="k" aria-hidden="true">🚒</span>
-            <span><b>Guardia permanente</b><small>Personal de turno los 365 días del año</small></span>
-          </li>
+      <div class="xp-card">
+        <h3>Qué ocurre después</h3>
+        <ul class="info-list" style="margin:0">
+          <li><span class="k" aria-hidden="true">1️⃣</span><span><b>Recepción</b><small>La Comandancia revisa tu solicitud y te asigna un folio.</small></span></li>
+          <li><span class="k" aria-hidden="true">2️⃣</span><span><b>Contacto</b><small>Te escribimos al WhatsApp o correo indicado, en 3 días hábiles.</small></span></li>
+          <li><span class="k" aria-hidden="true">3️⃣</span><span><b>Entrevista</b><small>Si postulas, se agenda la evaluación médica y el curso básico.</small></span></li>
         </ul>
       </div>
 
-      <div class="card">
-        <h3>¿Desea ser bombero voluntario?</h3>
-        <p>
-          Puede postular desde los 15 años. El proceso incluye una entrevista, evaluación
-          médica y el curso básico de formación. Seleccione
-          <b>«Quiero ser bombero voluntario»</b> en el formulario y lo contactaremos.
-        </p>
+      <div class="xp-card">
+        <h3>Datos institucionales</h3>
+        <ul class="info-list" style="margin:0">
+          <li><span class="k" aria-hidden="true">📍</span><span><b>Cuartel general</b><small>Camaná, provincia de Camaná, Arequipa</small></span></li>
+          <li><span class="k" aria-hidden="true">🕘</span><span><b>Atención administrativa</b><small>Lunes a viernes, 08:00 a 16:00</small></span></li>
+          <li><span class="k" aria-hidden="true">✉️</span><span><b>Correo institucional</b><small>comunicaciones@bomberoscamana.pe</small></span></li>
+        </ul>
+      </div>
+
+      <div class="xp-card">
+        <h3>¿Solo quieres opinar?</h3>
         <p style="margin-bottom:0">
-          <a href="/">Conocer el proceso jugando →</a>
+          No necesitas registrarte para decir lo que piensas. La
+          <a href="/encuesta">encuesta ciudadana</a> es anónima y toma dos minutos.
         </p>
       </div>
     </aside>
   </div>
 </main>
 
-<!-- Pie -->
 <footer class="pie">
   <div class="wrap">
     <div class="cols3">
@@ -265,8 +342,9 @@
         <h4>Secciones</h4>
         <ul>
           <li><a href="/">Inicio</a></li>
-          <li><a href="/contacto">Contacto y registro</a></li>
+          <li><a href="/contacto">Inscripción y contacto</a></li>
           <li><a href="/encuesta">Encuesta ciudadana</a></li>
+          <li><a href="/resultados">Resultados</a></li>
           <li><a href="/admin">Panel interno</a></li>
         </ul>
       </div>
@@ -290,37 +368,61 @@
 (function () {
   'use strict';
   var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
   var form = $('#f');
+  var TOTAL = 3;
+  var paso = 1;
   var enviando = false;
+  var primerPintado = true;
 
   $('#anio').textContent = new Date().getFullYear();
 
+  /* ── Contexto de llegada (?desde=juego, ?motivo=) ──────────────────── */
+  var qs = new URLSearchParams(location.search);
+  var desde = (qs.get('desde') || '').toLowerCase();
+  if (desde === 'juego') {
+    $('#aviso-juego').hidden = false;
+    var pre = form.querySelector('input[name="motivo"][value="Quiero ser bombero voluntario"]');
+    if (pre) pre.checked = true;
+  }
+  var motivoPre = qs.get('motivo');
+  if (motivoPre) {
+    var r = form.querySelector('input[name="motivo"][value="' + motivoPre.replace(/"/g, '') + '"]');
+    if (r) r.checked = true;
+  }
+
+  /* Checklist de requisitos solo si quiere postular */
+  function syncReq() {
+    var sel = form.querySelector('input[name="motivo"]:checked');
+    $('#bloque-req').hidden = !(sel && sel.value === 'Quiero ser bombero voluntario');
+  }
+  syncReq();
+  form.addEventListener('change', function (ev) {
+    if (ev.target.name === 'motivo') syncReq();
+  });
+
   /* Contador de caracteres */
   var msg = $('#mensaje'), cuenta = $('#cuenta');
-  msg.addEventListener('input', function () {
-    cuenta.textContent = msg.value.length;
-  });
+  msg.addEventListener('input', function () { cuenta.textContent = msg.value.length; });
 
   /* ── Validación ─────────────────────────────────────────────────────── */
   function setErr(id, texto) {
     var e = $('#e-' + id), campo = $('#' + id);
     if (texto) {
-      e.textContent = texto;
-      e.classList.add('on');
-      if (campo) campo.setAttribute('aria-invalid', 'true');
+      if (e) { e.textContent = texto; e.classList.add('on'); }
+      if (campo && campo.tagName) campo.setAttribute('aria-invalid', 'true');
       return false;
     }
-    e.textContent = '';
-    e.classList.remove('on');
-    if (campo) campo.removeAttribute('aria-invalid');
+    if (e) { e.textContent = ''; e.classList.remove('on'); }
+    if (campo && campo.tagName) campo.removeAttribute('aria-invalid');
     return true;
   }
 
   var reglas = {
     nombre: function (v) {
-      if (v.length < 5) return 'Escriba sus nombres y apellidos completos.';
-      if (v.split(/\s+/).length < 2) return 'Ingrese al menos un nombre y un apellido.';
-      if (!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$/.test(v)) return 'Use solo letras y espacios.';
+      if (v.length < 5) return 'Escribe tus nombres y apellidos completos.';
+      if (v.split(/\s+/).length < 2) return 'Ingresa al menos un nombre y un apellido.';
+      if (!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$/.test(v)) return 'Usa solo letras y espacios.';
       return '';
     },
     dni: function (v) {
@@ -328,29 +430,45 @@
       if (!/^\d{8}$/.test(v)) return 'El DNI debe tener exactamente 8 dígitos.';
       return '';
     },
+    edad: function (v) {
+      if (!v) return '';
+      var n = Number(v);
+      if (!isFinite(n) || n < 14 || n > 80) return 'Indica una edad entre 14 y 80 años.';
+      return '';
+    },
     telefono: function (v) {
       var d = v.replace(/\D/g, '');
-      if (d.length < 9) return 'Ingrese un número de 9 dígitos.';
+      if (d.length < 9) return 'Ingresa un número de 9 dígitos.';
       if (d.length > 12) return 'El número es demasiado largo.';
       return '';
     },
     correo: function (v) {
-      if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(v)) return 'Ingrese un correo electrónico válido.';
+      if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(v)) return 'Ingresa un correo electrónico válido.';
       return '';
     },
-    distrito: function (v) { return v ? '' : 'Seleccione su distrito.'; },
-    motivo: function (v) { return v ? '' : 'Seleccione el motivo de su contacto.'; },
+    distrito: function (v) { return v ? '' : 'Selecciona tu distrito.'; },
     mensaje: function (v) {
-      if (v.length < 20) return 'Escriba al menos 20 caracteres para que podamos ayudarle.';
+      if (v.length < 20) return 'Escribe al menos 20 caracteres para que podamos ayudarte.';
       return '';
     },
     consent: function (_, campo) {
-      return campo.checked ? '' : 'Debe autorizar el uso de sus datos para continuar.';
+      return campo.checked ? '' : 'Debes autorizar el uso de tus datos para continuar.';
     },
   };
 
+  var PASOS = {
+    1: ['nombre', 'dni', 'edad', 'telefono', 'correo'],
+    2: ['motivo', 'distrito'],
+    3: ['mensaje', 'consent'],
+  };
+
   function validarCampo(id) {
+    if (id === 'motivo') {
+      var sel = form.querySelector('input[name="motivo"]:checked');
+      return setErr('motivo', sel ? '' : 'Selecciona el motivo de tu contacto.');
+    }
     var campo = $('#' + id);
+    if (!campo) return true;
     var v = campo.type === 'checkbox' ? '' : campo.value.trim();
     var err = reglas[id] ? reglas[id](v, campo) : '';
     return setErr(id, err);
@@ -358,6 +476,7 @@
 
   Object.keys(reglas).forEach(function (id) {
     var campo = $('#' + id);
+    if (!campo) return;
     campo.addEventListener('blur', function () { validarCampo(id); });
     campo.addEventListener('change', function () { validarCampo(id); });
     campo.addEventListener('input', function () {
@@ -365,39 +484,112 @@
     });
   });
 
+  /* ── Navegación entre pasos ─────────────────────────────────────────── */
+  function pintarPaso(n) {
+    paso = n;
+    $$('.xp-panel').forEach(function (p) {
+      p.classList.toggle('on', Number(p.dataset.panel) === n);
+    });
+    $$('#pasos li[data-paso]').forEach(function (li) {
+      var i = Number(li.dataset.paso);
+      li.classList.toggle('on', i === n);
+      li.classList.toggle('done', i < n);
+      var num = li.querySelector('.n');
+      if (num) num.textContent = i < n ? '✓' : String(i);
+    });
+    var pct = Math.round((n / TOTAL) * 100);
+    var nombres = { 1: 'Tus datos', 2: 'Tu interés', 3: 'Tu mensaje' };
+    $('#ptxt').textContent = 'Paso ' + n + ' de ' + TOTAL + ' · ' + nombres[n];
+    $('#ppct').textContent = pct + '%';
+    $('#pbar').querySelector('i').style.width = pct + '%';
+    $('#pbar').setAttribute('aria-valuenow', pct);
+    $('#atras').hidden = n === 1;
+    $('#siguiente').hidden = n === TOTAL;
+    $('#enviar').hidden = n !== TOTAL;
+    if (primerPintado) {
+      primerPintado = false;
+    } else {
+      var card = $('#carta-form');
+      var y = card.getBoundingClientRect().top + window.pageYOffset - 74;
+      if (window.pageYOffset > y + 60 || window.pageYOffset < y - 400) {
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+      var foco = $('.xp-panel.on input, .xp-panel.on select, .xp-panel.on textarea');
+      if (foco && n > 1) foco.focus({ preventScroll: true });
+    }
+  }
+
+  function validarPaso(n) {
+    var ok = true, primero = null;
+    (PASOS[n] || []).forEach(function (id) {
+      if (!validarCampo(id)) {
+        ok = false;
+        if (!primero) primero = id;
+      }
+    });
+    if (!ok && primero) {
+      var t = primero === 'motivo' ? $('#motivo') : $('#' + primero);
+      if (t) {
+        t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var f = t.querySelector ? t.querySelector('input') : null;
+        (f || t).focus({ preventScroll: true });
+      }
+    }
+    return ok;
+  }
+
+  $('#siguiente').addEventListener('click', function () {
+    if (!validarPaso(paso)) return;
+    if (paso < TOTAL) pintarPaso(paso + 1);
+  });
+  $('#atras').addEventListener('click', function () {
+    if (paso > 1) pintarPaso(paso - 1);
+  });
+  /* Enter avanza de paso en vez de enviar el formulario completo */
+  form.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' || paso === TOTAL) return;
+    var t = ev.target;
+    if (t && t.tagName === 'TEXTAREA') return;
+    ev.preventDefault();
+    $('#siguiente').click();
+  });
+  pintarPaso(1);
+
   /* ── Envío ──────────────────────────────────────────────────────────── */
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     if (enviando) return;
 
-    var ok = true, primero = null;
-    Object.keys(reglas).forEach(function (id) {
-      if (!validarCampo(id)) {
-        ok = false;
-        if (!primero) primero = $('#' + id);
+    var okTodo = true;
+    for (var p = 1; p <= TOTAL; p++) {
+      if (!validarPaso(p)) {
+        okTodo = false;
+        if (p !== paso) pintarPaso(p);
+        break;
       }
-    });
-
-    if (!ok) {
-      if (primero) primero.focus();
-      return;
     }
+    if (!okTodo) return;
 
     var btn = $('#enviar');
     enviando = true;
     btn.disabled = true;
     btn.textContent = 'Enviando…';
 
+    var motivoSel = form.querySelector('input[name="motivo"]:checked');
+
     var datos = {
       nombre: $('#nombre').value.trim(),
       dni: $('#dni').value.replace(/\D/g, ''),
+      edad: $('#edad').value.trim(),
       correo: $('#correo').value.trim(),
       telefono: $('#telefono').value.trim(),
       distrito: $('#distrito').value,
-      motivo: $('#motivo').value,
+      motivo: motivoSel ? motivoSel.value : '',
+      disponibilidad: $('#disponibilidad').value,
       mensaje: $('#mensaje').value.trim(),
       consent: $('#consent').checked,
       empresa: $('#empresa').value,
+      desde: desde || 'web',
     };
 
     fetch('/api/contacto', {
@@ -410,20 +602,22 @@
         if (j && j.ok) {
           $('#folio').textContent = 'Folio ' + j.folio;
           $('#carta-form').hidden = true;
+          $('#prog').hidden = true;
           $('#carta-ok').hidden = false;
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          $('#carta-ok').focus && $('#carta-ok').focus();
+          $('#carta-ok').setAttribute('tabindex', '-1');
+          $('#carta-ok').focus();
         } else {
-          mostrarError((j && j.error) || 'No se pudo enviar su comunicación.');
+          mostrarError((j && j.error) || 'No se pudo enviar tu comunicación.');
         }
       })
       .catch(function () {
-        mostrarError('No se pudo conectar con el servidor. Revise su conexión e intente nuevamente.');
+        mostrarError('No se pudo conectar con el servidor. Revisa tu conexión e inténtalo otra vez.');
       })
       .then(function () {
         enviando = false;
         btn.disabled = false;
-        btn.textContent = 'Enviar comunicación';
+        btn.textContent = 'Enviar mi inscripción ✓';
       });
   });
 
@@ -432,7 +626,7 @@
     if (prev) prev.remove();
     var div = document.createElement('div');
     div.id = 'aviso-error';
-    div.className = 'aviso aviso-emergencia';
+    div.className = 'xp-note';
     div.setAttribute('role', 'alert');
     div.innerHTML = '<span class="ic" aria-hidden="true">⚠</span><div></div>';
     div.lastChild.textContent = texto;

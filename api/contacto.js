@@ -25,6 +25,10 @@ const MOTIVOS = [
 
 const ESTADOS = ['nuevo', 'atendido', 'archivado'];
 
+const DISPONIBILIDAD = ['Mañanas', 'Tardes', 'Noches', 'Fines de semana', 'Flexible / rotativo'];
+
+const ORIGENES = ['web', 'juego', 'contacto', 'qr', 'encuesta'];
+
 function clean(v, max) {
   return String(v == null ? '' : v)
     .replace(/[\u0000-\u001f]/g, ' ')
@@ -56,6 +60,12 @@ async function crear(req, res) {
   const distrito = clean(body.distrito, 60);
   const motivo = clean(body.motivo, 80);
   const mensaje = clean(body.mensaje, 1500);
+  const edadTxt = clean(body.edad, 4).replace(/\D/g, '');
+  const edad = edadTxt ? Number(edadTxt) : null;
+  const disp = clean(body.disponibilidad, 40);
+  const disponibilidad = DISPONIBILIDAD.indexOf(disp) >= 0 ? disp : '';
+  const origenTxt = clean(body.desde, 20).toLowerCase();
+  const origen = ORIGENES.indexOf(origenTxt) >= 0 ? origenTxt : 'web';
 
   let error = '';
   if (nombre.length < 5 || nombre.split(' ').length < 2) {
@@ -64,6 +74,8 @@ async function crear(req, res) {
     error = 'El nombre solo puede contener letras y espacios.';
   } else if (dni && !/^\d{8}$/.test(dni)) {
     error = 'El DNI debe tener 8 dígitos.';
+  } else if (edad !== null && (edad < 14 || edad > 80)) {
+    error = 'Indique una edad entre 14 y 80 años.';
   } else if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(correo)) {
     error = 'Ingrese un correo electrónico válido.';
   } else if (telefono.replace(/\D/g, '').length < 9) {
@@ -89,11 +101,14 @@ async function crear(req, res) {
     estado: 'nuevo',
     nombre,
     dni,
+    edad,
     correo,
     telefono,
     distrito,
     motivo,
+    disponibilidad,
     mensaje,
+    origen,
     consent: true,
     ua: clean(req.headers['user-agent'], 200),
     pais: clean(req.headers['x-vercel-ip-country'], 8),
@@ -123,10 +138,15 @@ module.exports = async function handler(req, res) {
     if (req.method === 'GET') {
       const msgs = await store.listMsgs(Number(url.searchParams.get('limit')) || 1000);
       const conteo = { nuevo: 0, atendido: 0, archivado: 0 };
+      const origenes = {};
+      const motivos = {};
       msgs.forEach((m) => {
         conteo[m.estado] = (conteo[m.estado] || 0) + 1;
+        const o = m.origen || 'web';
+        origenes[o] = (origenes[o] || 0) + 1;
+        if (m.motivo) motivos[m.motivo] = (motivos[m.motivo] || 0) + 1;
       });
-      return json(res, 200, { ok: true, total: msgs.length, conteo, mensajes: msgs });
+      return json(res, 200, { ok: true, total: msgs.length, conteo, origenes, motivos, mensajes: msgs });
     }
 
     if (req.method === 'PATCH' || req.method === 'PUT') {
