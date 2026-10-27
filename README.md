@@ -136,22 +136,31 @@ Las 10 preguntas están definidas en `assets/encuesta.js` (las usan el formulari
 Para cambiar textos u opciones, edita ese archivo y el arreglo `REQUERIDAS` / `OPCIONES` /
 `MULTIPLE` de `api/encuesta.js`.
 
-| # | Pregunta | Tipo |
-|---|---|---|
-| 1 | ¿Cómo calificas la labor de los Bomberos de Camaná? | Escala 1–10 |
-| 2 | ¿Alguna vez has visto trabajar a los bomberos en una emergencia? | Opciones |
-| 3 | ¿Qué trabajo te gustaría presenciar de las actividades de los bomberos? | Selección múltiple |
-| 4 | ¿Tienes algún amigo o familiar que sea bombero? | Opciones |
-| 5 | ¿Qué nota le pondrías a los Bomberos de Camaná? | Escala 1–10 |
-| 6 | ¿Recomendarías a alguien ser bombero voluntario? | Opciones |
-| 7 | ¿Qué le pedirías a los Bomberos de Camaná? | Texto libre (opcional) |
-| 8 | ¿Sabes dónde queda la compañía más cercana a tu casa? | Opciones |
-| 9 | ¿Qué debería mejorar primero la compañía? | Selección múltiple |
-| 10 | ¿Cómo te gustaría apoyar a los bomberos de Camaná? | Opciones |
+Cuatro bloques que van de lo más simple a lo más comprometido, para que nadie abandone a
+mitad de camino. El número visible sale del orden del arreglo (`n`), así que la encuesta
+siempre se numera 1 a 10 sin huecos.
 
-Las preguntas 8–10 se añadieron después de las 7 del cuaderno de la compañía y usan los
-identificadores `p12`, `p13` y `p14` para no chocar con las preguntas `p8`–`p11` de la
-versión anterior, que se siguen aceptando por compatibilidad pero ya no se muestran.
+| # | Bloque | Pregunta | Tipo |
+|---|---|---|---|
+| 1 | Tu experiencia | Pensando en lo que has visto o escuchado, ¿cómo calificas la labor de los Bomberos de Camaná? | Escala 1–10 |
+| 2 | Tu experiencia | ¿Has visto a los bomberos de Camaná trabajando en una emergencia real? | Opciones |
+| 3 | Tu confianza | ¿Qué tan preparados sientes a los bomberos para una emergencia grande (sismo, incendio forestal, accidente múltiple)? | Escala 1–10 |
+| 4 | Tu confianza | Si hubiera una emergencia en tu casa, ¿sabrías dónde queda la compañía más cercana? | Opciones |
+| 5 | Tu confianza | ¿Tienes algún amigo o familiar que sea bombero voluntario? | Opciones |
+| 6 | Lo que pides | Si tuvieras que decidir, ¿qué debería mejorar primero la compañía? | Selección múltiple |
+| 7 | Lo que pides | ¿Qué te gustaría ver de cerca en una jornada de puertas abiertas? | Selección múltiple |
+| 8 | Tu compromiso | ¿Le recomendarías a un joven de tu distrito ser bombero voluntario? | Opciones |
+| 9 | Tu compromiso | ¿Cómo te gustaría apoyar a los bomberos de Camaná? | Opciones |
+| 10 | Tu compromiso | Para terminar: ¿qué le pedirías a los Bomberos de Camaná? | Texto libre (opcional) |
+
+La pregunta 3 (preparación percibida) reemplazó a la antigua «nota global», que repetía la
+pregunta 1. Ahora el panel puede comparar **labor vs. preparación** y sacar de ahí el
+argumento para pedir equipamiento y más voluntarios.
+
+Los `id` (`p1`…`p7`, `p12`…`p14`) se mantienen estables respecto a las versiones anteriores
+para no romper las respuestas ya guardadas; `p12`–`p14` evitan chocar con las preguntas
+`p8`–`p11` heredadas, que se aceptan por compatibilidad pero ya no se muestran. **El número
+visible no es el `id`**: vive en `n`, dentro de `assets/encuesta.js`.
 
 Además, dos datos opcionales: distrito y rango de edad.
 

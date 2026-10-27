@@ -62,7 +62,7 @@
 <div class="xp-prog" id="prog">
   <div class="wrap">
     <div class="in">
-      <span id="ptxt">0 de 6 respondidas</span>
+      <span id="ptxt">0 de 9 obligatorias</span>
       <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar"><i></i></div>
       <span class="pc" id="ppct">0%</span>
     </div>
@@ -82,8 +82,9 @@
           <span class="xp-badge">🔒 Anónima</span>
         </div>
         <p class="lead">
-          Responde con sinceridad. No hay respuestas correctas ni incorrectas: tu percepción
-          es el dato que nos falta. La última pregunta es opcional.
+          Cuatro bloques cortos —cómo nos ves, tu confianza, lo que pides y tu compromiso—.
+          No hay respuestas correctas ni incorrectas: tu percepción es el dato que nos falta.
+          La última pregunta es opcional.
         </p>
 
         <div class="xp-note privacy" role="note" style="margin:14px 0 16px">
@@ -254,13 +255,15 @@
   var paso = 1;
   var primerPintado = true;
 
-  /* Cuatro pasos cortos: cada uno cabe en una pantalla de celular. */
-  var PASOS = [
-    { t: 'Tu experiencia', sub: 'Cómo has visto el trabajo de la compañía en tu distrito.', ids: ['p1', 'p2', 'p12'] },
-    { t: 'Lo que quieres ver', sub: 'Elige las actividades que te gustaría conocer de cerca.', ids: ['p3'] },
-    { t: 'Tu vínculo', sub: 'Qué tan cerca sientes a la institución y qué nota le pones.', ids: ['p4', 'p5', 'p6'] },
-    { t: 'Tu pedido', sub: 'Qué debe mejorar, cómo apoyarías y una sugerencia libre.', ids: ['p13', 'p14', 'p7'] },
-  ];
+  /* Cuatro pasos cortos: cada uno cabe en una pantalla de celular.
+     La estructura sale de ENCUESTA.secciones, así el orden vive en un solo lugar. */
+  var PASOS = E.secciones.map(function (s) {
+    return {
+      t: s.titulo,
+      sub: s.sub || '',
+      ids: s.preguntas.map(function (p) { return p.id; }),
+    };
+  });
 
   $('#anio').textContent = new Date().getFullYear();
 
@@ -445,10 +448,10 @@
     if (primerPintado) {
       primerPintado = false;
     } else {
-      var y = $('#carta-enc').getBoundingClientRect().top + window.pageYOffset - 74;
-      if (window.pageYOffset > y + 60 || window.pageYOffset < y - 500) {
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-      }
+      /* Llevar la vista al inicio del paso (no al inicio de la tarjeta: en el
+         celular eso dejaba al usuario en la portada del formulario). */
+      var y = Math.max(0, $('#pasos').getBoundingClientRect().top + window.pageYOffset - 70);
+      if (Math.abs(window.pageYOffset - y) > 24) window.scrollTo({ top: y, behavior: 'smooth' });
       var foco = $('.xp-panel.on input, .xp-panel.on textarea');
       if (foco && n > 1) foco.focus({ preventScroll: true });
     }

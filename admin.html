@@ -381,24 +381,24 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     <div class="kpis">
       <div class="kpi"><div class="lb">📊 Respuestas</div><div class="nb" id="e1">—</div><div class="sub" id="e1s">&nbsp;</div></div>
       <div class="kpi v"><div class="lb">⭐ Labor (prom.)</div><div class="nb" id="e2">—</div><div class="sub">Escala 1 a 10</div></div>
-      <div class="kpi h"><div class="lb">🎖️ Nota global (prom.)</div><div class="nb" id="e3">—</div><div class="sub">Escala 1 a 10</div></div>
+      <div class="kpi h"><div class="lb">🛡️ Preparación (prom.)</div><div class="nb" id="e3">—</div><div class="sub">Ante una emergencia mayor</div></div>
       <div class="kpi n"><div class="lb">👍 Recomendarían</div><div class="nb" id="e4">—</div><div class="sub">Ser bombero voluntario</div></div>
     </div>
 
     <div class="charts tres">
       <div class="card">
         <h2>Calificación de la labor</h2>
-        <div class="hint">Distribución de notas (pregunta 1)</div>
+        <div class="hint">Distribución de notas · <span data-qn="p1"></span></div>
         <svg class="chart" id="ch3" viewBox="0 0 320 132" preserveAspectRatio="none"></svg>
       </div>
       <div class="card">
         <h2>Actividades de interés</h2>
-        <div class="hint">Puede elegir varias (pregunta 3)</div>
+        <div class="hint">Puede elegir varias · <span data-qn="p3"></span></div>
         <ul class="hbar" id="hb-act"></ul>
       </div>
       <div class="card">
         <h2>¿Han visto trabajar a los bomberos?</h2>
-        <div class="hint">Pregunta 2 · contacto con una emergencia</div>
+        <div class="hint"><span data-qn="p2"></span> · contacto con una emergencia</div>
         <ul class="hbar" id="hb-visto"></ul>
       </div>
     </div>
@@ -406,12 +406,12 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     <div class="charts">
       <div class="card">
         <h2>Vínculo con un bombero</h2>
-        <div class="hint">Pregunta 4 · red natural de reclutamiento</div>
+        <div class="hint"><span data-qn="p4"></span> · red natural de reclutamiento</div>
         <ul class="hbar" id="hb-vinculo"></ul>
       </div>
       <div class="card">
         <h2>¿Recomendarían ser bombero?</h2>
-        <div class="hint">Pregunta 6 · disposición a recomendar</div>
+        <div class="hint"><span data-qn="p6"></span> · disposición a recomendar</div>
         <ul class="hbar" id="hb-rec"></ul>
       </div>
     </div>
@@ -419,19 +419,19 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     <div class="charts">
       <div class="card">
         <h2>¿Saben dónde está el cuartel?</h2>
-        <div class="hint">Pregunta 8 · conocimiento de la ubicación</div>
+        <div class="hint"><span data-qn="p12"></span> · conocimiento de la ubicación</div>
         <ul class="hbar" id="hb-ubi"></ul>
       </div>
       <div class="card">
         <h2>Qué debe mejorar primero</h2>
-        <div class="hint">Pregunta 9 · puede elegir varias</div>
+        <div class="hint"><span data-qn="p13"></span> · puede elegir varias</div>
         <ul class="hbar" id="hb-pri"></ul>
       </div>
     </div>
 
     <div class="card" style="margin-bottom:20px">
       <h2>Cómo les gustaría apoyar</h2>
-      <div class="hint">Pregunta 10 · voluntariado, donación, difusión o primeros auxilios</div>
+      <div class="hint"><span data-qn="p14"></span> · voluntariado, donación, difusión o primeros auxilios</div>
       <ul class="hbar" id="hb-apo"></ul>
     </div>
 
@@ -459,7 +459,7 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
       <select id="f-enc">
         <option value="">Todas las respuestas</option>
         <option value="com">Solo con comentario</option>
-        <option value="baja">Nota global ≤ 5</option>
+        <option value="baja">Preparación ≤ 5</option>
       </select>
       <span id="c-enc" style="font-size:.79rem;color:var(--mut);font-weight:600"></span>
     </div>
@@ -468,8 +468,8 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
       <table>
         <thead>
           <tr>
-            <th>Folio / fecha</th><th>Distrito</th><th>Edad</th><th>P1 · Labor</th><th>P5 · Nota</th>
-            <th>P6 · Recomienda</th><th>Interés</th><th>Comentario</th><th></th>
+            <th>Folio / fecha</th><th>Distrito</th><th>Edad</th><th><span data-qn="p1" data-qshort></span> · Labor</th><th><span data-qn="p5" data-qshort></span> · Preparación</th>
+            <th><span data-qn="p6" data-qshort></span> · Recomienda</th><th><span data-qn="p3" data-qshort></span> · Interés</th><th>Comentario</th><th></th>
           </tr>
         </thead>
         <tbody id="tb-enc"></tbody>
@@ -487,6 +487,15 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   'use strict';
   var $ = function (s) { return document.querySelector(s); };
   var E = window.ENCUESTA;
+  /* Los números de pregunta se leen del modelo (assets/encuesta.js) para que
+     las etiquetas del panel no se desfasen si la encuesta se reordena. */
+  function numerarPreguntas() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-qn]'), function (el) {
+      var q = E && E.porId ? E.porId(el.getAttribute('data-qn')) : null;
+      el.textContent = q ? (el.hasAttribute('data-qshort') ? 'P' + q.n : 'Pregunta ' + q.n) : '';
+    });
+  }
+  numerarPreguntas();
   var TOKEN_KEY = 'camana_admin_token';
   var TOKEN = '';
   var TAB = 'msg';
@@ -929,7 +938,7 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
         '<td><b>' + esc(r.p1) + '</b><span style="color:var(--mut);font-size:.75rem">/10</span></td>' +
         '<td><b>' + esc(r.p5) + '</b><span style="color:var(--mut);font-size:.75rem">/10</span></td>' +
         '<td>' + esc(E ? E.texto(p6def, r.p6) : r.p6) + '</td>' +
-        '<td style="max-width:190px;font-size:.79rem;color:var(--tx2)">' + esc(E ? E.texto(E.preguntas[2], r.p3) : r.p3) + '</td>' +
+        '<td style="max-width:190px;font-size:.79rem;color:var(--tx2)">' + esc(E ? E.texto(E.porId('p3'), r.p3) : r.p3) + '</td>' +
         '<td class="msg">' + (r.p7
           ? '<details><summary>Ver comentario</summary><div class="full">' + esc(r.p7) + '</div></details>'
           : '<span style="color:var(--mut)">—</span>') + '</td>' +
@@ -1051,16 +1060,24 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
           m.distrito, m.motivo, m.disponibilidad || '', m.origen || 'web', m.mensaje, m.estado];
       }), ['Folio', 'Fecha', 'Nombre', 'DNI', 'Edad', 'Correo', 'Teléfono', 'Distrito', 'Motivo', 'Disponibilidad', 'Origen', 'Mensaje', 'Estado'], 'mensajes-camana');
     } else {
+      /* Exportación en el mismo orden del cuestionario, con el número visible. */
+      var col = function (id, label) {
+        var p = E && E.porId ? E.porId(id) : null;
+        return 'P' + (p ? p.n : '?') + ' ' + label;
+      };
       csv(DATA.encs.respuestas.map(function (e) {
         var r = e.r || {};
         var txt = function (id, v) {
           var p = E && E.porId ? E.porId(id) : null;
           return p ? E.texto(p, v) : (v == null ? '' : v);
         };
-        return [e.id, fecha(e.creado), e.distrito || '', e.edad || '', e.origen || 'web', r.p1, r.p5,
-          txt('p6', r.p6), txt('p3', r.p3), txt('p4', r.p4), txt('p2', r.p2),
-          txt('p12', r.p12), txt('p13', r.p13), txt('p14', r.p14), r.p7 || ''];
-      }), ['Folio', 'Fecha', 'Distrito', 'Edad', 'Origen', 'P1 Labor', 'P5 Nota', 'P6 Recomienda', 'P3 Interés', 'P4 Vínculo', 'P2 ¿Ha visto?', 'P12 ¿Sabe dónde está?', 'P13 Qué mejorar', 'P14 Cómo apoyaría', 'P7 Pedido'], 'encuestas-camana');
+        return [e.id, fecha(e.creado), e.distrito || '', e.edad || '', e.origen || 'web',
+          r.p1, txt('p2', r.p2), r.p5, txt('p12', r.p12), txt('p4', r.p4),
+          txt('p13', r.p13), txt('p3', r.p3), txt('p6', r.p6), txt('p14', r.p14), r.p7 || ''];
+      }), ['Folio', 'Fecha', 'Distrito', 'Edad', 'Origen',
+        col('p1', 'Labor'), col('p2', 'Ha visto'), col('p5', 'Preparación'), col('p12', 'Ubica el cuartel'),
+        col('p4', 'Vínculo'), col('p13', 'Qué mejorar'), col('p3', 'Interés'), col('p6', 'Recomienda'),
+        col('p14', 'Cómo apoyaría'), col('p7', 'Pedido')], 'encuestas-camana');
     }
   });
 

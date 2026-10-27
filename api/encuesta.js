@@ -4,10 +4,12 @@ const auth = require('../lib/auth');
 const { json, readBody, preflight } = require('../lib/http');
 
 /* Validación del cuestionario. Los identificadores coinciden con assets/encuesta.js
-   Son las 10 preguntas de la campaña: p1–p7 del cuaderno de la compañía y
-   p12–p14 añadidas para orientar el trabajo (ubicación del cuartel, prioridades
-   y disposición a apoyar). Se usan ids p12+ para no chocar con las preguntas
-   heredadas p8–p11, que se aceptan si vienen pero ya no se muestran. */
+   Son las 10 preguntas de la campaña, ordenadas en cuatro bloques (experiencia,
+   confianza, pedidos y compromiso): p1–p7 del cuaderno de la compañía y p12–p14
+   añadidas para orientar el trabajo (ubicación del cuartel, prioridades y
+   disposición a apoyar). Se usan ids p12+ para no chocar con las preguntas
+   heredadas p8–p11, que se aceptan si vienen pero ya no se muestran.
+   El número visible de cada pregunta vive en assets/encuesta.js (`n`), no aquí. */
 const ESCALA = { p1: [1, 10], p5: [1, 10] };
 const OPCIONES = {
   p2: ['si', 'una', 'no', 'ns'],
@@ -247,17 +249,25 @@ function resumen(encs) {
       );
     }
 
-    if (promedioLabor != null && promedioNota != null && Math.abs(promedioNota - promedioLabor) >= 0.5) {
+    if (promedioLabor != null && promedioNota != null) {
       const dif = Math.round((promedioNota - promedioLabor) * 10) / 10;
       const abs = Math.abs(dif);
       const txt = abs === 1 ? '1 punto' : abs + ' puntos';
-      push(
-        'info',
-        'Nota global ' + (dif > 0 ? txt + ' por encima' : txt + ' por debajo') + ' de la labor',
-        dif > 0
-          ? 'La gente valora mejor a los bomberos como institución que su trabajo del día a día. Esa confianza es una base para pedir apoyo.'
-          : 'La labor concreta se valora mejor que la institución en general: hay que comunicar más lo que se hace.'
-      );
+      if (abs >= 0.5) {
+        push(
+          'info',
+          'Preparación percibida ' + (dif > 0 ? txt + ' por encima' : txt + ' por debajo') + ' de la labor',
+          dif > 0
+            ? 'La comunidad confía más en la capacidad de respuesta que en el trabajo del día a día. Conviene mostrar más lo que se hace, para que esa confianza se traduzca en apoyo concreto.'
+            : 'Se valora mejor la labor del día a día que la preparación para una emergencia mayor. Es el argumento más concreto para sustentar un pedido de equipamiento, unidades y más voluntarios.'
+        );
+      } else {
+        push(
+          'ok',
+          'Preparación y labor, a la par (' + promedioNota + '/10)',
+          'La comunidad percibe a la compañía igual de preparada que de eficaz: no hay una brecha entre lo que se hace y lo que se puede llegar a enfrentar.'
+        );
+      }
     }
 
     const pctVisto = pct(hanVisto, n);
