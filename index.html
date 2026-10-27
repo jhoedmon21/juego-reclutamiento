@@ -16,6 +16,8 @@ canvas#c{position:fixed;inset:0;display:block}
 #hud b{font-size:1.1rem;color:var(--red)}
 #hud div.m{margin-top:4px;display:flex;justify-content:space-between;gap:8px}#hud .ok{color:#1c9a45;font-weight:700}
 #bar{height:7px;background:rgba(128,128,128,.3);border-radius:6px;margin-top:8px;overflow:hidden}#bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amb),var(--red));transition:.5s}
+#wbar{height:6px;background:rgba(128,128,128,.3);border-radius:6px;margin-top:6px;overflow:hidden}#wbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);transition:width .15s}
+.wtl{display:block;font-size:.72rem;font-weight:700;color:#0e7490;margin-top:4px;letter-spacing:.02em}
 #mm{position:fixed;left:12px;top:calc(335px + env(safe-area-inset-top,0px));width:112px;height:112px;border-radius:50%;border:3px solid var(--pn);box-shadow:0 4px 14px rgba(0,0,0,.35);z-index:5}
 #hint{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--pn);padding:8px 16px;border-radius:30px;font-size:.82rem;z-index:5}
 #pn{position:fixed;right:12px;top:calc(12px + env(safe-area-inset-top,0px));width:min(370px,calc(100vw - 24px));background:var(--pn);border-radius:18px;padding:18px 20px;box-shadow:0 10px 30px rgba(0,0,0,.35);border-top:6px solid var(--red);transform:translateX(120%);transition:.4s;z-index:6;max-height:72vh;overflow:auto}
@@ -59,6 +61,10 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 #pg,#pg2{bottom:calc(190px + env(safe-area-inset-bottom,0px))}#gd{left:auto;right:12px;transform:none;top:calc(112px + env(safe-area-inset-top,0px))}}
 #pg2{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);width:min(320px,80vw);background:var(--pn);border-radius:14px;padding:8px 12px;font-size:.82rem;font-weight:700;display:none;z-index:6}#pg2 i{display:block;height:8px;border-radius:6px;width:0;margin-top:5px}
 #gd{position:fixed;left:50%;transform:translateX(-50%);top:calc(12px + env(safe-area-inset-top,0px));background:var(--pn);padding:6px 14px;border-radius:30px;font-size:.82rem;font-weight:700;z-index:5;display:flex;gap:8px;align-items:center}#ga{display:inline-block;color:var(--red);font-size:1.2rem}
+#ctx{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(126px + env(safe-area-inset-bottom,0px));background:rgba(12,18,22,.93);color:#fff;padding:9px 16px 9px 10px;border-radius:30px;font-size:.84rem;font-weight:700;z-index:7;display:none;align-items:center;gap:9px;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 26px rgba(0,0,0,.38);white-space:nowrap;max-width:92vw}
+#ctx.on{display:flex;animation:ctxb 1.5s ease-in-out infinite}
+#ctx i{font-style:normal;display:inline-flex;min-width:30px;height:30px;padding:0 8px;align-items:center;justify-content:center;background:var(--red);color:#fff;border-radius:8px;font-size:.8rem;font-family:Impact,"Arial Narrow Bold",sans-serif;letter-spacing:.5px;box-shadow:0 3px 0 rgba(0,0,0,.4)}
+@keyframes ctxb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
 /* contador de visitas */
 #hud .vw{margin-top:9px;padding-top:8px;border-top:1px solid rgba(128,128,128,.28);font-size:.71rem;color:var(--mut);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;line-height:1.35}
 #hud .vw span{white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
@@ -97,15 +103,15 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 <canvas id="c"></canvas>
 <div id="hud"><b class="f">🚒 CAMANÁ TE NECESITA</b>
 <div class="m" id="m0"></div><div class="m" id="m1"></div><div class="m" id="m2"></div><div class="m" id="m3"></div><div class="m" id="m4"></div><div class="m" id="m5"></div><div class="m" id="m6"></div>
-<div id="bar"><i></i></div><button class="bt" id="bm">📖 Manual del bombero (M)</button></div>
+<div id="bar"><i></i></div><div id="wbar" title="Agua en el tanque"><i></i></div><span class="wtl" id="wtv">💧 45%</span><button class="bt" id="bm">📖 Manual del bombero (M)</button></div>
 <canvas id="mm" width="224" height="224"></canvas>
-<div id="hint">WASD / flechas: conducir · <b>E</b>: agua · <b>R</b>: hidráulica · <b>Espacio</b>: sirena · <b>M</b>: manual</div>
-<div id="pg"><span id="pgt"></span><i></i></div><div id="gd"><b id="ga">▲</b><span id="gt"></span></div><div id="pg2"><span id="pg2t"></span><i></i></div><div id="pn"></div><div id="toast"></div>
+<div id="hint"><b>WASD</b>: conducir · <b>E</b>: agua / hidrante · <b>R</b>: rescate y herramientas · <b>Espacio</b>: sirena · <b>M</b>: manual</div>
+<div id="pg"><span id="pgt"></span><i></i></div><div id="gd"><b id="ga">▲</b><span id="gt"></span></div><div id="pg2"><span id="pg2t"></span><i></i></div><div id="ctx"></div><div id="pn"></div><div id="toast"></div>
 <div id="js"><i></i></div>
 <div class="pad"><button data-k="KeyR" class="b2">🔧</button><button data-k="Space" class="b2">📢</button><button data-k="KeyM" class="b2">📖</button><button data-k="KeyE" class="big">💧</button></div>
 <div id="rg"><div class="bx"></div></div>
 <div id="mn"><div class="bx"></div></div>
-<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button></div></div>
+<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por los escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Recarga el tanque en el hidrante, atiende a los heridos y evacúa a los vecinos con la sirena.<br><b>Servir también es amar a tu tierra.</b></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button></div></div>
 <div class="ov" id="fin"><div class="finbox"><h1>¡Bombero<br><em>honorario!</em></h1><p>Completaste las 7 misiones del simulador. Solo falta un paso para llevarte tu medalla.</p><div class="fin2"><div class="fc" id="fc-enc"><span class="fi">🏅</span><b>Responde la encuesta y desbloquea tu medalla</b><p>10 preguntas, 2 minutos y anónima. Al terminar la encuesta vuelves aquí con tu medalla lista para descargar.</p><small id="fcount">Tu medalla se desbloquea al enviar la encuesta.</small><a class="lk sm" href="/encuesta?src=juego" id="encl">Responder la encuesta →</a></div></div><div class="finbtns"><button class="lk" id="cb">🏅 Descargar mi medalla</button><button class="lk alt" id="kp">Seguir explorando</button></div></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -115,9 +121,15 @@ var T=THREE,$=function(s){return document.querySelector(s)},PI=Math.PI,rnd=Math.
 var yaVisitado=null;try{yaVisitado=sessionStorage.getItem("camana_v");sessionStorage.setItem("camana_v","1")}catch(e){}
 try{fetch("/api/track",yaVisitado?{method:"GET"}:{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).catch(function(){})}catch(e){}
 // la encuesta deja una marca en localStorage al enviarse: es lo que desbloquea la medalla
-var ENC=0;try{ENC=localStorage.getItem("camana_enc")?1:0;if(/[?&]enc=1/.test(location.search)){ENC=1;localStorage.setItem("camana_enc","1")}}catch(e){}
-function marcarEncuesta(){if(!ENC)return;var c=$("#fc-enc");if(c)c.classList.add("done");var a=$("#encl");if(a)a.outerHTML='<span style="display:inline-block;margin-top:10px;padding:8px 16px;border-radius:30px;background:rgba(34,197,94,.18);border:1px solid rgba(74,222,128,.45);color:#4ade80;font-weight:700;font-size:.86rem">✅ Encuesta respondida · medalla desbloqueada</span>';var f=$("#fcount");if(f)f.textContent="Ya respondiste: pulsa «Descargar mi medalla»."}
+var ENC=0;
+function leerEnc(){try{if(localStorage.getItem("camana_enc"))ENC=1;if(/[?&]enc=1/.test(location.search)){ENC=1;localStorage.setItem("camana_enc","1")}}catch(e){}return ENC}
+leerEnc();
+function marcarEncuesta(){if(!ENC)return;var c=$("#fc-enc");if(c){c.classList.add("done");var b=c.querySelector("b");if(b)b.textContent="Encuesta respondida: tu medalla está lista";var pp=c.querySelector("p");if(pp)pp.textContent="Gracias por aportar tu mirada. Descarga tu medalla y compártela con la compañía."}var a=$("#encl");if(a)a.outerHTML='<span style="display:inline-block;margin-top:10px;padding:8px 16px;border-radius:30px;background:rgba(34,197,94,.18);border:1px solid rgba(74,222,128,.45);color:#4ade80;font-weight:700;font-size:.86rem">✅ Encuesta respondida · medalla desbloqueada</span>';var f=$("#fcount");if(f)f.textContent="Ya respondiste: pulsa «Descargar mi medalla»."}
 marcarEncuesta();
+// si la persona responde la encuesta en otra pestaña y vuelve, la medalla se desbloquea sola
+function revisarEncuesta(){if(ENC)return;if(leerEnc())marcarEncuesta()}
+addEventListener("focus",revisarEncuesta);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)revisarEncuesta()});
 var MB=matchMedia("(pointer:coarse)").matches,R;try{R=new T.WebGLRenderer({canvas:$("#c"),antialias:true})}catch(e){$("#ov").innerHTML="<p>Tu navegador no soporta WebGL.</p>";return}
 R.setPixelRatio(Math.min(devicePixelRatio,MB?1.5:2));R.setSize(innerWidth,innerHeight);R.shadowMap.enabled=true;R.shadowMap.type=T.PCFSoftShadowMap;R.outputEncoding=T.sRGBEncoding;R.toneMapping=T.ACESFilmicToneMapping;R.toneMappingExposure=1.15;
 function tex(c){var t=new T.CanvasTexture(c);t.encoding=T.sRGBEncoding;return t}
@@ -208,14 +220,22 @@ for(i=0;i<46;i++){var e=i%4,t=-68+(i*37%136),tx=e<2?(e?-68:-68):t,tz=e<2?t:(e==2
 for(i=0;i<10;i++)palm(72+rnd()*3,-64+i*14);[[-24,40],[26,42],[-44,-4],[44,-6],[-14,24],[14,22]].forEach(function(p){tree(p[0],p[1],1)});
 function hyd(x,z){Cy(.35,.4,1.3,0xd7191f,x,.65,z,S,10);Cy(.5,.5,.2,0xd7191f,x,1.4,z,S,10);B(1,.22,.22,0xd7191f,x,1,z);ST.push([x,z,.6])}
 [[-8,-30],[8,30],[-8,44],[8,44],[-20,10],[20,10]].forEach(function(p){hyd(p[0],p[1])});
-// objetos empujables
+// props livianos del patio (conos, vallas, extintores): se pueden rozar con la unidad
 function pu(m,r,x,z){m.position.x=x;m.position.z=z;PU.push({m:m,x:x,z:z,vx:0,vz:0,r:r})}
 for(i=0;i<14;i++){var cn=new T.Group();Cy(.1,.7,1.4,0xff6a00,0,.7,0,cn,10);Cy(.5,.5,.1,0xffffff,0,.9,0,cn,10);B(1.4,.12,1.4,0x222222,0,.06,0,cn);S.add(cn);pu(cn,.7,i%2?6.4:-6.4,18+Math.floor(i/2)*2.6)}
 for(i=0;i<10;i++)pu(Cy(.7,.7,1.4,i%2?0xb3121a:0xe2b300,0,.7,0,S,16),.8,-24+(i%5)*2.1,-37+Math.floor(i/5)*2.1);
-for(i=0;i<8;i++)pu(B(1.6,1.6,1.6,0xb98a52,0,.8,0),1.1,16+(i%4)*1.9,-37+Math.floor(i/4)*1.9);
+// equipo del cuartel: pilas de manguera y bidones de espuma (fijos, no se empujan)
+for(i=0;i<8;i++){var hx2=16+(i%4)*1.9,hz2=-37+Math.floor(i/4)*1.9;
+if(i%2){Cy(.55,.55,1.1,0xf4f4f4,hx2,.55,hz2,S,14);Cy(.64,.64,.12,0x1d6fb8,hx2,1.12,hz2,S,14);Cy(.64,.64,.12,0x1d6fb8,hx2,.86,hz2,S,14)}
+else{B(1.5,1.2,1.1,0x1d6fb8,hx2,.6,hz2);B(1.5,.12,1.1,0x0f3f6a,hx2,1.2,hz2)}
+ST.push([hx2,hz2,.8])}
 for(i=0;i<6;i++){var ex=new T.Group();Cy(.25,.25,1,0xd7191f,0,.5,0,ex);Cy(.08,.08,.3,0x222222,0,1.15,0,ex);S.add(ex);pu(ex,.4,-14+i*1.6,-2)}
-"CAMANÁ".split("").forEach(function(l,k){var c=cv(128,128),q=c.getContext("2d");q.fillStyle="#f59e0b";q.fillRect(0,0,128,128);q.strokeStyle="#7a0c10";q.lineWidth=8;q.strokeRect(6,6,116,116);q.fillStyle="#7a0c10";q.font="bold 92px Arial";q.textAlign="center";q.textBaseline="middle";q.fillText(l,64,70);
-var m=new T.Mesh(new T.BoxGeometry(2.6,2.6,2.6),new T.MeshStandardMaterial({map:tex(c),roughness:.5}));m.position.y=1.3;A(m);pu(m,1.6,(k-2.5)*3.3,-16)});
+// cartel de bienvenida del cuartel
+(function(){var c=cv(1024,256),q=c.getContext("2d");q.fillStyle="#b3121a";q.fillRect(0,0,1024,256);q.strokeStyle="#f59e0b";q.lineWidth=14;q.strokeRect(14,14,996,228);
+q.fillStyle="#fff";q.textAlign="center";q.textBaseline="middle";q.font="bold 120px Impact,Arial Black,Arial";q.fillText("CAMANÁ",512,92);
+q.font="bold 50px Arial";q.fillText("BOMBEROS VOLUNTARIOS",512,194);
+var m=new T.Mesh(new T.PlaneGeometry(11,2.75),new T.MeshStandardMaterial({map:tex(c),roughness:.6,side:T.DoubleSide}));m.position.set(24,4.6,-12);m.rotation.y=-PI/2;S.add(m);
+[-4.2,4.2].forEach(function(o){Cy(.16,.16,4.6,0x8f8f8f,24,2.3,-12+o,S,8);ST.push([24,-12+o,.45])})})();
 // carro bomba
 var tr=new T.Group(),bd=new T.Group(),WH=[],ST2=[];tr.add(bd);S.add(tr);
 var RD=0xd01a1f,CR={r:.2,m:.9};
@@ -256,11 +276,14 @@ veh:P("🚗 Rescate vehicular",`<ul><li>Señalizar y asegurar la escena del acci
 req:P("📄 Requisitos",`<p><b>Postulante:</b></p><ul><li>Ficha única de postulante</li><li>Declaración jurada de antecedentes penales o policiales</li><li>Constancia de estudios y/o trabajo</li><li>Mínimo 3.er grado de secundaria</li><li>Certificado domiciliario</li><li>Copia de DNI, partida de nacimiento o libreta militar</li><li>Autorización notarial si eres menor</li></ul><p><b>Bombero alumno:</b> desde los 15 años; aprueba exámenes médico, psicológico y de aptitud física y la Escuela Básica para ser APTO.</p><p><b>Asimilado (profesional):</b> título, CV, declaraciones juradas, ser APTO y aprobar el Curso Básico.</p><p>Acércate a la compañía más cercana a tu distrito.</p><p class="src">Fuente: portal.bomberosperu.gob.pe/admision</p>`),
 ben:P("🎁 Beneficios",`<ul><li>Atención en EsSalud sin costo por actos de servicio (si no tienes otro seguro) e incorporación al SIS</li><li>Subvención del Fondo de Invalidez y Protección por incapacidad o fallecimiento en acto de servicio</li><li>Pensión de gracia excepcional y temporal (Ministerio del Interior)</li><li>Becas PRONABEC con puntaje adicional para ti y tus hijos</li><li>Pase libre en transporte público</li><li>25 % de descuento en maestrías y doctorados (previo convenio)</li><li>Prioridad en Techo Propio y Mi Vivienda, si aplicas</li><li>Exoneración del pago por certificado médico en establecimientos públicos</li><li>Convenios institucionales, p. ej. medicina hiperbárica por actos de servicio para bomberos y familiares directos (desde 12/2023)</li><li>Permisos laborales para emergencias y no discriminación por ser bombero</li></ul>`+SRC),
 deb:P("⚖️ Deberes",`<ul><li>Servir de forma voluntaria y ad honorem: no eres funcionario ni servidor público</li><li>Cumplir las disposiciones del Comando Nacional, que son obligatorias</li><li>Respetar la jerarquía y la disciplina institucional</li><li>Someterte al Consejo Nacional de Disciplina</li><li>Usar de forma correcta y diligente bienes, equipos y materiales</li><li>Usar uniforme, insignias y emblemas solo con autorización</li><li>Instruirte y actuar con valor, integridad, rectitud y honradez</li></ul><p>Jerarquía: de Aspirante a Brigadier General. Pasas al retiro a los 70 años, por incapacidad o a tu solicitud. Son causales de expulsión la sanción disciplinaria firme o una sentencia firme por delito doloso.</p>`+SRC),
-est:P("🏠 La compañía de bomberos",`<ul><li>Es el hogar de la compañía: aquí se guardan las unidades, los equipos y la radio</li><li>Cada guardia empieza revisando la unidad: motor, agua, mangueras, herramientas hidráulicas y luces</li><li>Se entrena con frecuencia: nudos, escaleras, rescate y primeros auxilios</li><li>Tras cada emergencia se limpia, repone y deja todo listo para la siguiente</li></ul><p><b>Mira:</b> al acercarte, las puertas se abren y se ven la unidad de reserva y los casilleros con el equipo de protección.</p>`+NT)
+est:P("🏠 La compañía de bomberos",`<ul><li>Es el hogar de la compañía: aquí se guardan las unidades, los equipos y la radio</li><li>Cada guardia empieza revisando la unidad: motor, agua, mangueras, herramientas hidráulicas y luces</li><li>Se entrena con frecuencia: nudos, escaleras, rescate y primeros auxilios</li><li>Tras cada emergencia se limpia, repone y deja todo listo para la siguiente</li></ul><p><b>Mira:</b> al acercarte, las puertas se abren y se ven la unidad de reserva y los casilleros con el equipo de protección.</p>`+NT),
+agua:P("🚰 Agua, hidrantes y abastecimiento",`<ul><li>El tanque de la unidad es finito: cada descarga de agua lo baja</li><li>Se recarga conectando la manguera a un hidrante de la red</li><li>Nunca se deja la unidad sin reserva: siempre hay una línea de abastecimiento</li><li>Al llenar el tanque se revisa la presión y se purga el aire de la bomba</li></ul><p><b>Misión:</b> acércate a un hidrante 🚰, <b>detente</b> y <b>mantén E</b> hasta llenar el tanque. Hay 2 hidrantes en el mapa y aparecen en el minimapa en celeste.</p>`+NT),
+aux:P("🩺 Primeros auxilios y triaje",`<ul><li>Evaluar la escena antes de tocar al paciente: no te conviertas en una segunda víctima</li><li>Triaje: primero quien tiene riesgo de muerte, pero puede esperar minutos</li><li>Controlar hemorragias, asegurar vía aérea y mantener abrigo</li><li>No movilizar a un politraumatizado sin inmovilización</li><li>Registrar hora, estado y entrega al personal de salud</li></ul><p><b>Misión:</b> <b>detén</b> el camión a menos de 7 m del herido y <b>mantén R</b> hasta estabilizarlo. Son 2 heridos.</p>`+NT),
+eva:P("📢 Evacuación y sirena",`<ul><li>La sirena abre paso y avisa a la población: se usa al llegar y al evacuar</li><li>La evacuación se hace en orden: niños, gestantes, adultos mayores y personas con discapacidad primero</li><li>Se define una ruta y un punto de reunión alejado del humo</li><li>Nadie vuelve a la zona hasta que el mando lo autorice</li></ul><p><b>Misión:</b> enciende la sirena con <b>Espacio</b> y pasa cerca de los vecinos (menos de 13 m) hasta evacuar a los 3.</p>`+NT)
 };
-var ZN=[[0,34,"inc","INCENDIO","#d9501a"],[-34,34,"res","RESCATE","#1d6fb8"],[38,12,"haz","MAT. PELIGROSOS","#6a9a1d"],[-42,22,"veh","RESCATE VEHICULAR","#1d9a8a"],[-40,-34,"req","REQUISITOS","#b8791d"],[40,-34,"ben","BENEFICIOS","#6a4bb8"],[58,-12,"deb","DEBERES","#b3121a"],[0,-27,"est","COMPAÑÍA","#be185d"]],ZR=[],vis={},nv=0,cur="";
+var ZN=[[0,34,"inc","INCENDIO","#d9501a"],[-34,34,"res","RESCATE","#1d6fb8"],[38,12,"haz","MAT. PELIGROSOS","#6a9a1d"],[-42,22,"veh","RESCATE VEHICULAR","#1d9a8a"],[0,-27,"est","COMPAÑÍA","#be185d"]],ZR=[],ZL=[],cur="",pnT=0;
 ZN.forEach(function(q){var r=new T.Mesh(new T.RingGeometry(4.6,6,40),new T.MeshBasicMaterial({color:q[4],side:T.DoubleSide,transparent:true,opacity:.9}));r.rotation.x=-PI/2;r.position.set(q[0],.2,q[1]);S.add(r);ZR.push(r);
-var d=new T.Mesh(new T.CircleGeometry(4.6,32),new T.MeshBasicMaterial({color:q[4],transparent:true,opacity:.28}));d.rotation.x=-PI/2;d.position.set(q[0],.18,q[1]);S.add(d);var s=lab(q[3],q[4],11);s.position.set(q[0],8,q[1]);S.add(s);var bm=new T.Mesh(new T.CylinderGeometry(.15,.15,7,6),new T.MeshBasicMaterial({color:q[4],transparent:true,opacity:.5}));bm.position.set(q[0],3.5,q[1]);S.add(bm)});
+var d=new T.Mesh(new T.CircleGeometry(4.6,32),new T.MeshBasicMaterial({color:q[4],transparent:true,opacity:.28}));d.rotation.x=-PI/2;d.position.set(q[0],.18,q[1]);S.add(d);var s=lab(q[3],q[4],11);s.position.set(q[0],12.5,q[1]);s.material.transparent=true;S.add(s);ZL.push(s);var bm=new T.Mesh(new T.CylinderGeometry(.15,.15,7,6),new T.MeshBasicMaterial({color:q[4],transparent:true,opacity:.5}));bm.position.set(q[0],3.5,q[1]);S.add(bm)});
 // escenarios
 var FO=[[-3.6,48.6,4.6],[3.6,48.6,4.6],[0,54,9.5]].map(function(p){return{x:p[0],z:p[1],y:p[2],f:1}}),FL=[],SM=[],SP=[],fl=new T.PointLight(0xff5a00,3,55);fl.position.set(0,8,46);S.add(fl);
 var fc=cv(64,64),fcx=fc.getContext("2d"),fg=fcx.createRadialGradient(32,32,2,32,32,30);fg.addColorStop(0,"rgba(255,255,200,1)");fg.addColorStop(.35,"rgba(255,160,40,.85)");fg.addColorStop(1,"rgba(255,60,0,0)");fcx.fillStyle=fg;fcx.fillRect(0,0,64,64);var ft=tex(fc);
@@ -298,14 +321,41 @@ var o3=new T.Object3D(),cl=new T.Color(),gi=new T.InstancedMesh(new T.ConeGeomet
 for(i=0;i<500;i++){var g1=(rnd()-.5)*140,g2=(rnd()-.5)*140;if(Math.abs(g1)<6.5||Math.abs(g2-10)<6.5)g1+=g1<0?-8:8;o3.position.set(g1,.3,g2);o3.scale.setScalar(.7+rnd());o3.updateMatrix();gi.setMatrixAt(i,o3.matrix);cl.setHSL(.25+rnd()*.08,.5,.3+rnd()*.15);gi.setColorAt(i,cl)}S.add(gi);
 for(i=0;i<8;i++){var lx=i%2?5.9:-5.9,lz=-30+Math.floor(i/2)*22;Cy(.1,.12,5,0x444444,lx,2.5,lz,S,6);var lh=new T.Mesh(new T.SphereGeometry(.35,8,8),new T.MeshBasicMaterial({color:0xffe9a8}));lh.position.set(lx,5.1,lz);S.add(lh);ST.push([lx,lz,.3])}
 function wrap(t,n){var w=t.split(" "),ls=[],c="";w.forEach(function(q){if((c+" "+q).length>n&&c){ls.push(c);c=q}else c=c?c+" "+q:q});ls.push(c);return ls}
-var PD=[[-24,-22,"BENEFICIOS","#1d6fb8","d"],[24,-22,"DEBERES","#b3121a","b"]],PDC={d:0,b:0},cards=[];
-PD.forEach(function(p){var r=new T.Mesh(new T.RingGeometry(3.6,4.6,40),new T.MeshBasicMaterial({color:p[3],side:T.DoubleSide}));r.rotation.x=-PI/2;r.position.set(p[0],.22,p[1]);S.add(r);var d=new T.Mesh(new T.CircleGeometry(3.6,32),new T.MeshBasicMaterial({color:p[3],transparent:true,opacity:.3}));d.rotation.x=-PI/2;d.position.set(p[0],.2,p[1]);S.add(d);var q=lab(p[2],p[3],9);q.position.set(p[0],6,p[1]);S.add(q)});
-[["d","🩺","Atención de salud por actos de servicio"],["b","🫡","Cumplir las disposiciones del Comando"],["d","🚌","Pase libre en transporte público"],["b","🧰","Usar con cuidado los equipos"],["d","🎓","Becas con puntaje adicional"],["b","⚖️","Respetar jerarquía y disciplina"]].forEach(function(q,n){var c=cv(256,256),x2=c.getContext("2d");x2.fillStyle="#fff6dc";x2.fillRect(0,0,256,256);x2.strokeStyle="#7a0c10";x2.lineWidth=10;x2.strokeRect(5,5,246,246);x2.font="80px Arial";x2.textAlign="center";x2.fillText(q[1],128,100);x2.fillStyle="#3a1a10";x2.font="bold 26px Arial";wrap(q[2],16).forEach(function(l,j){x2.fillText(l,128,150+j*30)});
-var m=new T.Mesh(new T.BoxGeometry(2.2,2.2,2.2),new T.MeshStandardMaterial({map:tex(c),roughness:.5}));m.position.y=1.1;A(m);pu(m,1.4,-9+n*3.6,-22);cards.push({o:PU[PU.length-1],t:q[0],m:m,ok:0})});
-var DC=[],DT=[["DNI o partida de nacimiento",-62,-10],["Ficha única de postulante",-18,2],["Declaración jurada de antecedentes",18,2],["Constancia de estudios o trabajo",-20,42],["Certificado domiciliario",30,38],["Constancia de 3.er grado de secundaria",62,10],["Autorización notarial (si eres menor)",66,-6]];
-DT.forEach(function(q){var gp=new T.Group();gp.position.set(q[1],0,q[2]);B(1.1,1.5,.1,0xffffff,0,1.8,0,gp);B(1.1,.3,.12,0x1d6fb8,0,2.3,0,gp);B(.6,.06,.12,0x999999,0,1.8,0,gp);B(.6,.06,.12,0x999999,0,1.6,0,gp);var rg=new T.Mesh(new T.RingGeometry(1.2,1.6,24),new T.MeshBasicMaterial({color:0xffd23f,side:T.DoubleSide}));rg.rotation.x=-PI/2;rg.position.y=.2;gp.add(rg);S.add(gp);DC.push({g:gp,x:q[1],z:q[2],n:q[0],on:1})});
+// ── Nuevas dinámicas: hidrante, primeros auxilios y evacuación ──────────
+var HID=[],hid=0,WT=45;
+[[5.5,-38],[-6,30]].forEach(function(p){
+  var g=new T.Group();g.position.set(p[0],0,p[1]);S.add(g);
+  Cy(.34,.44,1.05,0xd7191f,0,.52,0,g,10);
+  Cy(.30,.30,.16,0xf5c518,0,1.1,0,g,10);
+  Cy(.15,.15,.36,0xb3121a,-.42,.72,0,g,8).rotation.z=PI/2;
+  Cy(.15,.15,.36,0xb3121a,.42,.72,0,g,8).rotation.z=PI/2;
+  var rg=new T.Mesh(new T.RingGeometry(3.4,4.2,32),new T.MeshBasicMaterial({color:0x38bdf8,side:T.DoubleSide,transparent:true,opacity:.85}));
+  rg.rotation.x=-PI/2;rg.position.y=.2;g.add(rg);
+  var lb=lab("🚰 HIDRANTE","#0e7490",8);lb.position.set(0,4.8,0);g.add(lb);
+  HID.push({x:p[0],z:p[1],rg:rg,on:1,used:0,w:0});
+});
+var PAT=[],aid=0,RW2=0;
+[[13,12],[-12,44]].forEach(function(p){
+  var g=new T.Group();g.position.set(p[0],0,p[1]);S.add(g);
+  B(1.9,.26,.8,0x2f6f9e,0,.3,0,g);
+  B(.9,.2,.5,0x8a5a3a,-.1,.52,0,g);
+  var hd3=new T.Mesh(new T.SphereGeometry(.25,10,10),M(0xe8b48a));hd3.position.set(-.58,.58,0);A(hd3,g);
+  var rg2=new T.Mesh(new T.RingGeometry(3.2,3.9,32),new T.MeshBasicMaterial({color:0x4ade80,side:T.DoubleSide,transparent:true,opacity:.85}));
+  rg2.rotation.x=-PI/2;rg2.position.y=.2;g.add(rg2);
+  var lb2=lab("🩺 HERIDO","#166534",8);lb2.position.set(0,4.2,0);g.add(lb2);
+  PAT.push({x:p[0],z:p[1],rg:rg2,on:1,p:0});
+});
+var EVA=[],evac=0;
+[[-7,24],[7,26],[0,20]].forEach(function(p){
+  var g=new T.Group();g.position.set(p[0],0,p[1]);S.add(g);
+  Cy(.24,.32,1.05,0x2563eb,0,.72,0,g,8);
+  var hd4=new T.Mesh(new T.SphereGeometry(.23,10,10),M(0xe8b48a));hd4.position.y=1.5;A(hd4,g);
+  var rg3=new T.Mesh(new T.RingGeometry(2.5,3.1,28),new T.MeshBasicMaterial({color:0xf5c518,side:T.DoubleSide,transparent:true,opacity:.8}));
+  rg3.rotation.x=-PI/2;rg3.position.y=.2;g.add(rg3);
+  EVA.push({x:p[0],z:p[1],rg:rg3,g:g,on:1,t:0});
+});
 // entrada y audio
-var k={},started=0,siren=0,ac,osc,gn,cd=0,mo=0,ncl=0,ndoc=0,nfo=0,t0=0,fin=0,prog=0;
+var k={},started=0,siren=0,ac,osc,gn,cd=0,mo=0,nfo=0,t0=0,fin=0,prog=0,WTlast=-1,WTw=0;
 addEventListener("keydown",function(e){if(e.code=="Space"&&!e.repeat)siren=!siren;k[e.code]=1;if(/Arrow|Space/.test(e.code))e.preventDefault()});
 addEventListener("keyup",function(e){k[e.code]=0});
 document.querySelectorAll(".pad button").forEach(function(b){var c=b.dataset.k;b.addEventListener("pointerdown",function(e){e.preventDefault();k[c]=1;if(c=="Space")siren=!siren;if(c=="KeyM")$("#bm").onclick()});["pointerup","pointerleave","pointercancel"].forEach(function(n){b.addEventListener(n,function(){if(c!="Space")k[c]=0})})});
@@ -315,6 +365,7 @@ function closeRg(){mo=0;$("#rg").className=""}
 // Se desbloquea al responder la encuesta (marca en localStorage).
 function abrirMedalla(){
 if(!REC)REC={f:new Date().toLocaleDateString("es-PE",{day:"numeric",month:"long",year:"numeric"}),s:"CAM-"+String(Date.now()).slice(-6)};
+revisarEncuesta();
 if(!ENC){
 mo=1;$("#rg").className="on";
 $("#rg .bx").innerHTML='<h3 class="f" style="color:var(--red);margin:0 0 8px;font-size:1.35rem">🔒 Tu medalla está casi lista</h3><p style="font-size:.93rem;margin:0 0 14px">Para llevártela falta un solo paso: responder la <b>encuesta ciudadana</b>. Son 10 preguntas, 2 minutos y es anónima. Al enviarla, esta medalla se desbloquea y se marca con tu insignia de ciudadano comprometido.</p><a class="lk" href="/encuesta?src=juego" style="display:inline-block;text-decoration:none">📊 Responder la encuesta →</a><div style="margin-top:12px"><button class="bt" id="rkl">Volver al juego</button></div><p class="src">La medalla se dibuja en tu navegador: el juego no guarda tu nombre ni ningún dato personal.</p>';
@@ -424,7 +475,7 @@ x.fillStyle="#f0c33c";x.font="bold 16px Georgia,serif";x.textAlign="center";x.fi
 x.fillStyle="#ffe9b0";x.font="22px Arial";x.textAlign="left";
 x.fillText("🔥 3 focos apagados      🆘 3 rescates",344,598);
 x.fillText("☣️ 1 fuga controlada      🚗 1 extricación",344,636);
-x.fillText("📄 7 documentos      📍 8 zonas del mapa",344,674);
+x.fillText("🚰 2 hidrantes      🩺 2 heridos      📢 3 vecinos evacuados",344,674);
 x.fillText("⏱ "+Math.max(1,Math.round((Date.now()-gs)/60000))+" min de servicio",344,712);
 x.textAlign="center";x.font="bold 23px Georgia,serif";x.fillStyle="#f0c33c";x.fillText("Servir también es amar a tu tierra.",600,744);
 x.font="15px Arial";x.fillStyle="#ffe9b0";x.fillText("Camaná, "+REC.f+"   ·   N.º "+REC.s,600,768);
@@ -450,10 +501,10 @@ $("#hud b").onclick=function(){$("#hud").classList.toggle("open")};
 $("#go").onclick=function(){try{if(MB&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen({navigationUI:"hide"}).catch(function(){})}catch(e){}started=1;gs=Date.now();setTimeout(function(){toast("🚒 Sal del cuartel y sigue los aros de colores")},900);$("#ov").style.opacity=0;setTimeout(function(){$("#ov").style.display="none"},600);try{ac=new(window.AudioContext||window.webkitAudioContext)();osc=ac.createOscillator();gn=ac.createGain();osc.type="sawtooth";gn.gain.value=0;osc.connect(gn);gn.connect(ac.destination);osc.start();ac.resume&&ac.resume()}catch(e){}};
 $("#kp").onclick=function(){$("#fin").style.display="none"};
 function toast(m){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}var q=$("#toast");q.textContent=m;q.className="on";clearTimeout(toast.t);toast.t=setTimeout(function(){q.className=""},3600)}
-var MT=["🔥 Incendio estructural","🆘 Rescate de personas","☣️ Materiales peligrosos","🚗 Rescate vehicular","📄 Reunir documentos","⚖️ Beneficios y deberes","📍 Zonas de información"];
-function hud(){var v=[nfo,rescued,HZ.l<=0?1:0,VH.done,ndoc,ncl,nv],mx=[3,3,1,1,7,6,ZN.length],tot=0;for(var j=0;j<7;j++){var e=$("#m"+j),ok=v[j]>=mx[j];e.innerHTML="<span>"+MT[j]+"</span><span class=\""+(ok?"ok":"")+"\">"+(ok?"✔":v[j]+"/"+mx[j])+"</span>";tot+=v[j]/mx[j]}
+var MT=["🔥 Incendio (E)","🆘 Rescate (R)","☣️ Fuga tóxica (E)","🚗 Extricación (R)","🚰 Hidrante (E)","🩺 Primeros auxilios (R)","📢 Evacuar (sirena)"];
+function hud(){var v=[nfo,rescued,HZ.l<=0?1:0,VH.done,hid,aid,evac],mx=[3,3,1,1,2,2,3],tot=0;for(var j=0;j<7;j++){var e=$("#m"+j),ok=v[j]>=mx[j];e.innerHTML="<span>"+MT[j]+"</span><span class=\""+(ok?"ok":"")+"\">"+(ok?"✔":v[j]+"/"+mx[j])+"</span>";tot+=v[j]/mx[j]}
 $("#bar i").style.width=tot/7*100+"%";prog=tot/7;if(tot>=6.99&&!fin){fin=1;setTimeout(function(){var f=$("#fin");f.style.display="grid";setTimeout(function(){f.style.opacity=1},30)},1800)}}
-var MK=[["req","Requisitos"],["ben","Beneficios"],["deb","Deberes"]];
+var MK=[["req","Requisitos"],["ben","Beneficios"],["deb","Deberes"],["agua","Agua"],["aux","Auxilios"],["eva","Evacuar"]];
 function mnu(key){$("#mn .bx").innerHTML="<div class=\"tb\">"+MK.map(function(a){return "<button data-k=\""+a[0]+"\" class=\""+(a[0]==key?"on":"")+"\">"+a[1]+"</button>"}).join("")+"</div>"+PN[key]+"<button class=\"bt\" id=\"cm\">Cerrar</button>";document.querySelectorAll("#mn .tb button").forEach(function(b){b.onclick=function(){mnu(b.dataset.k)}});$("#cm").onclick=function(){mo=0;$("#mn").className=""}}
 $("#bm").onclick=function(){mnu("req");mo=1;$("#mn").className="on"};
 addEventListener("keydown",function(e){if(e.code=="KeyM"){mo=!mo;if(mo)mnu("req");$("#mn").className=mo?"on":""}});
@@ -461,10 +512,10 @@ function res(px,pz,r,sx,sz,sr){var dx=px-sx,dz=pz-sz,d=Math.sqrt(dx*dx+dz*dz)||.
 var mm=$("#mm").getContext("2d");
 function minimap(){var W=224;mm.clearRect(0,0,W,W);mm.fillStyle="rgba(70,120,60,.92)";mm.fillRect(0,0,W,W);mm.fillStyle="#e8d7a5";mm.fillRect(W*.9,0,W,W);mm.fillStyle="#555";mm.fillRect(W*.47,0,W*.06,W);mm.fillRect(0,W*.57,W,W*.06);mm.fillStyle="#b3121a";mm.fillRect(86,174,52,19);
 function pt(a,b,c,r){mm.fillStyle=c;mm.beginPath();mm.arc((a+75)/150*W,W-(b+75)/150*W,r,0,7);mm.fill()}
-ZN.forEach(function(q){pt(q[0],q[1],q[4],8)});PD.forEach(function(p){pt(p[0],p[1],p[3],6)});DC.forEach(function(d){if(d.on)pt(d.x,d.z,"#7fd0ff",5)});if(nfo<3)pt(0,54,"#ff5a1a",9);if(!VH.done)pt(VH.x,VH.z,"#2dd4ff",7);if(HZ.l>0)pt(HZ.x,HZ.z,"#7cfc00",8);PE.forEach(function(p){if(p.userData.on)pt(p.userData.x,p.userData.z,"#ffd23f",6)});
+ZN.forEach(function(q){pt(q[0],q[1],q[4],8)});HID.forEach(function(h){if(h.on)pt(h.x,h.z,"#38bdf8",6)});PAT.forEach(function(p){if(p.on)pt(p.x,p.z,"#4ade80",6)});EVA.forEach(function(e){if(e.on)pt(e.x,e.z,"#f5c518",5)});if(nfo<3)pt(0,54,"#ff5a1a",9);if(!VH.done)pt(VH.x,VH.z,"#2dd4ff",7);if(HZ.l>0)pt(HZ.x,HZ.z,"#7cfc00",8);PE.forEach(function(p){if(p.userData.on)pt(p.userData.x,p.userData.z,"#ffd23f",6)});
 mm.save();mm.translate((x+75)/150*W,W-(z+75)/150*W);mm.rotate(-hd);mm.fillStyle="#fff";mm.strokeStyle="#d01a1f";mm.lineWidth=3;mm.beginPath();mm.moveTo(0,-11);mm.lineTo(8,9);mm.lineTo(-8,9);mm.closePath();mm.fill();mm.stroke();mm.restore()}
 function guide(){var best=null,bd2=1e9;function c2(n,a,b){var d=Math.hypot(a-x,b-z);if(d<bd2){bd2=d;best=[n,a,b]}}
-if(nfo<3)c2("🔥 Incendio",0,50);PE.forEach(function(p){if(p.userData.on)c2("🆘 Víctima",p.userData.x,p.userData.z)});if(HZ.l>0)c2("☣️ Fuga",HZ.x,HZ.z);if(!VH.done)c2("🚗 Auto",VH.x,VH.z);if(ncl<6)c2("⚖️ Cajas",0,-22);DC.forEach(function(d){if(d.on)c2("📄 Documento",d.x,d.z)});ZN.forEach(function(q){if(!vis[q[2]])c2("📍 "+q[3],q[0],q[1])});
+if(nfo<3)c2("🔥 Incendio",0,50);PE.forEach(function(p){if(p.userData.on)c2("🆘 Víctima",p.userData.x,p.userData.z)});if(HZ.l>0)c2("☣️ Fuga",HZ.x,HZ.z);if(!VH.done)c2("🚗 Auto",VH.x,VH.z);HID.forEach(function(h){if(h.on)c2("🚰 Hidrante",h.x,h.z)});PAT.forEach(function(p){if(p.on)c2("🩺 Herido",p.x,p.z)});EVA.forEach(function(e){if(e.on)c2("📢 Vecino",e.x,e.z)});
 if(!best){$("#gd").style.display="none";return}$("#gd").style.display="flex";$("#ga").style.transform="rotate("+(-(Math.atan2(best[1]-x,best[2]-z)-hd))+"rad)";$("#gt").textContent=best[0]+" · "+Math.round(bd2)+" m"}
 var last=performance.now();
 function loop(now){requestAnimationFrame(loop);var dt=Math.min(.05,(now-last)/1000);last=now;t0+=dt;
@@ -478,19 +529,47 @@ PU.forEach(function(p){var r=res(p.x,p.z,p.r,px,pz,1.4);if(r){p.x+=r[0]*r[2];p.z
 PU.forEach(function(p){p.x+=p.vx*dt;p.z+=p.vz*dt;var dm=Math.pow(.93,dt*60);p.vx*=dm;p.vz*=dm;
 ST.forEach(function(s){var r=res(p.x,p.z,p.r,s[0],s[1],s[2]);if(r){p.x+=r[0]*r[2];p.z+=r[1]*r[2]}});
 p.x=Math.max(-72,Math.min(72,p.x));p.z=Math.max(-72,Math.min(72,p.z));p.m.position.x=p.x;p.m.position.z=p.z;p.m.rotation.y+=(p.vx-p.vz)*dt*.15});
-cd-=dt;if(k.KeyE&&cd<=0){cd=.022;for(var j=0;j<WP.length;j++){var q=WP[j];if(!q.on){q.on=1;q.m.visible=true;q.m.position.set(x+fx*1.4,3.2,z+fz*1.4);var vv=19+Math.max(0,sp)*.5;q.vx=fx*vv+(rnd()-.5)*1.4;q.vz=fz*vv+(rnd()-.5)*1.4;q.vy=5.5+rnd()*1.5;break}}}
-ZN.forEach(function(q,n){var d=Math.hypot(x-q[0],z-q[1]);ZR[n].scale.setScalar(1+.05*Math.sin(t0*4));if(d<5.6){if(cur!=q[2]){cur=q[2];$("#pn").innerHTML=PN[q[2]]+"<button class=\"bt\" id=\"px\">Cerrar</button>";$("#px").onclick=function(){$("#pn").className=""};$("#pn").className="on";if(!vis[q[2]]){vis[q[2]]=1;nv++;hud();if(nv==ZN.length)toast("¡Conoces todo el trabajo de los bomberos!")}}}else if(cur==q[2]){cur="";$("#pn").className=""}});
-cards.forEach(function(c){if(c.ok)return;PD.forEach(function(p){var d2=Math.hypot(c.o.x-p[0],c.o.z-p[1]);if(d2<3.3){if(p[4]==c.t){c.ok=1;PU.splice(PU.indexOf(c.o),1);var px=p[0]+(PDC[c.t]-1)*2.4;c.m.position.set(px,1.1,p[1]);c.m.material.emissive.setHex(0x1c7a35);ST.push([px,p[1],1.1]);PDC[c.t]++;ncl++;toast("¡Correcto! "+ncl+"/6 ✅");hud()}else{var dx=c.o.x-p[0],dz=c.o.z-p[1],dl=Math.hypot(dx,dz)||1;c.o.vx=dx/dl*14;c.o.vz=dz/dl*14;toast(p[4]=="d"?"Eso es un DEBER 🔴 Llévalo a la zona roja":"Eso es un BENEFICIO 🔵 Llévalo a la zona azul")}}})});
-DC.forEach(function(d){if(!d.on)return;d.g.rotation.y+=dt*1.5;d.g.position.y=Math.sin(t0*3+d.x)*.2;if(Math.hypot(x-d.x,z-d.z)<3.5){d.on=0;d.g.visible=false;ndoc++;toast("📄 "+d.n+" ("+ndoc+"/7)");hud()}});
+cd-=dt;
+// hidrante más cercano: si estás cerca, E carga agua en vez de rociar
+var hN=null,hD=99;HID.forEach(function(h){if(!h.on)return;var dh=Math.hypot(x-h.x,z-h.z);if(dh<hD){hD=dh;hN=h}});
+var cargando=!!(hN&&hD<11&&k.KeyE);
+if(k.KeyE&&!cargando&&cd<=0&&WT>0){cd=.022;for(var j=0;j<WP.length;j++){var q=WP[j];if(!q.on){q.on=1;q.m.visible=true;q.m.position.set(x+fx*1.4,3.2,z+fz*1.4);var vv=19+Math.max(0,sp)*.5;q.vx=fx*vv+(rnd()-.5)*1.4;q.vz=fz*vv+(rnd()-.5)*1.4;q.vy=5.5+rnd()*1.5;WT=Math.max(0,WT-.35);break}}}
+ZN.forEach(function(q,n){var d=Math.hypot(x-q[0],z-q[1]);ZR[n].scale.setScalar(1+.05*Math.sin(t0*4));if(d<5.6){if(cur!=q[2]){cur=q[2];$("#pn").innerHTML=PN[q[2]]+"<button class=\"bt\" id=\"px\">Cerrar</button>";$("#px").onclick=function(){$("#pn").className=""};$("#pn").className="on";clearTimeout(pnT);pnT=setTimeout(function(){$("#pn").className=""},12000)}}else if(cur==q[2]){cur="";clearTimeout(pnT);$("#pn").className=""}});
+// hidrante: mantener E junto al hidrante para llenar el tanque
+HID.forEach(function(h){if(!h.on)return;h.rg.scale.setScalar(1+.06*Math.sin(t0*3));var dh=Math.hypot(x-h.x,z-h.z);
+if(dh<11){if(k.KeyE){WT=Math.min(100,WT+45*dt);if(WT>=99){h.on=0;h.used=1;h.rg.material.opacity=.22;hid++;toast("🚰 Tanque lleno · hidrante "+hid+"/2");hud()}}
+else if(t0-h.w>4){h.w=t0;toast("🚰 Mantén E para cargar agua en el tanque")}}});
+// primeros auxilios: detener el camión y mantener R junto al herido
+var patN=null,patD=99;PAT.forEach(function(p){if(!p.on)return;p.rg.scale.setScalar(1+.05*Math.sin(t0*3));var dp=Math.hypot(x-p.x,z-p.z);if(dp<patD){patD=dp;patN=p}});
+if(patN){if(k.KeyR&&patD<7&&Math.abs(sp)<4){patN.p=Math.min(1,patN.p+dt/2.2);if(patN.p>=1){patN.on=0;patN.rg.material.opacity=.18;aid++;toast("🩺 Herido estabilizado y entregado a salud "+aid+"/2");hud()}}
+else{patN.p=Math.max(0,patN.p-dt*.6);if(k.KeyR&&patD<14&&t0-RW2>3){RW2=t0;toast(patD<7?"Detén el camión para atender al herido":"Acércate a menos de 7 m del herido")}}}
+// evacuación: encender la sirena cerca de los vecinos
+var evD=99;
+EVA.forEach(function(e){if(!e.on)return;e.rg.scale.setScalar(1+.05*Math.sin(t0*3));var de=Math.hypot(x-e.x,z-e.z);if(de<evD)evD=de;
+if(siren&&de<13){e.t+=dt;e.g.rotation.y+=dt*1.4;if(e.t>1.6){e.on=0;e.g.visible=false;evac++;toast("📢 Vecino evacuado "+evac+"/3");hud()}}else e.t=Math.max(0,e.t-dt*.5)});
 var rp2=null,rd=99;PE.forEach(function(p){var u=p.userData;if(u.t>0){u.t-=dt;p.position.y=(1.5-u.t)*1.2;if(u.t<=0)p.visible=false;return}if(!u.on)return;u.ar.position.y=3.4+Math.sin(t0*4)*.3;u.ar.rotation.y+=dt*2;var d=Math.hypot(x-u.x,z-u.z);if(d<rd){rd=d;rp2=p}});
 var u2=rp2&&rp2.userData,p2=$("#pg2"),ff=(FO[0].f+FO[1].f+FO[2].f)/3;
 if(u2){if(k.KeyR&&rd<9&&Math.abs(sp)<3){u2.p=Math.min(1,u2.p+dt/3);if(u2.p>=1){u2.on=0;u2.t=1.5;ST.splice(ST.indexOf(u2.c),1);rescued++;toast("¡Víctima a salvo y entregada a salud! "+rescued+"/3 🆘");hud()}}else{u2.p=Math.max(0,u2.p-dt*.5);if(k.KeyR&&rd<16&&t0-RW>3){RW=t0;toast(rd<9?"Detén el camión para rescatar":"Acércate a menos de 9 m de la víctima")}}}
 if(u2&&u2.p>0){p2.style.display="block";$("#pg2t").textContent="🆘 Rescatando… "+Math.floor(u2.p*100)+"%";$("#pg2 i").style.width=u2.p*100+"%";$("#pg2 i").style.background="linear-gradient(90deg,#4ade80,#16a34a)"}
+else if(patN&&patN.p>0){p2.style.display="block";$("#pg2t").textContent="🩺 Atendiendo al herido… "+Math.floor(patN.p*100)+"%";$("#pg2 i").style.width=patN.p*100+"%";$("#pg2 i").style.background="linear-gradient(90deg,#86efac,#16a34a)"}
 else if(nfo<3&&Math.hypot(x,z-50)<34){p2.style.display="block";$("#pg2t").textContent="🔥 Fuego restante "+Math.round(ff*100)+"%";$("#pg2 i").style.width=ff*100+"%";$("#pg2 i").style.background="linear-gradient(90deg,#f59e0b,#d7191f)"}else p2.style.display="none";
 var dv=Math.hypot(x-VH.x,z-VH.z),dz2=Math.hypot(x-HZ.x,z-HZ.z);
 if(!VH.done){if(k.KeyR&&dv<11&&Math.abs(sp)<4){VH.cut=Math.min(1,VH.cut+dt/4);vl.intensity=2+rnd()*4;if(VH.cut>=1){VH.done=1;vl.intensity=0;vic.position.set(VH.x-3,1,VH.z+1.5);toast("🚗 ¡Víctima extricada! Entregada al personal de salud");hud()}}else{vl.intensity=0;if(k.KeyR&&t0-VH.w>3){VH.w=t0;toast(dv<11?"Detén el camión para usar la herramienta":"Acércate a menos de 11 m del auto azul")}}
 $("#pg").style.display=(VH.cut>0&&!VH.done)?"block":"none";$("#pgt").textContent="🔧 Extricación hidráulica "+Math.floor(VH.cut*100)+"%";$("#pg i").style.width=VH.cut*100+"%"}
 if(HZ.l>0&&dz2<8&&t0-HZ.warn>4){HZ.warn=t0;toast("☣️ ¡ZONA CALIENTE! Retrocede y rocía desde 8–18 m")}
+var wtR=Math.round(WT);if(wtR!==WTlast){WTlast=wtR;var wb=$("#wbar i"),wv=$("#wtv");if(wb)wb.style.width=wtR+"%";if(wv)wv.textContent="💧 "+wtR+"%";if(wtR<=0&&t0-(WTw||0)>6){WTw=t0;toast("💧 Tanque vacío: recarga en el hidrante")}}
+// pista contextual: qué tecla pulsar según lo que tengas al lado
+var cq=$("#ctx"),cm="",hLeft=HID.filter(function(h){return h.on}).length;
+if(u2&&u2.on&&rd<12&&!k.KeyR)cm="<i>R</i> mantén pulsado para rescatar a la persona";
+else if(patN&&patD<11&&!k.KeyR)cm="<i>R</i> mantén pulsado para estabilizar al herido";
+else if(!VH.done&&dv<14&&!k.KeyR)cm="<i>R</i> mantén pulsado para extricación hidráulica";
+else if(hN&&hD<11&&!k.KeyE)cm="<i>E</i> mantén pulsado para llenar el tanque";
+else if(evD<16&&!siren)cm="<i>Espacio</i> enciende la sirena para evacuar";
+else if(nfo<3&&Math.hypot(x,z-50)<32&&!k.KeyE)cm="<i>E</i> mantén pulsado para rociar agua";
+else if(HZ.l>0&&dz2<9)cm="<i>S</i> retrocede: zona caliente, rocía desde 8–18 m";
+else if(WT<12&&hLeft>0)cm="<i>🚰</i> tanque bajo: busca un hidrante en el mapa";
+else if(WT<12)cm="<i>💧</i> sin hidrantes cerca: dosifica el agua";
+if(cm){if(cq.innerHTML!==cm)cq.innerHTML=cm;cq.className="on"}else cq.className="";
 if(ac&&gn){gn.gain.value=siren?.05:0;osc.frequency.value=700+350*Math.sin(t0*5)}}
 WP.forEach(function(q){if(!q.on)return;q.vy-=14*dt;var m=q.m.position;m.x+=q.vx*dt;m.y+=q.vy*dt;m.z+=q.vz*dt;var hit=0;
 FO.forEach(function(o){if(!hit&&o.f>0&&Math.hypot(m.x-o.x,m.z-o.z)<4.6&&m.y<12){o.f=Math.max(0,o.f-.03);hit=1;if(o.f<=0){nfo++;toast(nfo<3?"🔥 Foco controlado "+nfo+"/3":"¡Incendio sofocado! 💧 Así sirven los bomberos");hud()}}});
@@ -513,6 +592,7 @@ if(started&&Math.abs(sp)>7&&rnd()<.5){for(var j=0;j<DU.length;j++){if(DU[j].user
 DU.forEach(function(d){var u=d.userData;if(u.l>0){u.l-=dt*1.4;d.material.opacity=Math.max(0,u.l*.35);d.scale.setScalar(1+(1-u.l)*2.5);d.position.y+=dt*.8}else d.material.opacity=0});
 DP+=((Math.hypot(x,z+41)<26?1:0)-DP)*Math.min(1,dt*1.6);DR.forEach(function(g){g.scale.y=1-.9*DP});il.intensity=1+DP*1.2;SB.material.emissive.setHex(siren&&ph?0xff2200:0x220000);SL.color.setHex(ph?0xff2200:0x2266ff);SL.intensity=siren?7:2.5;
 tr.position.set(x,0,z);tr.rotation.y=hd;
+ZL.forEach(function(s){var d=Math.hypot(C.position.x-s.position.x,C.position.z-s.position.z);s.material.opacity=Math.min(1,Math.max(0,(d-16)/14))});
 var da=((hd-ch+PI)%(2*PI)+2*PI)%(2*PI)-PI;ch+=da*Math.min(1,dt*3);
 var ins=Math.abs(x)<16.5&&z<-42&&z>-55;CD+=((ins?7.2:14)-CD)*Math.min(1,dt*3);CY+=((ins?3.4:8+sp*.06)-CY)*Math.min(1,dt*3);C.position.lerp(new T.Vector3(x-Math.sin(ch)*CD,CY,z-Math.cos(ch)*CD),Math.min(1,dt*4));if(ins){C.position.x=Math.max(-16.7,Math.min(16.7,C.position.x));C.position.z=Math.max(-53.9,C.position.z)}C.lookAt(x+Math.sin(ch)*5,1.5,z+Math.cos(ch)*5);C.fov=(C.aspect<1?78:60)+sp*.35;C.updateProjectionMatrix();
 L.position.set(x+34,55,z+22);L.target.position.set(x,0,z);guide();minimap();R.render(S,C)}

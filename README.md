@@ -165,6 +165,40 @@ cuartel, prioridades de mejora, gente dispuesta a apoyar y ritmo de la campaña)
 > **Requiere sesión de administrador.** Los resultados ya no son públicos: sin token, la API
 > responde `401`. Ese bloque alimenta únicamente la pestaña **Encuestas** del panel interno.
 
+### Las 7 misiones del simulador
+
+Todas son tareas reales de la profesión, no acertijos: se resuelven conduciendo la unidad,
+deteniéndose en el lugar correcto y manteniendo la tecla de la acción.
+
+| # | Misión | Cómo se resuelve | Tecla |
+|---|--------|------------------|-------|
+| 1 | 🔥 Incendio estructural | Rociar los 3 focos (ventanas y techo) | **E** |
+| 2 | 🆘 Rescate de personas | Detenerse a menos de 9 m de cada víctima y mantener | **R** |
+| 3 | ☣️ Fuga tóxica | Rociar la fuga desde la zona segura (8–18 m) | **E** |
+| 4 | 🚗 Rescate vehicular | Detenerse a menos de 11 m del auto y usar la herramienta hidráulica | **R** |
+| 5 | 🚰 Hidrante | Detenerse junto al hidrante y llenar el tanque | **E** |
+| 6 | 🩺 Primeros auxilios | Detenerse a menos de 7 m del herido y estabilizarlo | **R** |
+| 7 | 📢 Evacuación | Encender la sirena y pasar a menos de 13 m de los 3 vecinos | **Espacio** |
+
+Detalles de diseño que se ven en el juego:
+
+- **El agua es finita.** Cada descarga baja el tanque (barra celeste) y solo se recupera en los
+  **2 hidrantes** del mapa, que aparecen en celeste en el minimapa. Junto al hidrante, `E`
+  recarga en lugar de rociar.
+- **Pista contextual.** Una pastilla flotante indica la tecla exacta de lo que tienes al lado
+  («`R` mantén pulsado para rescatar a la persona», «`Espacio` enciende la sirena para evacuar»…),
+  para que nadie tenga que adivinar.
+- **El patio del cuartel tiene equipo real**: pilas de manguera, bidones de espuma, conos,
+  vallas y extintores. Se acabaron las cajas de empujar: no hay ninguna mecánica de arrastre.
+- **Sin zonas de información en el mapa.** Requisitos, beneficios y deberes ya no ocupan un
+  aro: eran ruido para conducir y su contenido vive ahora en el **Manual del bombero (`M`)**.
+  En el mapa quedan 5 aros: Incendio, Rescate, Materiales peligrosos, Rescate vehicular y
+  Compañía. El cartel de bienvenida del cuartel reemplazó a los cubos con letras.
+- **Manual del bombero (`M`)** con las pestañas Requisitos, Beneficios, Deberes, Agua,
+  Auxilios y Evacuar, además del protocolo que aparece al entrar a cada zona (se cierra solo
+  a los 12 s para no tapar la conducción).
+- **Etiquetas de zona** que se desvanecen cuando la cámara pasa cerca, para no tapar la vista.
+
 ### Cómo se conecta con el juego
 
 El juego es deliberadamente cerrado: **no muestra contadores, no tiene menú de navegación ni
