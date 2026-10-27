@@ -2,9 +2,11 @@
    La usan encuesta.html (para pintar el formulario), resultados.html (tablero)
    y admin.html (gráficos y exportación).
 
-   Son las 7 preguntas del cuaderno de la compañía: calificación de la labor,
-   contacto con una emergencia, actividad que quiere conocer, vínculo con un
-   bombero, nota final, recomendación y pedido abierto. */
+   Son las 10 preguntas de la campaña: las 7 del cuaderno de la compañía
+   (calificación de la labor, contacto con una emergencia, actividad que quiere
+   conocer, vínculo con un bombero, nota final, recomendación y pedido abierto)
+   más 3 añadidas para orientar el trabajo de la compañía: si sabe dónde queda
+   el cuartel, qué debe mejorar primero y cómo le gustaría apoyar. */
 (function (w) {
   'use strict';
 
@@ -122,6 +124,56 @@
       placeholder: 'Ej. Que visiten los colegios para enseñar primeros auxilios…',
       max: 600,
       requerido: false,
+    },
+    {
+      id: 'p12',
+      seccion: 'Su experiencia',
+      n: 8,
+      icono: '📍',
+      tipo: 'opciones',
+      corto: '¿Sabe dónde está la compañía?',
+      titulo: '¿Sabes dónde queda la compañía de bomberos más cercana a tu casa?',
+      ayuda: 'Nos dice si la gente del distrito tiene claro a dónde acudir.',
+      opciones: [
+        { v: 'si', t: 'Sí, sé dónde está', icono: '🏠' },
+        { v: 'maso', t: 'Más o menos', icono: '🤔' },
+        { v: 'no', t: 'No lo sé', icono: '🚫' },
+      ],
+    },
+    {
+      id: 'p13',
+      seccion: 'Su pedido',
+      n: 9,
+      icono: '🛠️',
+      tipo: 'opciones',
+      corto: 'Qué debe mejorar primero',
+      titulo: '¿Qué debería mejorar primero la compañía?',
+      ayuda: 'Puedes marcar más de una opción. Es lo que más nos ayuda a priorizar.',
+      multiple: true,
+      opciones: [
+        { v: 'equipo', t: 'Equipo y unidades', icono: '🚒' },
+        { v: 'capacitacion', t: 'Capacitación del personal', icono: '🎓' },
+        { v: 'respuesta', t: 'Tiempo de respuesta', icono: '⏱️' },
+        { v: 'comunicacion', t: 'Comunicación con el barrio', icono: '📢' },
+        { v: 'voluntarios', t: 'Más voluntarios', icono: '🙋' },
+        { v: 'local', t: 'Local e instalaciones', icono: '🏢' },
+      ],
+    },
+    {
+      id: 'p14',
+      seccion: 'Su pedido',
+      n: 10,
+      icono: '🤲',
+      tipo: 'opciones',
+      corto: 'Cómo le gustaría apoyar',
+      titulo: '¿Cómo te gustaría apoyar a los bomberos de Camaná?',
+      opciones: [
+        { v: 'voluntario', t: 'Siendo voluntario', icono: '🧑‍🚒' },
+        { v: 'donacion', t: 'Con una donación', icono: '🎁' },
+        { v: 'difundir', t: 'Difundiendo su trabajo', icono: '📣' },
+        { v: 'aprender', t: 'Aprendiendo primeros auxilios', icono: '🩺' },
+        { v: 'ahora', t: 'Por ahora no puedo', icono: '🙅' },
+      ],
     },
   ];
 

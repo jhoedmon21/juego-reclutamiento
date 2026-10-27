@@ -229,7 +229,6 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
       <span>Compañía de Bomberos de Camaná</span>
     </div>
     <div class="sp"></div>
-    <a class="btn" href="/resultados" target="_blank" rel="noopener">📊 Resultados</a>
     <a class="btn" href="/" target="_blank" rel="noopener">↗ Ver sitio</a>
     <button class="btn" id="ref">↻ Actualizar</button>
     <button class="btn" id="csv">⬇ Exportar</button>
@@ -239,25 +238,26 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   <div id="warn"></div>
 
   <div class="tabs" role="tablist" aria-label="Secciones del panel">
-    <button class="tab" role="tab" id="tab-post" aria-controls="panel-post" aria-selected="true" data-tab="post">
-      Postulantes <span class="n" id="n-post">0</span>
-    </button>
-    <button class="tab" role="tab" id="tab-msg" aria-controls="panel-msg" aria-selected="false" data-tab="msg">
-      Mensajes de contacto <span class="n" id="n-msg">0</span>
+    <button class="tab" role="tab" id="tab-msg" aria-controls="panel-msg" aria-selected="true" data-tab="msg">
+      Inscripciones <span class="n" id="n-msg">0</span>
     </button>
     <button class="tab" role="tab" id="tab-enc" aria-controls="panel-enc" aria-selected="false" data-tab="enc">
       Encuestas <span class="n" id="n-enc">0</span>
     </button>
+    <button class="tab" role="tab" id="tab-post" aria-controls="panel-post" aria-selected="false" data-tab="post">
+      Histórico del juego <span class="n" id="n-post">0</span>
+    </button>
   </div>
 
   <!-- ─── Postulantes ─── -->
-  <section class="panel on" id="panel-post" role="tabpanel" aria-labelledby="tab-post">
+  <section class="panel" id="panel-post" role="tabpanel" aria-labelledby="tab-post" hidden>
     <div class="card" style="margin-bottom:18px;border-left:4px solid var(--red)">
-      <h2 style="font-size:1rem">El juego ya no registra postulantes</h2>
+      <h2 style="font-size:1rem">Registros del juego anterior</h2>
       <div class="hint" style="margin:0">
-        La única vía de inscripción es el <a href="/contacto" target="_blank" rel="noopener">formulario de la web</a>.
-        Los postulantes nuevos aparecen en <b>Mensajes de contacto</b> con el motivo «Quiero ser bombero voluntario».
-        Esta tabla conserva los registros históricos del juego anterior.
+        El juego ya no registra a nadie: la única vía de inscripción es el
+        <a href="/contacto" target="_blank" rel="noopener">formulario de la web</a> y sus envíos
+        aparecen en la pestaña <b>Inscripciones</b>. Esta tabla solo conserva los registros
+        históricos que quedaron del simulador, por si necesitas consultarlos.
       </div>
     </div>
     <div class="kpis">
@@ -307,16 +307,32 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   </section>
 
   <!-- ─── Mensajes ─── -->
-  <section class="panel" id="panel-msg" role="tabpanel" aria-labelledby="tab-msg" hidden>
+  <section class="panel on" id="panel-msg" role="tabpanel" aria-labelledby="tab-msg">
+    <div class="card" style="margin-bottom:18px;border-left:4px solid var(--red)">
+      <h2 style="font-size:1rem">Aquí llegan las inscripciones</h2>
+      <div class="hint" style="margin:0">
+        Todo lo que se envía desde el <a href="/contacto" target="_blank" rel="noopener">formulario de la web</a>
+        aparece en esta tabla. Los que marcan «Quiero ser bombero voluntario» son los postulantes:
+        usa el filtro de motivo para verlos solos. El juego ya no registra a nadie.
+      </div>
+    </div>
     <div class="kpis">
-      <div class="kpi"><div class="lb">✉️ Mensajes recibidos</div><div class="nb" id="m1">—</div><div class="sub" id="m1s">&nbsp;</div></div>
+      <div class="kpi"><div class="lb">📝 Inscripciones y mensajes</div><div class="nb" id="m1">—</div><div class="sub" id="m1s">&nbsp;</div></div>
       <div class="kpi n"><div class="lb">🔔 Sin atender</div><div class="nb" id="m2">—</div><div class="sub">Requieren respuesta</div></div>
       <div class="kpi v"><div class="lb">✓ Atendidos</div><div class="nb" id="m3">—</div><div class="sub">Con respuesta enviada</div></div>
-      <div class="kpi h"><div class="lb">📥 Archivados</div><div class="nb" id="m4">—</div><div class="sub">Sin acción pendiente</div></div>
+      <div class="kpi h"><div class="lb">🚒 Postulantes</div><div class="nb" id="m5">—</div><div class="sub">Quieren ser voluntarios</div></div>
     </div>
 
     <div class="tools">
-      <input type="search" id="q-msg" placeholder="Buscar por nombre, correo, teléfono o motivo…">
+      <input type="search" id="q-msg" placeholder="Buscar por nombre, DNI, correo, teléfono o motivo…">
+      <select id="f-motivo">
+        <option value="">Todos los motivos</option>
+        <option value="Quiero ser bombero voluntario">Solo postulantes a voluntario</option>
+        <option value="Información sobre el voluntariado">Información sobre el voluntariado</option>
+        <option value="Capacitación y prevención">Capacitación y prevención</option>
+        <option value="Donaciones y apoyo">Donaciones y apoyo</option>
+        <option value="Otros">Otros motivos</option>
+      </select>
       <select id="f-msg">
         <option value="">Todos los estados</option>
         <option value="nuevo">Nuevo</option>
@@ -336,7 +352,7 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
         </thead>
         <tbody id="tb-msg"></tbody>
       </table>
-      <div class="empty" id="emp-msg" style="display:none"><b>✉️</b>Todavía no se han recibido mensajes.</div>
+      <div class="empty" id="emp-msg" style="display:none"><b>✉️</b>Todavía no hay inscripciones ni mensajes.</div>
     </div>
   </section>
 
@@ -344,7 +360,7 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   <section class="panel" id="panel-enc" role="tabpanel" aria-labelledby="tab-enc" hidden>
     <div class="card" style="margin-bottom:20px">
       <h2>Participación de la campaña</h2>
-      <div class="hint">Análisis permanente · se publica en <a href="/resultados" target="_blank" rel="noopener">/resultados</a></div>
+      <div class="hint">Análisis permanente · visible solo con sesión iniciada</div>
       <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-top:4px">
         <span id="e-meta-n" style="font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums;line-height:1">—</span>
         <span style="font-size:.8rem;color:var(--mut)" id="e-meta-t">de 500 respuestas de meta</span>
@@ -400,9 +416,28 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
       </div>
     </div>
 
+    <div class="charts">
+      <div class="card">
+        <h2>¿Saben dónde está el cuartel?</h2>
+        <div class="hint">Pregunta 8 · conocimiento de la ubicación</div>
+        <ul class="hbar" id="hb-ubi"></ul>
+      </div>
+      <div class="card">
+        <h2>Qué debe mejorar primero</h2>
+        <div class="hint">Pregunta 9 · puede elegir varias</div>
+        <ul class="hbar" id="hb-pri"></ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <h2>Cómo les gustaría apoyar</h2>
+      <div class="hint">Pregunta 10 · voluntariado, donación, difusión o primeros auxilios</div>
+      <ul class="hbar" id="hb-apo"></ul>
+    </div>
+
     <div class="card" style="margin-bottom:20px">
       <h2>Lectura automática</h2>
-      <div class="hint">Se recalcula con cada respuesta y se publica en <a href="/resultados" target="_blank" rel="noopener">/resultados</a></div>
+      <div class="hint">Se recalcula con cada respuesta · visible solo con sesión iniciada</div>
       <div id="enc-analisis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:12px"></div>
     </div>
 
@@ -454,9 +489,9 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   var E = window.ENCUESTA;
   var TOKEN_KEY = 'camana_admin_token';
   var TOKEN = '';
-  var TAB = 'post';
+  var TAB = 'msg';
   var DATA = { stats: null, registros: [], msgs: [], encs: null };
-  var FILTER = { post: { q: '', estado: '' }, msg: { q: '', estado: '' }, enc: { q: '', tipo: '' } };
+  var FILTER = { post: { q: '', estado: '' }, msg: { q: '', estado: '', motivo: '' }, enc: { q: '', tipo: '' } };
 
   function tok() { try { return sessionStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return TOKEN; } }
   function setTok(t) {
@@ -679,24 +714,29 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     }).join('');
   }
 
-  /* ─── Mensajes ─────────────────────────────────────────── */
+  /* ─── Inscripciones y mensajes ─────────────────────────── */
   function renderMsg() {
     var msgs = DATA.msgs;
     var nuevo = msgs.filter(function (m) { return m.estado === 'nuevo'; }).length;
     var aten = msgs.filter(function (m) { return m.estado === 'atendido'; }).length;
-    var arch = msgs.filter(function (m) { return m.estado === 'archivado'; }).length;
+    var postulantes = msgs.filter(function (m) { return m.motivo === 'Quiero ser bombero voluntario'; }).length;
 
     $('#m1').textContent = nf(msgs.length);
-    $('#m1s').textContent = msgs.length ? 'Último: ' + fecha(msgs[0].creado) : 'Sin mensajes';
+    $('#m1s').textContent = msgs.length ? 'Último: ' + fecha(msgs[0].creado) : 'Sin inscripciones';
     $('#m2').textContent = nf(nuevo);
     $('#m3').textContent = nf(aten);
-    $('#m4').textContent = nf(arch);
+    $('#m5').textContent = nf(postulantes);
 
     var q = FILTER.msg.q.toLowerCase().trim();
     var rows = msgs.filter(function (m) {
       if (FILTER.msg.estado && (m.estado || 'nuevo') !== FILTER.msg.estado) return false;
+      if (FILTER.msg.motivo) {
+        if (FILTER.msg.motivo === 'Otros') {
+          if (m.motivo === 'Quiero ser bombero voluntario' || m.motivo === 'Información sobre el voluntariado' || m.motivo === 'Capacitación y prevención' || m.motivo === 'Donaciones y apoyo') return false;
+        } else if (m.motivo !== FILTER.msg.motivo) return false;
+      }
       if (!q) return true;
-      return (m.nombre + ' ' + m.correo + ' ' + m.telefono + ' ' + m.motivo + ' ' + m.mensaje + ' ' + m.id)
+      return (m.nombre + ' ' + m.dni + ' ' + m.correo + ' ' + m.telefono + ' ' + m.motivo + ' ' + m.mensaje + ' ' + m.id)
         .toLowerCase().indexOf(q) >= 0;
     });
 
@@ -831,6 +871,19 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
     hbars('#hb-rec', R && R.recomendacion, {
       si: 'Sí, sin dudarlo', talvez: 'Tal vez', no: 'No',
     });
+    hbars('#hb-ubi', R && R.ubicacion, {
+      si: 'Sí, sé dónde está', maso: 'Más o menos', no: 'No lo sé',
+    });
+    hbars('#hb-pri', R && R.prioridades, {
+      equipo: 'Equipo y unidades', capacitacion: 'Capacitación del personal',
+      respuesta: 'Tiempo de respuesta', comunicacion: 'Comunicación con el barrio',
+      voluntarios: 'Más voluntarios', local: 'Local e instalaciones',
+    });
+    hbars('#hb-apo', R && R.apoyo, {
+      voluntario: 'Siendo voluntario', donacion: 'Con una donación',
+      difundir: 'Difundiendo su trabajo', aprender: 'Aprendiendo primeros auxilios',
+      ahora: 'Por ahora no puedo',
+    });
     hbars('#hb-dis', R && R.distritos, null);
     hbars('#hb-eda', R && R.edades, null);
 
@@ -963,6 +1016,7 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
   $('#f-post').addEventListener('change', function (e) { FILTER.post.estado = e.target.value; renderPost(); });
   $('#q-msg').addEventListener('input', function (e) { FILTER.msg.q = e.target.value; renderMsg(); });
   $('#f-msg').addEventListener('change', function (e) { FILTER.msg.estado = e.target.value; renderMsg(); });
+  $('#f-motivo').addEventListener('change', function (e) { FILTER.msg.motivo = e.target.value; renderMsg(); });
   $('#q-enc').addEventListener('input', function (e) { FILTER.enc.q = e.target.value; renderEnc(); });
   $('#f-enc').addEventListener('change', function (e) { FILTER.enc.tipo = e.target.value; renderEnc(); });
 
@@ -1004,8 +1058,9 @@ select.est.st-descartado,select.est.st-archivado{border-color:#d9d3ce;background
           return p ? E.texto(p, v) : (v == null ? '' : v);
         };
         return [e.id, fecha(e.creado), e.distrito || '', e.edad || '', e.origen || 'web', r.p1, r.p5,
-          txt('p6', r.p6), txt('p3', r.p3), txt('p4', r.p4), txt('p2', r.p2), r.p7 || ''];
-      }), ['Folio', 'Fecha', 'Distrito', 'Edad', 'Origen', 'P1 Labor', 'P5 Nota', 'P6 Recomienda', 'P3 Interés', 'P4 Vínculo', 'P2 ¿Ha visto?', 'P7 Pedido'], 'encuestas-camana');
+          txt('p6', r.p6), txt('p3', r.p3), txt('p4', r.p4), txt('p2', r.p2),
+          txt('p12', r.p12), txt('p13', r.p13), txt('p14', r.p14), r.p7 || ''];
+      }), ['Folio', 'Fecha', 'Distrito', 'Edad', 'Origen', 'P1 Labor', 'P5 Nota', 'P6 Recomienda', 'P3 Interés', 'P4 Vínculo', 'P2 ¿Ha visto?', 'P12 ¿Sabe dónde está?', 'P13 Qué mejorar', 'P14 Cómo apoyaría', 'P7 Pedido'], 'encuestas-camana');
     }
   });
 

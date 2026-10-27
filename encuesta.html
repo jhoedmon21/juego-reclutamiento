@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Encuesta ciudadana · Compañía de Bomberos de Camaná</title>
-<meta name="description" content="Encuesta de opinión ciudadana de la Compañía de Bomberos Voluntarios de Camaná B-35. Siete preguntas, dos minutos, totalmente anónima. Los resultados se publican en vivo.">
+<meta name="description" content="Encuesta de opinión ciudadana de la Compañía de Bomberos Voluntarios de Camaná B-35. Diez preguntas, dos minutos, totalmente anónima.">
 <meta name="theme-color" content="#3d0a0d">
 <link rel="stylesheet" href="/assets/institucional.css">
 <link rel="stylesheet" href="/assets/rediseno.css">
@@ -19,7 +19,7 @@
     <span class="em">🚨 Emergencias <b>116</b></span>
     <span class="meta">
       <span>Camaná · Arequipa · Perú</span>
-      <span>7 preguntas · 2 minutos · anónima</span>
+      <span>10 preguntas · 2 minutos · anónima</span>
     </span>
   </div>
 </div>
@@ -37,7 +37,6 @@
       <a href="/">Inicio</a>
       <a href="/contacto">Inscripción</a>
       <a href="/encuesta" aria-current="page">Encuesta</a>
-      <a href="/resultados">Resultados</a>
       <a class="cta" href="/admin">Panel interno</a>
     </nav>
   </div>
@@ -46,15 +45,15 @@
 <section class="xp-hero">
   <div class="wrap">
     <span class="kick">Consulta pública · Camaná 2026</span>
-    <h1>Siete preguntas para que la compañía <em>te escuche</em></h1>
+    <h1>Diez preguntas para que la compañía <em>te escuche</em></h1>
     <p class="sub">
       No pedimos nombre ni documento. Solo queremos saber cómo ves a tus bomberos y qué
-      te gustaría que hagamos en Camaná. Al terminar ves los resultados en vivo.
+      te gustaría que hagamos en Camaná. Los resultados los revisa la Comandancia.
     </p>
     <div class="chips">
-      <span class="xp-chip"><span class="dot"></span><b id="h-total">—</b> vecinos ya respondieron</span>
-      <span class="xp-chip">📅 Hoy: <b id="h-hoy">—</b></span>
-      <span class="xp-chip">⭐ Promedio: <b id="h-prom">—</b>/10</span>
+      <span class="xp-chip">📝 <b>10</b> preguntas</span>
+      <span class="xp-chip">⏱️ <b>2</b> minutos</span>
+      <span class="xp-chip">🔒 <b>Anónima</b></span>
       <span class="xp-chip">🎯 Meta: <b>500</b> voces</span>
     </div>
   </div>
@@ -104,14 +103,6 @@
           </div>
         </div>
 
-        <div class="xp-goal" id="goal" style="margin:0 0 20px">
-          <div class="top">
-            <span><b id="ob-total">—</b> <span id="ob-lbl">vecinos ya respondieron</span></span>
-            <span id="ob-pie">Cargando el avance de la campaña…</span>
-          </div>
-          <div class="track"><i id="ob-barra"></i></div>
-        </div>
-
         <ol class="xp-steps" id="pasos"></ol>
 
         <form id="f" novalidate>
@@ -159,11 +150,8 @@
 
         <div class="xp-share">
           <a class="wa" id="sh-wa" href="#" target="_blank" rel="noopener">💬 Compartir por WhatsApp</a>
-          <a class="xp-btn sec" href="/resultados">📊 Ver resultados en vivo</a>
-          <a class="xp-btn sec" id="sh-juego" href="/?enc=1">🚒 Volver al juego</a>
+          <a class="xp-btn sec" id="sh-juego" href="/?enc=1">🚒 Volver al juego y recoger mi medalla</a>
         </div>
-
-        <div class="xp-stats xp-mt" id="resumen" hidden></div>
 
         <p class="hint" style="margin-top:18px">
           ¿Te gustaría ser bombero? <a href="/contacto?desde=juego">Inscríbete en el formulario oficial →</a>
@@ -181,19 +169,18 @@
       </div>
 
       <div class="xp-card">
-        <h3>Resultados en vivo</h3>
-        <div class="xp-stats" style="grid-template-columns:1fr 1fr">
-          <div class="xp-stat"><div class="v" id="s-total">—</div><div class="l">Participantes</div></div>
-          <div class="xp-stat gold"><div class="v" id="s-prom">—</div><div class="l">Nota promedio</div></div>
-        </div>
-        <p style="margin:12px 0 0"><a href="/resultados">Ver el tablero completo →</a></p>
+        <h3>¿Y los resultados?</h3>
+        <p style="margin-bottom:0">
+          Los revisa la Comandancia en el panel interno, junto con las inscripciones.
+          No se publican cifras sueltas: primero se leen y después se actúa.
+        </p>
       </div>
 
       <div class="xp-card">
-        <h3>¿Por qué 7 preguntas?</h3>
+        <h3>¿Por qué 10 preguntas?</h3>
         <ul class="info-list" style="margin:0">
-          <li><span class="k" aria-hidden="true">⏱️</span><span><b>Dos minutos</b><small>Más corto que la versión anterior, para que nadie lo deje a medias.</small></span></li>
-          <li><span class="k" aria-hidden="true">📊</span><span><b>Análisis permanente</b><small>El tablero se actualiza solo y no se reinicia entre campañas.</small></span></li>
+          <li><span class="k" aria-hidden="true">⏱️</span><span><b>Dos minutos</b><small>Las justas para que nadie lo deje a medias.</small></span></li>
+          <li><span class="k" aria-hidden="true">📊</span><span><b>Análisis permanente</b><small>Cada respuesta se acumula y no se reinicia entre campañas.</small></span></li>
           <li><span class="k" aria-hidden="true">🤝</span><span><b>Sin datos personales</b><small>No hay forma de vincular una respuesta con una persona.</small></span></li>
         </ul>
       </div>
@@ -234,7 +221,6 @@
           <li><a href="/">Inicio</a></li>
           <li><a href="/contacto">Inscripción y contacto</a></li>
           <li><a href="/encuesta">Encuesta ciudadana</a></li>
-          <li><a href="/resultados">Resultados</a></li>
           <li><a href="/admin">Panel interno</a></li>
         </ul>
       </div>
@@ -270,10 +256,10 @@
 
   /* Cuatro pasos cortos: cada uno cabe en una pantalla de celular. */
   var PASOS = [
-    { t: 'Tu experiencia', sub: 'Cómo has visto el trabajo de la compañía en tu distrito.', ids: ['p1', 'p2'] },
+    { t: 'Tu experiencia', sub: 'Cómo has visto el trabajo de la compañía en tu distrito.', ids: ['p1', 'p2', 'p12'] },
     { t: 'Lo que quieres ver', sub: 'Elige las actividades que te gustaría conocer de cerca.', ids: ['p3'] },
     { t: 'Tu vínculo', sub: 'Qué tan cerca sientes a la institución y qué nota le pones.', ids: ['p4', 'p5', 'p6'] },
-    { t: 'Tu pedido', sub: 'Una sugerencia para la compañía y dos datos opcionales.', ids: ['p7'] },
+    { t: 'Tu pedido', sub: 'Qué debe mejorar, cómo apoyarías y una sugerencia libre.', ids: ['p13', 'p14', 'p7'] },
   ];
 
   $('#anio').textContent = new Date().getFullYear();
@@ -435,7 +421,7 @@
   function actualizarProgreso() {
     var n = REQUERIDAS.filter(respondida).length;
     var pct = Math.round((n / REQUERIDAS.length) * 100);
-    $('#ptxt').textContent = n + ' de ' + REQUERIDAS.length + ' respondidas';
+    $('#ptxt').textContent = n + ' de ' + REQUERIDAS.length + ' obligatorias';
     $('#ppct').textContent = pct + '%';
     $('#pbar').querySelector('i').style.width = pct + '%';
     $('#pbar').setAttribute('aria-valuenow', pct);
@@ -573,7 +559,6 @@
           var msg = 'Ya respondí la encuesta ciudadana de los Bomberos de Camaná 🚒 Son 2 minutos y es anónima: ' +
                     location.origin + '/encuesta?src=qr';
           $('#sh-wa').href = 'https://wa.me/?text=' + encodeURIComponent(msg);
-          cargarResumen(true);
         } else {
           alert((j && j.error) || 'No se pudo enviar la encuesta.');
         }
@@ -588,49 +573,6 @@
       });
   });
 
-  /* ── Meta, prueba social y resultados en vivo ───────────────────────── */
-  function pintarMeta(j) {
-    var t = Number(j.total) || 0;
-    var pct = Math.min(100, Math.round((t / META) * 100));
-    $('#ob-total').textContent = nf(t);
-    $('#ob-barra').style.width = pct + '%';
-    $('#h-total').textContent = nf(t);
-    $('#h-hoy').textContent = nf(j.hoy || 0);
-    $('#h-prom').textContent = j.promedioLabor != null ? j.promedioLabor : '—';
-    $('#s-total').textContent = nf(t);
-    $('#s-prom').textContent = j.promedioNota != null ? j.promedioNota + '/10' : '—';
-
-    if (t === 0) {
-      $('#ob-lbl').textContent = 'sé el primero en responder';
-      $('#ob-pie').textContent = 'Tu respuesta abre la conversación en la compañía.';
-    } else if (t >= META) {
-      $('#ob-lbl').textContent = t === 1 ? 'vecino ya respondió' : 'vecinos ya respondieron';
-      $('#ob-pie').textContent = 'Meta cumplida ✓ seguimos escuchando';
-    } else {
-      $('#ob-lbl').textContent = t === 1 ? 'vecino ya respondió' : 'vecinos ya respondieron';
-      $('#ob-pie').textContent = 'Faltan ' + nf(META - t) + ' para la meta (' + pct + '%)';
-    }
-  }
-
-  function cargarResumen(trasEnvio) {
-    fetch('/api/encuesta?resumen=1', { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (!j || !j.ok) return;
-        pintarMeta(j);
-        if (!trasEnvio) return;
-        var caja = $('#resumen');
-        caja.innerHTML =
-          '<div class="xp-stat"><div class="v">' + nf(j.total) + '</div><div class="l">Respuestas totales</div></div>' +
-          '<div class="xp-stat gold"><div class="v">' + (j.promedioLabor || '—') + '<small>/10</small></div><div class="l">Labor promedio</div></div>' +
-          '<div class="xp-stat"><div class="v">' + (j.recomiendaPct != null ? j.recomiendaPct + '%' : '—') + '</div><div class="l">Recomendaría ser bombero</div></div>' +
-          '<div class="xp-stat"><div class="v">' + (j.hanVistoPct != null ? j.hanVistoPct + '%' : '—') + '</div><div class="l">Ha visto a los bomberos actuar</div></div>';
-        caja.hidden = false;
-      })
-      .catch(function () { pintarMeta({ total: 0 }); });
-  }
-
-  cargarResumen(false);
 
   /* ── Compartir ──────────────────────────────────────────────────────── */
   var enlace = location.origin + '/encuesta';

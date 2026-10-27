@@ -9,8 +9,7 @@ análisis permanente** y un **panel de administración** privado.
 - 🎮 **Juego:** https://juego-reclutamiento.vercel.app
 - ✉️ **Contacto y registro:** https://juego-reclutamiento.vercel.app/contacto
 - 📊 **Encuesta ciudadana:** https://juego-reclutamiento.vercel.app/encuesta
-- 📈 **Resultados en vivo:** https://juego-reclutamiento.vercel.app/resultados
-- 🔐 **Panel:** https://juego-reclutamiento.vercel.app/admin
+- 🔐 **Panel (resultados e inscripciones):** https://juego-reclutamiento.vercel.app/admin
 
 ---
 
@@ -18,17 +17,16 @@ análisis permanente** y un **panel de administración** privado.
 
 | Archivo | Qué es |
 |---|---|
-| `index.html` | El juego completo (escenarios, misiones y medalla). **No registra usuarios.** |
+| `index.html` | El juego completo (escenarios, misiones y medalla). **No registra usuarios, no muestra contadores y no tiene enlaces externos.** |
 | `contacto.html` | Formulario oficial de inscripción y contacto. Es la única vía de registro. |
-| `encuesta.html` | Encuesta ciudadana de 7 preguntas, anónima, con contador en vivo. |
-| `resultados.html` | Tablero público permanente con el análisis automático de la encuesta. |
-| `admin.html` | Panel de administración: postulantes históricos, mensajes y encuestas. |
+| `encuesta.html` | Encuesta ciudadana de 10 preguntas, anónima. No muestra resultados al público. |
+| `admin.html` | Panel privado: inscripciones, encuestas con análisis y registros históricos del juego. |
 | `assets/institucional.css` | Sistema de diseño institucional compartido (rojo, dorado y grafito). |
-| `assets/rediseno.css` | Capa de diseño 2026 para encuesta, inscripción y resultados. |
-| `assets/encuesta.js` | Definición única de las 7 preguntas (la usan la encuesta, el tablero y el panel). |
-| `api/track.js` | Contador de visitas y de encuestas respondidas. |
-| `api/contacto.js` | Mensajes de contacto: alta pública, listado, estado y borrado. |
-| `api/encuesta.js` | Respuestas de la encuesta: alta pública, análisis agregado y administración. |
+| `assets/rediseno.css` | Capa de diseño 2026 para encuesta e inscripción. |
+| `assets/encuesta.js` | Definición única de las 10 preguntas (la usan la encuesta y el panel). |
+| `api/track.js` | Contador de visitas (el juego lo llama en silencio, sin mostrarlo). |
+| `api/contacto.js` | Inscripciones y mensajes: alta pública, listado, estado y borrado. |
+| `api/encuesta.js` | Respuestas de la encuesta: alta pública; lectura y análisis **solo con sesión**. |
 | `api/admin/login.js` | Entrega el token de sesión del panel. |
 | `api/admin/registros.js` | Listar, cambiar estado y eliminar postulantes históricos. |
 | `api/admin/stats.js` | Métricas del panel (visitas, postulantes, series por día). |
@@ -115,21 +113,28 @@ El panel tiene tres pestañas, cada una con sus propias métricas y exportación
 - Estado: `nuevo → atendido / archivado`.
 - Botón directo a WhatsApp y enlace `mailto:` para responder.
 
+**Inscripciones** (pestaña principal del panel)
+- Todo lo que llega desde `/contacto`: folio, fecha, nombre, DNI, edad, correo, teléfono,
+  distrito, motivo, disponibilidad y mensaje.
+- Filtro «Solo postulantes a voluntario» para separar a quien quiere postular del resto de consultas.
+- Estado: `nuevo → atendido / archivado`. Botón directo a WhatsApp y enlace `mailto:`.
+
 **Encuestas**
 - Participación de la campaña: total acumulado, hoy, últimos 7 días, origen y avance de meta.
 - KPIs: promedio de la labor, nota global y porcentaje que recomendaría ser bombero.
-- Gráficos de las 7 preguntas: distribución de notas, actividades de interés, contacto con
-  emergencias, vínculo con un bombero, recomendación, distrito y edad.
-- **Lectura automática**: el mismo análisis que se publica en `/resultados`.
+- Gráficos de las 10 preguntas: distribución de notas, actividades de interés, contacto con
+  emergencias, vínculo con un bombero, recomendación, conocimiento del cuartel, prioridades
+  de mejora, disposición a apoyar, distrito y edad.
+- **Lectura automática**: el análisis completo, visible solo con sesión iniciada.
 - Tabla con filtro «solo con comentario» y «nota global ≤ 5» para priorizar casos críticos.
 
 ---
 
 ## Encuesta ciudadana
 
-Las 7 preguntas están definidas en `assets/encuesta.js` (las usan el formulario, el tablero y
-el panel). Para cambiar textos u opciones, edita ese archivo y el arreglo
-`REQUERIDAS` / `OPCIONES` de `api/encuesta.js`.
+Las 10 preguntas están definidas en `assets/encuesta.js` (las usan el formulario y el panel).
+Para cambiar textos u opciones, edita ese archivo y el arreglo `REQUERIDAS` / `OPCIONES` /
+`MULTIPLE` de `api/encuesta.js`.
 
 | # | Pregunta | Tipo |
 |---|---|---|
@@ -140,6 +145,13 @@ el panel). Para cambiar textos u opciones, edita ese archivo y el arreglo
 | 5 | ¿Qué nota le pondrías a los Bomberos de Camaná? | Escala 1–10 |
 | 6 | ¿Recomendarías a alguien ser bombero voluntario? | Opciones |
 | 7 | ¿Qué le pedirías a los Bomberos de Camaná? | Texto libre (opcional) |
+| 8 | ¿Sabes dónde queda la compañía más cercana a tu casa? | Opciones |
+| 9 | ¿Qué debería mejorar primero la compañía? | Selección múltiple |
+| 10 | ¿Cómo te gustaría apoyar a los bomberos de Camaná? | Opciones |
+
+Las preguntas 8–10 se añadieron después de las 7 del cuaderno de la compañía y usan los
+identificadores `p12`, `p13` y `p14` para no chocar con las preguntas `p8`–`p11` de la
+versión anterior, que se siguen aceptando por compatibilidad pero ya no se muestran.
 
 Además, dos datos opcionales: distrito y rango de edad.
 
@@ -147,25 +159,30 @@ Además, dos datos opcionales: distrito y rango de edad.
 
 `GET /api/encuesta?resumen=1` devuelve solo cifras agregadas y un bloque `analisis` con la
 lectura automática de los resultados (imagen de la compañía, cobertura de emergencias,
-demanda de actividades, red de reclutamiento, disposición a recomendar y ritmo de la campaña).
-Ese bloque alimenta:
+demanda de actividades, red de reclutamiento, disposición a recomendar, conocimiento del
+cuartel, prioridades de mejora, gente dispuesta a apoyar y ritmo de la campaña).
 
-- el contador en vivo de `encuesta.html`;
-- el tablero público de `resultados.html`, que se refresca cada minuto y nunca se reinicia;
-- la pestaña **Encuestas** del panel interno;
-- el contador de encuestas del HUD del juego.
+> **Requiere sesión de administrador.** Los resultados ya no son públicos: sin token, la API
+> responde `401`. Ese bloque alimenta únicamente la pestaña **Encuestas** del panel interno.
 
 ### Cómo se conecta con el juego
 
-1. El HUD del juego muestra **visitas** y **encuestas respondidas** en tiempo real.
-2. Hay una zona **📊 ENCUESTA** en el mapa (sobre la avenida principal) con un panel que
-   invita a responder.
-3. Al completar las 7 misiones aparece el bloque «Reto final: la encuesta ciudadana» con el
-   avance de la meta y el enlace directo.
-4. Al enviar la encuesta se guarda el folio en `localStorage` (`camana_enc`). Al volver al
-   juego con `?enc=1` o con ese folio guardado, el juego marca la encuesta como respondida y
-   estampa **«ENCUESTA RESPONDIDA»** en la medalla.
-5. La pantalla de éxito de la encuesta ofrece volver al juego y compartir por WhatsApp.
+El juego es deliberadamente cerrado: **no muestra contadores, no tiene menú de navegación ni
+enlaces al sitio**, y no ofrece inscribirse ni responder la encuesta dentro del mapa. La única
+conexión es el final:
+
+1. Al completar las 7 misiones aparece la pantalla final con un solo pedido: responder la
+   encuesta para desbloquear la medalla.
+2. Al enviar la encuesta se guarda el folio en `localStorage` (`camana_enc`). Al volver al
+   juego con `?enc=1` o con ese folio guardado, la medalla se desbloquea y queda estampada
+   con **«ENCUESTA RESPONDIDA»**.
+3. Si alguien pulsa «Descargar mi medalla» sin haber respondido, ve un aviso con el enlace a la
+   encuesta en lugar de la medalla.
+4. La pantalla de éxito de la encuesta ofrece volver al juego a recoger la medalla y compartir
+   por WhatsApp.
+
+La medalla lleva un **hito de Camaná elegido al azar** en cada emisión (Plaza de Armas, Malecón,
+Cuartel B-35, Puente del río, Valle o Cerros), dibujado en canvas junto al sello de la encuesta.
 
 La inscripción real **solo** ocurre en `/contacto`. El juego no pide nombre, DNI ni ningún
 dato personal: la medalla se dibuja en el navegador.

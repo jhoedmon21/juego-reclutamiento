@@ -4,17 +4,23 @@ const auth = require('../lib/auth');
 const { json, readBody, preflight } = require('../lib/http');
 
 /* Validación del cuestionario. Los identificadores coinciden con assets/encuesta.js
-   Son las 7 preguntas del cuaderno de la compañía. Las preguntas p8–p11 de la
-   versión anterior se aceptan si vienen (compatibilidad con datos ya guardados),
-   pero ya no son obligatorias ni se muestran en el formulario. */
+   Son las 10 preguntas de la campaña: p1–p7 del cuaderno de la compañía y
+   p12–p14 añadidas para orientar el trabajo (ubicación del cuartel, prioridades
+   y disposición a apoyar). Se usan ids p12+ para no chocar con las preguntas
+   heredadas p8–p11, que se aceptan si vienen pero ya no se muestran. */
 const ESCALA = { p1: [1, 10], p5: [1, 10] };
 const OPCIONES = {
   p2: ['si', 'una', 'no', 'ns'],
   p4: ['amigo', 'familiar', 'ambos', 'no'],
   p6: ['si', 'talvez', 'no'],
+  p12: ['si', 'maso', 'no'],
+  p14: ['voluntario', 'donacion', 'difundir', 'aprender', 'ahora'],
 };
-const MULTIPLE = { p3: ['incendios', 'rescate', 'vehicular', 'matpel', 'prevencion', 'otro'] };
-const REQUERIDAS = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'];
+const MULTIPLE = {
+  p3: ['incendios', 'rescate', 'vehicular', 'matpel', 'prevencion', 'otro'],
+  p13: ['equipo', 'capacitacion', 'respuesta', 'comunicacion', 'voluntarios', 'local'],
+};
+const REQUERIDAS = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p12', 'p13', 'p14'];
 
 /* Preguntas heredadas (solo se guardan si llegan bien formadas). */
 const LEGADO_OPCIONES = {
@@ -201,6 +207,15 @@ function resumen(encs) {
   const vinculo = cuenta((e) => e.r && e.r.p4, OPCIONES.p4);
   const visto = cuenta((e) => e.r && e.r.p2, OPCIONES.p2);
   const recomendacion = cuenta((e) => e.r && e.r.p6, OPCIONES.p6);
+  const ubicacion = cuenta((e) => e.r && e.r.p12, OPCIONES.p12);
+  const prioridades = cuenta((e) => e.r && e.r.p13, MULTIPLE.p13);
+  const apoyo = cuenta((e) => e.r && e.r.p14, OPCIONES.p14);
+
+  const sabeCuartel = encs.filter((e) => e.r && e.r.p12 === 'si').length;
+  const quierenApoyar = encs.filter((e) => e.r && e.r.p14 && e.r.p14 !== 'ahora').length;
+  const quierenVoluntario = encs.filter((e) => e.r && e.r.p14 === 'voluntario').length;
+  const topPrioridad = Object.keys(prioridades).sort((a, b) => prioridades[b] - prioridades[a])[0];
+  const prioridadMax = topPrioridad ? prioridades[topPrioridad] : 0;
 
   const topActividad = Object.keys(actividades).sort((a, b) => actividades[b] - actividades[a])[0];
   const actividadesMax = topActividad ? actividades[topActividad] : 0;
@@ -297,6 +312,43 @@ function resumen(encs) {
       );
     }
 
+    const pctCuartel = pct(sabeCuartel, n);
+    if (pctCuartel != null) {
+      push(
+        pctCuartel >= 70 ? 'ok' : 'warn',
+        'El ' + pctCuartel + '% sabe dónde está el cuartel',
+        pctCuartel >= 70
+          ? 'La ubicación de la compañía es conocida en el distrito: en una emergencia la gente sabe a dónde acudir.'
+          : 'Una parte importante no tiene claro dónde queda el cuartel. Un mapa y un cartel visible en la puerta, más difusión en colegios, resuelve algo básico.'
+      );
+    }
+
+    if (topPrioridad && prioridadMax) {
+      const etiquetaPri = {
+        equipo: 'equipo y unidades',
+        capacitacion: 'capacitación del personal',
+        respuesta: 'tiempo de respuesta',
+        comunicacion: 'comunicación con el barrio',
+        voluntarios: 'más voluntarios',
+        local: 'local e instalaciones',
+      }[topPrioridad];
+      push(
+        'info',
+        'Lo que piden mejorar: ' + (etiquetaPri || topPrioridad),
+        prioridadMax + ' personas lo marcaron (' + pct(prioridadMax, n) + '%). Es el argumento más fuerte para sustentar un pedido de apoyo ante la municipalidad o el gobierno regional.'
+      );
+    }
+
+    if (quierenApoyar) {
+      const pctApoyo = pct(quierenApoyar, n);
+      push(
+        'ok',
+        quierenApoyar + ' personas quieren apoyar',
+        (quierenVoluntario ? quierenVoluntario + ' se ofrecieron como voluntarios. ' : '') +
+          'El ' + pctApoyo + '% está dispuesto a sumar de alguna forma (voluntariado, donación, difusión o primeros auxilios). Conviene contactarlos mientras la respuesta está fresca.'
+      );
+    }
+
     if (ritmo7 >= 1) {
       const falta = Math.max(0, META - n);
       const dias = Math.ceil(falta / ritmo7);
@@ -358,6 +410,14 @@ function resumen(encs) {
     vinculo,
     visto,
     recomendacion,
+    ubicacion,
+    prioridades,
+    apoyo,
+    sabeCuartel,
+    sabeCuartelPct: pct(sabeCuartel, n),
+    quierenApoyar,
+    quierenApoyarPct: pct(quierenApoyar, n),
+    quierenVoluntario,
     distritos: cuenta((e) => e.distrito, DISTRITOS),
     edades: cuenta((e) => e.edad, EDADES),
     origenes,
@@ -407,14 +467,16 @@ module.exports = async function handler(req, res) {
     const url = new URL(req.url, 'http://localhost');
 
     // Resumen público: solo cifras agregadas, nunca respuestas individuales.
+    /* Los resultados ya no son públicos: solo se consultan con sesión iniciada
+       desde el panel interno. Sin token, ni agregados ni respuestas. */
+    if (!auth.requireAdmin(req)) {
+      return json(res, 401, { ok: false, error: 'Los resultados requieren iniciar sesión.' });
+    }
+
     if (req.method === 'GET' && url.searchParams.get('resumen') === '1') {
       const encs = await store.listEncuestas(5000);
       const s = resumen(encs);
       return json(res, 200, Object.assign({ ok: true }, s));
-    }
-
-    if (!auth.requireAdmin(req)) {
-      return json(res, 401, { ok: false, error: 'Sesión expirada. Vuelve a entrar.' });
     }
 
     if (req.method === 'GET') {

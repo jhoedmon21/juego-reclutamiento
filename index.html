@@ -97,7 +97,7 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 <canvas id="c"></canvas>
 <div id="hud"><b class="f">🚒 CAMANÁ TE NECESITA</b>
 <div class="m" id="m0"></div><div class="m" id="m1"></div><div class="m" id="m2"></div><div class="m" id="m3"></div><div class="m" id="m4"></div><div class="m" id="m5"></div><div class="m" id="m6"></div>
-<div id="bar"><i></i></div><div class="vw" id="vw"><span>👁 <b id="vcn" class="v0">—</b> <i id="vcu">visitas</i></span><span>📊 <b id="rcn" class="v0">—</b> <i id="rcu">encuestas</i></span></div><button class="bt" id="bm">📖 Manual del bombero (M)</button></div>
+<div id="bar"><i></i></div><button class="bt" id="bm">📖 Manual del bombero (M)</button></div>
 <canvas id="mm" width="224" height="224"></canvas>
 <div id="hint">WASD / flechas: conducir · <b>E</b>: agua · <b>R</b>: hidráulica · <b>Espacio</b>: sirena · <b>M</b>: manual</div>
 <div id="pg"><span id="pgt"></span><i></i></div><div id="gd"><b id="ga">▲</b><span id="gt"></span></div><div id="pg2"><span id="pg2t"></span><i></i></div><div id="pn"></div><div id="toast"></div>
@@ -105,40 +105,34 @@ html,body{overscroll-behavior:none;-webkit-user-select:none;user-select:none;-we
 <div class="pad"><button data-k="KeyR" class="b2">🔧</button><button data-k="Space" class="b2">📢</button><button data-k="KeyM" class="b2">📖</button><button data-k="KeyE" class="big">💧</button></div>
 <div id="rg"><div class="bx"></div></div>
 <div id="mn"><div class="bx"></div></div>
-<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="vw2">👁 <b id="vco">—</b> <i id="vou">visitas</i> · 📊 <b id="rco">—</b> <i id="rou">encuestas respondidas</i></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button><p class="ovnav"><a href="/contacto?desde=juego">Inscripción</a><span>·</span><a href="/encuesta?src=juego">Encuesta ciudadana</a><span>·</span><a href="/resultados">Resultados</a><span>·</span><a href="/admin">Panel interno</a></p></div></div>
-<div class="ov" id="fin"><div class="finbox"><h1>¡Bombero<br><em>honorario!</em></h1><p>Completaste las 7 misiones del simulador. Llévate tu medalla y elige tu siguiente paso: la encuesta ciudadana o la inscripción oficial.</p><div class="finbtns"><button class="lk" id="cb">🏅 Descargar mi medalla</button><button class="lk alt" id="kp">Seguir explorando</button></div><div class="fin2"><div class="fc" id="fc-enc"><span class="fi">📊</span><b>Reto final: la encuesta ciudadana</b><p>7 preguntas, 2 minutos y anónima. Es el único termómetro que nos dice qué necesita Camaná y cómo preparar mejor a la compañía.</p><div class="fmeta"><i id="fbar"></i></div><small id="fcount">Cargando el avance de la campaña…</small><a class="lk sm" href="/encuesta?src=juego" id="encl">Responder la encuesta →</a></div><div class="fc" id="fc-ins"><span class="fi">📝</span><b>¿Quieres ser bombero de verdad?</b><p>La inscripción oficial se hace únicamente en el formulario de la compañía. Este juego no registra datos personales.</p><a class="lk sm alt" href="/contacto?desde=juego">Ir al formulario de inscripción →</a></div></div></div></div>
+<div class="ov" id="ov"><div><h1>Camaná<br><em>te necesita</em></h1><p>Conduce el carro bomba por 4 escenarios reales: incendio estructural, rescate de personas, materiales peligrosos y rescate vehicular. Reúne tus documentos y conoce los beneficios y deberes del bombero voluntario.<br><b>Servir también es amar a tu tierra.</b></p><p class="mbt">Joystick a la izquierda para conducir · 💧 agua · 🔧 hidráulica · 📢 sirena · 📖 manual</p><button class="lk" id="go">🚒 Arrancar motor</button></div></div>
+<div class="ov" id="fin"><div class="finbox"><h1>¡Bombero<br><em>honorario!</em></h1><p>Completaste las 7 misiones del simulador. Solo falta un paso para llevarte tu medalla.</p><div class="fin2"><div class="fc" id="fc-enc"><span class="fi">🏅</span><b>Responde la encuesta y desbloquea tu medalla</b><p>10 preguntas, 2 minutos y anónima. Al terminar la encuesta vuelves aquí con tu medalla lista para descargar.</p><small id="fcount">Tu medalla se desbloquea al enviar la encuesta.</small><a class="lk sm" href="/encuesta?src=juego" id="encl">Responder la encuesta →</a></div></div><div class="finbtns"><button class="lk" id="cb">🏅 Descargar mi medalla</button><button class="lk alt" id="kp">Seguir explorando</button></div></div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
 var T=THREE,$=function(s){return document.querySelector(s)},PI=Math.PI,rnd=Math.random;
-// ── Contador de visitas y encuestas respondidas ───────────────────────────
-function nf(n){try{return Number(n).toLocaleString("es-PE")}catch(e){return String(n)}}
-function pintarStats(v,e){var a=$("#vcn"),b=$("#rcn"),c=$("#vco"),d=$("#rco");
-function set(id,txt){var x=$(id);if(x)x.textContent=txt}
-if(a&&v!=null){a.textContent=nf(v);a.className="";set("#vcu",v==1?"visita":"visitas");set("#vou",v==1?"visita":"visitas")}
-if(b&&e!=null){b.textContent=nf(e);b.className="";set("#rcu",e==1?"encuesta":"encuestas");set("#rou",e==1?"encuesta respondida":"encuestas respondidas")}
-if(c&&v!=null)c.textContent=nf(v);if(d&&e!=null)d.textContent=nf(e)}
-function apiStats(metodo){
-var o={method:metodo||"GET",headers:{"Content-Type":"application/json"}};
-if(metodo==="POST")o.body="{}";
-return fetch("/api/track",o).then(function(r){return r.json()}).then(function(j){if(j&&j.ok!==false)pintarStats(j.visitas,j.encuestas);return j}).catch(function(){return null})}
+// ── Registro de visitas (silencioso: el juego no muestra contadores) ─────
 var yaVisitado=null;try{yaVisitado=sessionStorage.getItem("camana_v");sessionStorage.setItem("camana_v","1")}catch(e){}
-apiStats(yaVisitado?"GET":"POST");
-// insignia: la encuesta deja un folio en localStorage al enviarse
+try{fetch("/api/track",yaVisitado?{method:"GET"}:{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).catch(function(){})}catch(e){}
+// la encuesta deja una marca en localStorage al enviarse: es lo que desbloquea la medalla
 var ENC=0;try{ENC=localStorage.getItem("camana_enc")?1:0;if(/[?&]enc=1/.test(location.search)){ENC=1;localStorage.setItem("camana_enc","1")}}catch(e){}
-function marcarEncuesta(){var c=$("#fc-enc");if(!c)return;if(ENC){c.classList.add("done");var a=$("#encl");if(a){a.textContent="✅ Ya respondiste · ver resultados";a.href="/resultados"}}}
+function marcarEncuesta(){if(!ENC)return;var c=$("#fc-enc");if(c)c.classList.add("done");var a=$("#encl");if(a)a.outerHTML='<span style="display:inline-block;margin-top:10px;padding:8px 16px;border-radius:30px;background:rgba(34,197,94,.18);border:1px solid rgba(74,222,128,.45);color:#4ade80;font-weight:700;font-size:.86rem">✅ Encuesta respondida · medalla desbloqueada</span>';var f=$("#fcount");if(f)f.textContent="Ya respondiste: pulsa «Descargar mi medalla»."}
 marcarEncuesta();
-// prueba social de la encuesta en la pantalla final
-function pintarEncuesta(j){if(!j)return;var t=Number(j.total)||0,m=Number(j.meta)||500;
-var e=$("#fcount"),b=$("#fbar");if(b)b.style.width=Math.min(100,Math.round(t/m*100))+"%";
-if(e)e.textContent=ENC?"Insignia conseguida: ya eres parte de las "+nf(t)+" respuestas":(t>0?"Ya respondieron "+nf(t)+" "+(t==1?"vecino":"vecinos")+" · meta "+nf(m):"Sé el primero en responder")}
-fetch("/api/encuesta?resumen=1").then(function(r){return r.json()}).then(pintarEncuesta).catch(function(){});
 var MB=matchMedia("(pointer:coarse)").matches,R;try{R=new T.WebGLRenderer({canvas:$("#c"),antialias:true})}catch(e){$("#ov").innerHTML="<p>Tu navegador no soporta WebGL.</p>";return}
 R.setPixelRatio(Math.min(devicePixelRatio,MB?1.5:2));R.setSize(innerWidth,innerHeight);R.shadowMap.enabled=true;R.shadowMap.type=T.PCFSoftShadowMap;R.outputEncoding=T.sRGBEncoding;R.toneMapping=T.ACESFilmicToneMapping;R.toneMappingExposure=1.15;
 function tex(c){var t=new T.CanvasTexture(c);t.encoding=T.sRGBEncoding;return t}
 function cv(w,h){var c=document.createElement("canvas");c.width=w;c.height=h;return c}
-var S=new T.Scene(),sk=cv(8,256),sx=sk.getContext("2d"),gr=sx.createLinearGradient(0,0,0,256);gr.addColorStop(0,"#2b5fa8");gr.addColorStop(.5,"#e3a77a");gr.addColorStop(1,"#ffd9a3");sx.fillStyle=gr;sx.fillRect(0,0,8,256);
-S.background=tex(sk);S.fog=new T.Fog(0xf0c9a0,70,190);
+var S=new T.Scene(),sk=cv(1024,512),sx=sk.getContext("2d"),gr=sx.createLinearGradient(0,0,0,512);
+gr.addColorStop(0,"#16386e");gr.addColorStop(.30,"#4a7ab0");gr.addColorStop(.54,"#c98f6e");gr.addColorStop(.74,"#f0b27a");gr.addColorStop(1,"#ffe3b4");
+sx.fillStyle=gr;sx.fillRect(0,0,1024,512);
+var sg=sx.createRadialGradient(700,362,8,700,362,270);
+sg.addColorStop(0,"rgba(255,242,196,.95)");sg.addColorStop(.32,"rgba(255,202,124,.42)");sg.addColorStop(1,"rgba(255,170,90,0)");
+sx.fillStyle=sg;sx.fillRect(0,0,1024,512);
+sx.fillStyle="rgba(255,247,216,.92)";sx.beginPath();sx.arc(700,362,32,0,7);sx.fill();
+for(var j=0;j<26;j++){var cw=90+rnd()*230,chh=12+rnd()*26,ccx=rnd()*1024,ccy=50+rnd()*240,cg=sx.createRadialGradient(ccx,ccy,2,ccx,ccy,cw/2);
+cg.addColorStop(0,"rgba(255,238,220,"+(.09+rnd()*.15).toFixed(2)+")");cg.addColorStop(1,"rgba(255,238,220,0)");
+sx.fillStyle=cg;sx.save();sx.translate(ccx,ccy);sx.scale(1,chh/cw);sx.beginPath();sx.arc(0,0,cw/2,0,7);sx.fill();sx.restore()}
+S.background=tex(sk);S.fog=new T.Fog(0xf3c99e,80,205);
 var C=new T.PerspectiveCamera(60,innerWidth/innerHeight,.1,400);
 S.add(new T.HemisphereLight(0xffe2c4,0x6a7a4a,.75));
 var L=new T.DirectionalLight(0xffc98a,1.25);L.castShadow=true;L.shadow.mapSize.set(MB?1024:2048,MB?1024:2048);L.shadow.bias=-.0005;var sc=L.shadow.camera;sc.left=sc.bottom=-50;sc.right=sc.top=50;sc.far=160;S.add(L,L.target);
@@ -262,10 +256,9 @@ veh:P("🚗 Rescate vehicular",`<ul><li>Señalizar y asegurar la escena del acci
 req:P("📄 Requisitos",`<p><b>Postulante:</b></p><ul><li>Ficha única de postulante</li><li>Declaración jurada de antecedentes penales o policiales</li><li>Constancia de estudios y/o trabajo</li><li>Mínimo 3.er grado de secundaria</li><li>Certificado domiciliario</li><li>Copia de DNI, partida de nacimiento o libreta militar</li><li>Autorización notarial si eres menor</li></ul><p><b>Bombero alumno:</b> desde los 15 años; aprueba exámenes médico, psicológico y de aptitud física y la Escuela Básica para ser APTO.</p><p><b>Asimilado (profesional):</b> título, CV, declaraciones juradas, ser APTO y aprobar el Curso Básico.</p><p>Acércate a la compañía más cercana a tu distrito.</p><p class="src">Fuente: portal.bomberosperu.gob.pe/admision</p>`),
 ben:P("🎁 Beneficios",`<ul><li>Atención en EsSalud sin costo por actos de servicio (si no tienes otro seguro) e incorporación al SIS</li><li>Subvención del Fondo de Invalidez y Protección por incapacidad o fallecimiento en acto de servicio</li><li>Pensión de gracia excepcional y temporal (Ministerio del Interior)</li><li>Becas PRONABEC con puntaje adicional para ti y tus hijos</li><li>Pase libre en transporte público</li><li>25 % de descuento en maestrías y doctorados (previo convenio)</li><li>Prioridad en Techo Propio y Mi Vivienda, si aplicas</li><li>Exoneración del pago por certificado médico en establecimientos públicos</li><li>Convenios institucionales, p. ej. medicina hiperbárica por actos de servicio para bomberos y familiares directos (desde 12/2023)</li><li>Permisos laborales para emergencias y no discriminación por ser bombero</li></ul>`+SRC),
 deb:P("⚖️ Deberes",`<ul><li>Servir de forma voluntaria y ad honorem: no eres funcionario ni servidor público</li><li>Cumplir las disposiciones del Comando Nacional, que son obligatorias</li><li>Respetar la jerarquía y la disciplina institucional</li><li>Someterte al Consejo Nacional de Disciplina</li><li>Usar de forma correcta y diligente bienes, equipos y materiales</li><li>Usar uniforme, insignias y emblemas solo con autorización</li><li>Instruirte y actuar con valor, integridad, rectitud y honradez</li></ul><p>Jerarquía: de Aspirante a Brigadier General. Pasas al retiro a los 70 años, por incapacidad o a tu solicitud. Son causales de expulsión la sanción disciplinaria firme o una sentencia firme por delito doloso.</p>`+SRC),
-est:P("🏠 La compañía de bomberos",`<ul><li>Es el hogar de la compañía: aquí se guardan las unidades, los equipos y la radio</li><li>Cada guardia empieza revisando la unidad: motor, agua, mangueras, herramientas hidráulicas y luces</li><li>Se entrena con frecuencia: nudos, escaleras, rescate y primeros auxilios</li><li>Tras cada emergencia se limpia, repone y deja todo listo para la siguiente</li></ul><p><b>Mira:</b> al acercarte, las puertas se abren y se ven la unidad de reserva y los casilleros con el equipo de protección.</p>`+NT),
-reg:P("🔥 ¡Responde el llamado!","<p>Camaná te necesita. Servir también es amar a tu tierra.</p><p>La inscripción oficial se realiza <b>solo en el formulario de la compañía</b>: allí dejas tus datos, adjuntas tus documentos y recibes tu <b>folio de postulante</b>. Este juego no registra a nadie.</p><a class=\"lk\" href=\"/contacto?desde=juego\" style=\"display:inline-block;text-decoration:none\">Ir al formulario de inscripción →</a><p class=\"src\" style=\"margin-top:10px\">El simulador es informativo y no recopila datos personales.</p>"),
-enc:P("📊 Encuesta ciudadana","<p>Antes de irte, deja tu opinión: <b>7 preguntas y 2 minutos</b>. Es anónima y es el único termómetro que tiene la compañía para saber qué necesita Camaná.</p><ul><li>No pedimos nombre, DNI ni correo.</li><li>Al enviarla vuelves con tu insignia de ciudadano comprometido.</li><li>Los resultados se publican en vivo.</li></ul><a class=\"lk\" href=\"/encuesta?src=juego\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;text-decoration:none\">Responder la encuesta →</a><p class=\"src\" style=\"margin-top:10px\">También puedes llegar desde el botón 📖 o al terminar las misiones.</p>")};
-var ZN=[[0,34,"inc","INCENDIO","#d9501a"],[-34,34,"res","RESCATE","#1d6fb8"],[38,12,"haz","MAT. PELIGROSOS","#6a9a1d"],[-42,22,"veh","RESCATE VEHICULAR","#1d9a8a"],[-40,-34,"req","REQUISITOS","#b8791d"],[40,-34,"ben","BENEFICIOS","#6a4bb8"],[58,-12,"deb","DEBERES","#b3121a"],[0,-6,"reg","INSCRÍBETE","#b3121a"],[0,14,"enc","ENCUESTA","#0e7490"],[0,-27,"est","COMPAÑÍA","#be185d"]],ZR=[],vis={},nv=0,cur="";
+est:P("🏠 La compañía de bomberos",`<ul><li>Es el hogar de la compañía: aquí se guardan las unidades, los equipos y la radio</li><li>Cada guardia empieza revisando la unidad: motor, agua, mangueras, herramientas hidráulicas y luces</li><li>Se entrena con frecuencia: nudos, escaleras, rescate y primeros auxilios</li><li>Tras cada emergencia se limpia, repone y deja todo listo para la siguiente</li></ul><p><b>Mira:</b> al acercarte, las puertas se abren y se ven la unidad de reserva y los casilleros con el equipo de protección.</p>`+NT)
+};
+var ZN=[[0,34,"inc","INCENDIO","#d9501a"],[-34,34,"res","RESCATE","#1d6fb8"],[38,12,"haz","MAT. PELIGROSOS","#6a9a1d"],[-42,22,"veh","RESCATE VEHICULAR","#1d9a8a"],[-40,-34,"req","REQUISITOS","#b8791d"],[40,-34,"ben","BENEFICIOS","#6a4bb8"],[58,-12,"deb","DEBERES","#b3121a"],[0,-27,"est","COMPAÑÍA","#be185d"]],ZR=[],vis={},nv=0,cur="";
 ZN.forEach(function(q){var r=new T.Mesh(new T.RingGeometry(4.6,6,40),new T.MeshBasicMaterial({color:q[4],side:T.DoubleSide,transparent:true,opacity:.9}));r.rotation.x=-PI/2;r.position.set(q[0],.2,q[1]);S.add(r);ZR.push(r);
 var d=new T.Mesh(new T.CircleGeometry(4.6,32),new T.MeshBasicMaterial({color:q[4],transparent:true,opacity:.28}));d.rotation.x=-PI/2;d.position.set(q[0],.18,q[1]);S.add(d);var s=lab(q[3],q[4],11);s.position.set(q[0],8,q[1]);S.add(s);var bm=new T.Mesh(new T.CylinderGeometry(.15,.15,7,6),new T.MeshBasicMaterial({color:q[4],transparent:true,opacity:.5}));bm.position.set(q[0],3.5,q[1]);S.add(bm)});
 // escenarios
@@ -319,25 +312,128 @@ document.querySelectorAll(".pad button").forEach(function(b){var c=b.dataset.k;b
 var RW=-9,REC=null,SV=0,CB,gs=Date.now();C.position.set(0,3.4,-53.5);
 function closeRg(){mo=0;$("#rg").className=""}
 // El juego NO registra usuarios: la medalla se dibuja en el navegador y no pide datos.
-function abrirMedalla(){if(!REC)REC={f:new Date().toLocaleDateString("es-PE",{day:"numeric",month:"long",year:"numeric"}),s:"CAM-"+String(Date.now()).slice(-6)};showCert()}
-function drawCert(){var c=cv(1200,850),x=c.getContext("2d"),g=x.createRadialGradient(600,300,50,600,425,800);g.addColorStop(0,"#9c1a1f");g.addColorStop(.6,"#4a0a0d");g.addColorStop(1,"#1a0505");x.fillStyle=g;x.fillRect(0,0,1200,850);
-x.save();x.translate(600,200);for(var j=0;j<24;j++){x.rotate(PI/12);x.fillStyle="rgba(255,190,60,.08)";x.beginPath();x.moveTo(0,0);x.lineTo(900,-40);x.lineTo(900,40);x.fill()}x.restore();
-x.strokeStyle="#f5c518";x.lineWidth=10;x.strokeRect(30,30,1140,790);x.strokeStyle="#ff7a1a";x.lineWidth=3;x.strokeRect(50,50,1100,750);x.textAlign="center";x.textBaseline="middle";
-[["#d7191f",[545,62,612,62,642,185,580,185]],["#fff",[588,62,655,62,625,185,562,185]]].forEach(function(q){x.fillStyle=q[0];x.beginPath();x.moveTo(q[1][0],q[1][1]);for(var j=2;j<8;j+=2)x.lineTo(q[1][j],q[1][j+1]);x.fill()});
-var rg=x.createRadialGradient(590,190,10,600,200,78);rg.addColorStop(0,"#ffe58a");rg.addColorStop(1,"#b8860b");x.fillStyle=rg;x.beginPath();x.arc(600,200,76,0,7);x.fill();x.strokeStyle="#7a5a00";x.lineWidth=5;x.stroke();
-x.fillStyle="#b3121a";x.beginPath();for(var j=0;j<16;j++){var a=j*PI/8-PI/2,rr=j%2?26:58;x.lineTo(600+Math.cos(a)*rr,200+Math.sin(a)*rr)}x.closePath();x.fill();x.stroke();x.font="40px Arial";x.fillText("🔥",600,203);
-x.fillStyle="#f5c518";x.font="74px Impact,Arial Narrow Bold,sans-serif";x.fillText("MEDALLA DE HONOR",600,330);x.fillStyle="#fff";x.font="bold 36px Arial";x.fillText("BOMBERO HONORARIO DE CAMANÁ",600,392);
-x.fillStyle="#ffd9a3";x.font="italic 24px Georgia,serif";x.fillText("Se otorga el reconocimiento de",600,442);x.fillStyle="#fff";var nm="BOMBERO HONORARIO",fs=66;x.font="bold "+fs+"px Georgia,serif";var wd=x.measureText(nm).width;if(wd>980){fs=Math.floor(fs*980/wd);x.font="bold "+fs+"px Georgia,serif"}x.fillText(nm,600,505);
-x.fillStyle="#ffd9a3";x.font="italic 22px Georgia,serif";x.fillText("a quien completó las 7 misiones del simulador",600,548);
-x.strokeStyle="#f5c518";x.lineWidth=3;x.beginPath();x.moveTo(200,563);x.lineTo(1000,563);x.stroke();x.font="30px Arial";x.fillStyle="#ffe9b0";
-x.fillText("🔥 3 focos apagados     🆘 3 rescates     ☣️ 1 fuga controlada",600,620);x.fillText("🚗 1 extricación     📄 7 documentos     ⏱ "+Math.max(1,Math.round((Date.now()-gs)/60000))+" min de servicio",600,672);
-x.font="bold 28px Georgia,serif";x.fillStyle="#f5c518";x.fillText("Camaná te necesita. Servir también es amar a tu tierra.",600,738);x.font="20px Arial";x.fillStyle="#fff";x.textAlign="left";x.fillText("Camaná, "+REC.f,90,778);x.textAlign="right";x.fillText("N.º "+REC.s,1110,778);
-x.textAlign="center";x.font="15px Arial";x.fillStyle="#d9b8a8";fit(x,"Reconocimiento del juego «Camaná te necesita». No guarda datos personales: la inscripción se hace en el formulario de la compañía.",15,1040,"Arial");x.fillText("Reconocimiento del juego «Camaná te necesita». No guarda datos personales: la inscripción se hace en el formulario de la compañía.",600,806);
-if(ENC){x.save();x.translate(214,132);x.rotate(-.16);x.strokeStyle="#4ade80";x.lineWidth=4;x.strokeRect(-122,-30,244,60);x.fillStyle="#4ade80";x.font="bold 20px Arial";x.textAlign="center";x.fillText("ENCUESTA RESPONDIDA",0,7);x.restore();x.textAlign="center"}
+// Se desbloquea al responder la encuesta (marca en localStorage).
+function abrirMedalla(){
+if(!REC)REC={f:new Date().toLocaleDateString("es-PE",{day:"numeric",month:"long",year:"numeric"}),s:"CAM-"+String(Date.now()).slice(-6)};
+if(!ENC){
+mo=1;$("#rg").className="on";
+$("#rg .bx").innerHTML='<h3 class="f" style="color:var(--red);margin:0 0 8px;font-size:1.35rem">🔒 Tu medalla está casi lista</h3><p style="font-size:.93rem;margin:0 0 14px">Para llevártela falta un solo paso: responder la <b>encuesta ciudadana</b>. Son 10 preguntas, 2 minutos y es anónima. Al enviarla, esta medalla se desbloquea y se marca con tu insignia de ciudadano comprometido.</p><a class="lk" href="/encuesta?src=juego" style="display:inline-block;text-decoration:none">📊 Responder la encuesta →</a><div style="margin-top:12px"><button class="bt" id="rkl">Volver al juego</button></div><p class="src">La medalla se dibuja en tu navegador: el juego no guarda tu nombre ni ningún dato personal.</p>';
+$("#rkl").onclick=closeRg;return}
+showCert()}
+// ── Hito de Camaná: cada medalla lleva un lugar distinto, al azar ────────
+var HITOS=[
+{n:"Plaza de Armas",k:0},
+{n:"Malecón de Camaná",k:1},
+{n:"Cuartel B-35",k:2},
+{n:"Puente del río Camaná",k:3},
+{n:"Valle de Camaná",k:4},
+{n:"Cerros camaneños",k:5}];
+var HITO=HITOS[Math.floor(rnd()*HITOS.length)];
+function escenaHito(x,cx,cy,r,k){
+x.save();x.beginPath();x.arc(cx,cy,r,0,7);x.clip();
+var cielos=[["#ffe1a8","#f08a4b"],["#bfe6f5","#4f93b8"],["#d8e2ff","#7d8ff0"],["#cdeed8","#4f9c74"],["#ffeaa7","#d99b3f"],["#f7c6a3","#b0563c"]];
+var cc=cielos[k%6],g=x.createLinearGradient(cx,cy-r,cx,cy+r);
+g.addColorStop(0,cc[0]);g.addColorStop(1,cc[1]);x.fillStyle=g;x.fillRect(cx-r,cy-r,r*2,r*2);
+x.fillStyle="rgba(255,255,255,.65)";x.beginPath();x.arc(cx+r*.34,cy-r*.38,r*.20,0,7);x.fill();
+var osc="rgba(35,22,14,.78)",i2,j;
+if(k===0){
+x.fillStyle=osc;x.fillRect(cx-r,cy+r*.30,r*2,r);
+x.fillRect(cx-r*.34,cy-r*.10,r*.68,r*.52);
+x.fillRect(cx-r*.54,cy-r*.36,r*.20,r*.78);x.fillRect(cx+r*.34,cy-r*.36,r*.20,r*.78);
+x.beginPath();x.moveTo(cx-r*.54,cy-r*.36);x.lineTo(cx-r*.44,cy-r*.54);x.lineTo(cx-r*.34,cy-r*.36);x.fill();
+x.beginPath();x.moveTo(cx+r*.34,cy-r*.36);x.lineTo(cx+r*.44,cy-r*.54);x.lineTo(cx+r*.54,cy-r*.36);x.fill();
+x.fillStyle="rgba(255,225,160,.9)";x.beginPath();x.arc(cx,cy+r*.18,r*.09,PI,0);x.fill();
+[-1,1].forEach(function(s){x.fillStyle=osc;x.beginPath();x.arc(cx+s*r*.66,cy+r*.06,r*.13,0,7);x.fill();x.fillRect(cx+s*r*.66-r*.02,cy+r*.06,r*.04,r*.26)});
+}else if(k===1){
+x.fillStyle="rgba(18,88,128,.9)";x.fillRect(cx-r,cy+r*.22,r*2,r);
+x.strokeStyle="rgba(255,255,255,.6)";x.lineWidth=2;
+for(j=0;j<4;j++){x.beginPath();for(i2=-r;i2<=r;i2+=6)x.lineTo(cx+i2,cy+r*.28+j*13+Math.sin(i2*.09+j)*3);x.stroke()}
+x.fillStyle=osc;x.fillRect(cx-r*.58,cy-r*.04,6,r*.52);
+for(j=0;j<5;j++){x.save();x.translate(cx-r*.58+3,cy-r*.04-j*2);x.rotate(-.5-j*.13);x.beginPath();x.ellipse(0,0,r*.30,7,0,0,7);x.fill();x.restore()}
+}else if(k===2){
+x.fillStyle=osc;x.fillRect(cx-r,cy+r*.06,r*2,r);
+x.fillStyle="rgba(200,16,46,.95)";x.fillRect(cx-r,cy+r*.06,r*2,r*.11);
+x.fillStyle="rgba(255,255,255,.16)";x.fillRect(cx-r*.32,cy+r*.24,r*.64,r*.36);
+x.fillStyle=osc;x.fillRect(cx+r*.18,cy+r*.36,r*.60,r*.20);x.fillRect(cx+r*.24,cy+r*.26,r*.32,r*.11);
+}else if(k===3){
+x.fillStyle="rgba(40,120,150,.92)";x.fillRect(cx-r,cy+r*.10,r*2,r);
+x.strokeStyle="rgba(255,255,255,.5)";x.lineWidth=2;
+for(j=0;j<3;j++){x.beginPath();for(i2=-r;i2<=r;i2+=8)x.lineTo(cx+i2,cy+r*.30+j*15+Math.sin(i2*.07+j)*2);x.stroke()}
+x.fillStyle=osc;x.fillRect(cx-r,cy+r*.02,r*2,r*.06);
+x.strokeStyle=osc;x.lineWidth=6;
+for(j=0;j<3;j++){x.beginPath();x.arc(cx-r*.56+j*r*.56,cy+r*.08,r*.26,PI,0);x.stroke()}
+}else if(k===4){
+x.fillStyle="rgba(35,22,14,.55)";x.beginPath();x.moveTo(cx-r,cy+r*.16);x.lineTo(cx-r*.18,cy-r*.30);x.lineTo(cx+r*.42,cy+r*.16);x.fill();
+x.fillStyle="rgba(52,104,58,.8)";
+for(j=0;j<5;j++){x.beginPath();x.moveTo(cx-r+j*r*.34,cy+r);x.lineTo(cx-r+j*r*.34+r*.10,cy+r*.16);x.lineTo(cx-r+j*r*.34+r*.22,cy+r);x.fill()}
+}else{
+x.fillStyle="rgba(35,22,14,.5)";x.beginPath();x.moveTo(cx-r,cy+r*.34);x.lineTo(cx-r*.34,cy-r*.26);x.lineTo(cx+r*.06,cy+r*.08);x.lineTo(cx+r*.44,cy-r*.20);x.lineTo(cx+r,cy+r*.34);x.fill();
+x.fillStyle="rgba(255,255,255,.30)";x.beginPath();x.arc(cx-r*.06,cy-r*.36,r*.11,0,7);x.fill();
+}
+x.restore();
+x.strokeStyle="#f0c33c";x.lineWidth=6;x.beginPath();x.arc(cx,cy,r,0,7);x.stroke();
+x.strokeStyle="rgba(240,195,60,.45)";x.lineWidth=2;x.beginPath();x.arc(cx,cy,r+8,0,7);x.stroke();
+}
+function drawCert(){
+var c=cv(1200,850),x=c.getContext("2d"),j;
+var g=x.createRadialGradient(600,230,40,600,430,880);
+g.addColorStop(0,"#ab2026");g.addColorStop(.55,"#570a0e");g.addColorStop(1,"#1b0506");
+x.fillStyle=g;x.fillRect(0,0,1200,850);
+x.save();x.translate(600,208);
+for(j=0;j<36;j++){x.rotate(PI/18);x.fillStyle=j%2?"rgba(255,205,90,.05)":"rgba(255,205,90,.022)";x.beginPath();x.moveTo(0,0);x.lineTo(950,-32);x.lineTo(950,32);x.fill()}
+x.restore();
+x.strokeStyle="rgba(245,197,24,.06)";x.lineWidth=1.2;
+for(j=0;j<24;j++){x.beginPath();x.arc(600,208,96+j*24,0,7);x.stroke()}
+x.strokeStyle="#f0c33c";x.lineWidth=9;x.strokeRect(28,28,1144,794);
+x.strokeStyle="#ff8a3d";x.lineWidth=2.5;x.strokeRect(46,46,1108,758);
+x.strokeStyle="rgba(240,195,60,.42)";x.lineWidth=1.5;x.strokeRect(58,58,1084,734);
+[[46,46,1,1],[1154,46,-1,1],[46,804,1,-1],[1154,804,-1,-1]].forEach(function(q){
+x.save();x.translate(q[0],q[1]);x.scale(q[2],q[3]);x.strokeStyle="#f0c33c";x.lineWidth=4;
+x.beginPath();x.moveTo(0,46);x.lineTo(0,0);x.lineTo(46,0);x.stroke();
+x.beginPath();x.moveTo(11,33);x.lineTo(11,11);x.lineTo(33,11);x.stroke();
+x.fillStyle="#f0c33c";x.beginPath();x.arc(23,23,3.6,0,7);x.fill();x.restore()});
+[["#c8102e",-1],["#f4f4f4",1]].forEach(function(rb){
+x.save();x.translate(600,112);x.rotate(rb[1]*.19);x.fillStyle=rb[0];
+x.beginPath();x.moveTo(-17,0);x.lineTo(17,0);x.lineTo(23,92);x.lineTo(-23,92);x.closePath();x.fill();x.restore()});
+var MX=600,MY=214,MR=84;
+var rg=x.createRadialGradient(MX-26,MY-30,10,MX,MY,MR+16);
+rg.addColorStop(0,"#fff5cf");rg.addColorStop(.45,"#f5c518");rg.addColorStop(.82,"#c9971a");rg.addColorStop(1,"#8a6410");
+x.fillStyle=rg;x.beginPath();x.arc(MX,MY,MR+14,0,7);x.fill();
+x.fillStyle="#8a6410";
+for(j=0;j<44;j++){var a=j*PI/22;x.beginPath();x.arc(MX+Math.cos(a)*(MR+14),MY+Math.sin(a)*(MR+14),3.2,0,7);x.fill()}
+var rg2=x.createRadialGradient(MX-18,MY-24,6,MX,MY,MR);
+rg2.addColorStop(0,"#d02329");rg2.addColorStop(1,"#6d0c11");
+x.fillStyle=rg2;x.beginPath();x.arc(MX,MY,MR,0,7);x.fill();
+x.strokeStyle="#f7df8a";x.lineWidth=3;x.stroke();
+[1,-1].forEach(function(s){x.save();x.translate(MX,MY);x.scale(s,1);
+for(var q=0;q<9;q++){var aa=-1.02+q*.19;x.save();x.rotate(aa);x.fillStyle=q%2?"#f7df8a":"#e0bd55";x.beginPath();x.ellipse(MR-12,0,11,4.4,0,0,7);x.fill();x.restore()}
+x.restore()});
+x.fillStyle="#f7df8a";x.beginPath();
+for(j=0;j<16;j++){var a2=j*PI/8-PI/2,rr=j%2?28:50;x.lineTo(MX+Math.cos(a2)*rr,MY+Math.sin(a2)*rr)}
+x.closePath();x.fill();x.strokeStyle="#8a6410";x.lineWidth=2;x.stroke();
+x.textAlign="center";x.textBaseline="middle";x.font="36px Arial";x.fillText("🔥",MX,MY+2);
+x.fillStyle="#f0c33c";x.font="bold 66px Impact,Arial Narrow Bold,sans-serif";x.fillText("MEDALLA DE HONOR",600,342);
+x.strokeStyle="rgba(240,195,60,.5)";x.lineWidth=2;x.beginPath();x.moveTo(340,386);x.lineTo(860,386);x.stroke();
+x.fillStyle="#fff";x.font="bold 32px Arial";x.fillText("BOMBERO HONORARIO DE CAMANÁ",600,418);
+x.fillStyle="#ffd9a3";x.font="italic 21px Georgia,serif";x.fillText("Se otorga este reconocimiento a",600,458);
+x.fillStyle="#fff";var nm="BOMBERO HONORARIO",fs=58;x.font="bold "+fs+"px Georgia,serif";var wd=x.measureText(nm).width;if(wd>860){fs=Math.floor(fs*860/wd);x.font="bold "+fs+"px Georgia,serif"}x.fillText(nm,600,508);
+x.fillStyle="#ffd9a3";x.font="italic 19px Georgia,serif";x.fillText("por completar las 7 misiones del simulador «Camaná te necesita»",600,548);
+x.strokeStyle="rgba(240,195,60,.35)";x.lineWidth=1.5;x.beginPath();x.moveTo(120,578);x.lineTo(1080,578);x.stroke();
+escenaHito(x,206,640,58,HITO.k);
+x.fillStyle="#f0c33c";x.font="bold 16px Georgia,serif";x.textAlign="center";x.fillText(HITO.n,206,714);
+x.fillStyle="#ffe9b0";x.font="22px Arial";x.textAlign="left";
+x.fillText("🔥 3 focos apagados      🆘 3 rescates",344,598);
+x.fillText("☣️ 1 fuga controlada      🚗 1 extricación",344,636);
+x.fillText("📄 7 documentos      📍 8 zonas del mapa",344,674);
+x.fillText("⏱ "+Math.max(1,Math.round((Date.now()-gs)/60000))+" min de servicio",344,712);
+x.textAlign="center";x.font="bold 23px Georgia,serif";x.fillStyle="#f0c33c";x.fillText("Servir también es amar a tu tierra.",600,744);
+x.font="15px Arial";x.fillStyle="#ffe9b0";x.fillText("Camaná, "+REC.f+"   ·   N.º "+REC.s,600,768);
+x.font="11.5px Arial";x.fillStyle="#c9a396";x.fillText("Reconocimiento del juego «Camaná te necesita». Se dibuja en tu navegador y no guarda datos personales.",600,788);
+if(ENC){x.save();x.translate(196,150);x.rotate(-.15);x.strokeStyle="#4ade80";x.lineWidth=4;x.strokeRect(-118,-28,236,56);x.fillStyle="#4ade80";x.font="bold 19px Arial";x.textAlign="center";x.fillText("ENCUESTA RESPONDIDA",0,7);x.restore();x.textAlign="center"}
 return c}
 function showCert(){mo=1;$("#fin").style.display="none";CB=drawCert();$("#rg").className="on";
-var encBox=ENC?'<div style="margin-top:14px;padding:14px;border-radius:12px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.35);text-align:left"><p style="font-size:.9rem;font-weight:700;margin:0 0 4px;color:#1c9a45">✅ Encuesta ciudadana respondida</p><p style="font-size:.82rem;margin:0 0 10px">Tu insignia ya está en la medalla. Gracias por ayudar a preparar mejor a la compañía.</p><a class="lk" href="/resultados" style="display:inline-block;text-decoration:none;font-size:.92rem">Ver los resultados →</a></div>':'<div style="margin-top:14px;padding:14px;border-radius:12px;background:rgba(177,27,34,.07);border:1px solid rgba(177,27,34,.28);text-align:left"><p style="font-size:.9rem;font-weight:700;margin:0 0 4px;color:var(--red)">Gana tu insignia de ciudadano comprometido</p><p style="font-size:.82rem;margin:0 0 10px">Responde la encuesta ciudadana (7 preguntas, 2 minutos) y vuelve: tu medalla se actualizará.</p><a class="lk" href="/encuesta?src=juego" style="display:inline-block;text-decoration:none;font-size:.95rem">Responder la encuesta →</a></div>';
-$("#rg .bx").innerHTML='<h3 class="f" style="color:var(--red);margin:0 0 8px;font-size:1.4rem">🏅 Tu medalla de Bombero Honorario</h3><img id="ci" style="width:100%;border-radius:10px;display:block" alt="Medalla de Bombero Honorario de Camaná"><p id="sm" style="font-size:.84rem;margin:8px 0;opacity:.85"></p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button class="lk" id="dl">⬇ Descargar</button> <button class="lk" id="sh" style="background:#1c9a45">📤 Compartir</button></div>'+encBox+'<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="bt" href="/contacto?desde=juego" style="display:inline-block;text-decoration:none">📝 Inscripción oficial</a><button class="bt" id="rk">Seguir explorando</button></div><p class="src">La medalla se genera en tu navegador: el juego no guarda tu nombre ni ningún dato personal. Si no se descarga, mantén presionada la imagen para guardarla.</p>';
+var encBox=ENC?'<div style="margin-top:14px;padding:14px;border-radius:12px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.35);text-align:left"><p style="font-size:.9rem;font-weight:700;margin:0 0 4px;color:#1c9a45">✅ Encuesta ciudadana respondida</p><p style="font-size:.82rem;margin:0">Tu insignia ya está en la medalla. Gracias por ayudar a preparar mejor a la compañía.</p></div>':'<div style="margin-top:14px;padding:14px;border-radius:12px;background:rgba(177,27,34,.07);border:1px solid rgba(177,27,34,.28);text-align:left"><p style="font-size:.9rem;font-weight:700;margin:0 0 4px;color:var(--red)">Gana tu insignia de ciudadano comprometido</p><p style="font-size:.82rem;margin:0 0 10px">Responde la encuesta ciudadana (10 preguntas, 2 minutos) y vuelve: tu medalla se actualizará.</p><a class="lk" href="/encuesta?src=juego" style="display:inline-block;text-decoration:none;font-size:.95rem">Responder la encuesta →</a></div>';
+$("#rg .bx").innerHTML='<h3 class="f" style="color:var(--red);margin:0 0 8px;font-size:1.4rem">🏅 Tu medalla de Bombero Honorario</h3><img id="ci" style="width:100%;border-radius:10px;display:block" alt="Medalla de Bombero Honorario de Camaná"><p id="sm" style="font-size:.84rem;margin:8px 0;opacity:.85"></p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button class="lk" id="dl">⬇ Descargar</button> <button class="lk" id="sh" style="background:#1c9a45">📤 Compartir</button></div>'+encBox+'<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><button class="bt" id="rk">Seguir explorando</button></div><p class="src">La medalla se genera en tu navegador: el juego no guarda tu nombre ni ningún dato personal. Si no se descarga, mantén presionada la imagen para guardarla.</p>';
 $("#ci").src=CB.toDataURL("image/png");$("#sm").textContent="Medalla emitida en tu navegador · Compártela con #CamanáTeNecesita.";
 $("#rk").onclick=closeRg;
 $("#dl").onclick=function(){CB.toBlob(function(b){try{var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="medalla-bombero-honorario-camana.png";a.style.display="none";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);if(a.parentNode)a.parentNode.removeChild(a)},2500);toast("Medalla descargada 📥")}catch(e){toast("Mantén presionada la imagen para guardarla 📲")}})};
